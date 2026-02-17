@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import LeadForm from '@/components/LeadForm';
 import WhatsAppButton from '@/components/WhatsAppButton';
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 
 const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -329,16 +329,20 @@ export default function LibertyJeansPage() {
                         <div className="bg-white text-slate-900 p-8 rounded-2xl shadow-2xl">
                             <h3 className="text-2xl font-bold mb-2 text-center">Solicite Orçamento</h3>
                             <p className="text-center text-slate-500 text-sm mb-6">Receba contato em até 24h</p>
-                            <LeadForm clientSlug="liberty-jeans" />
+                            <Suspense fallback={<div className="p-10 text-center animate-pulse bg-slate-100 rounded-xl">Carregando formulário...</div>}>
+                                <LeadForm clientSlug="liberty-jeans" />
+                            </Suspense>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <WhatsAppButton
-                phoneNumber="5581935002075"
-                message="Olá, quero receber o catálogo e as condições de atacado da Liberty Jeans."
-            />
+            <Suspense fallback={null}>
+                <WhatsAppButton
+                    phoneNumber="5581935002075"
+                    message="Olá, quero receber o catálogo e as condições de atacado da Liberty Jeans."
+                />
+            </Suspense>
         </main>
     );
 }

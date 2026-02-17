@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -346,7 +346,9 @@ export default function SunlivPage() {
 
                         <div className="bg-white p-8 md:p-12 rounded-[40px] shadow-2xl shadow-amber-500/10 border border-slate-100">
                             <h3 className="text-2xl font-black text-slate-900 mb-8">Receber Catálogo Atacado</h3>
-                            <LeadForm clientSlug="sunliv" />
+                            <Suspense fallback={<div className="p-10 text-center animate-pulse bg-slate-100 rounded-xl">Carregando formulário...</div>}>
+                                <LeadForm clientSlug="sunliv" />
+                            </Suspense>
                         </div>
                     </div>
                 </div>
@@ -363,10 +365,12 @@ export default function SunlivPage() {
                 </div>
             </footer>
 
-            <WhatsAppButton
-                phoneNumber="5585994399401"
-                message="Olá! Vim pela AmoAtacado e gostaria de revender Sunliv, ou obter mais informações."
-            />
+            <Suspense fallback={null}>
+                <WhatsAppButton
+                    phoneNumber="5585994399401"
+                    message="Olá! Vim pela AmoAtacado e gostaria de revender Sunliv, ou obter mais informações."
+                />
+            </Suspense>
         </main>
     );
 }

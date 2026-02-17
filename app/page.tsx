@@ -1,11 +1,12 @@
 'use client';
 
+import { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import LeadForm from '@/components/LeadForm';
 import TeamMember from '@/components/TeamMember';
+import WhatsAppButton from '@/components/WhatsAppButton';
 import { ArrowRight, CheckCircle2, TrendingUp, Users, Target, ShieldCheck } from 'lucide-react';
 
 export default function Home() {
@@ -319,6 +320,7 @@ export default function Home() {
           </div>
 
           <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
+
             <TeamMember
               name="Daniel Guedes"
               role="Estrategista de Tráfego"
@@ -401,6 +403,13 @@ export default function Home() {
           © {new Date().getFullYear()} Amo Atacado. Todos os direitos reservados.
         </div>
       </footer>
+
+      <Suspense fallback={null}>
+        <WhatsAppButton
+          phoneNumber="5585994399401"
+          message="Olá! Vim pelo site da Amo Atacado e gostaria de saber mais sobre como ser um parceiro."
+        />
+      </Suspense>
     </main>
   );
 }
