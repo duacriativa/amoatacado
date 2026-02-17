@@ -375,7 +375,7 @@ export default function Home() {
               <h3 className="text-2xl font-bold mb-2">Solicite sua Análise</h3>
               <p className="text-gray-500 mb-8 text-sm">Nossa equipe entrará em contato em até 24h.</p>
               <Suspense fallback={<div className="p-10 text-center animate-pulse bg-gray-100 rounded-xl">Carregando formulário...</div>}>
-                <LeadForm />
+                <LeadForm clientSlug="amo-atacado" />
               </Suspense>
             </div>
           </div>

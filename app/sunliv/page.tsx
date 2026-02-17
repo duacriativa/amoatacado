@@ -346,7 +346,7 @@ export default function SunlivPage() {
 
                         <div className="bg-white p-8 md:p-12 rounded-[40px] shadow-2xl shadow-amber-500/10 border border-slate-100">
                             <h3 className="text-2xl font-black text-slate-900 mb-8">Receber Catálogo Atacado</h3>
-                            <LeadForm />
+                            <LeadForm clientSlug="sunliv" />
                         </div>
                     </div>
                 </div>
