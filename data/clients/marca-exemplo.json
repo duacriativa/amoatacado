@@ -1,0 +1,58 @@
+{
+  "slug": "marca-exemplo",
+  "name": "Marca Exemplo",
+  "theme": {
+    "primaryColor": "#2563eb",
+    "secondaryColor": "#1e40af",
+    "logoUrl": "/images/logo-placeholder.png"
+  },
+  "content": {
+    "hero": {
+      "title": "Aumente suas vendas com a Marca Exemplo",
+      "subtitle": "Produtos de alta qualidade com margens incríveis para o seu negócio.",
+      "ctaText": "Quero Revender",
+      "backgroundImage": "/images/hero-placeholder.jpg"
+    },
+    "benefits": [
+      {
+        "title": "Alta Margem",
+        "description": "Lucre mais com produtos desejados pelo mercado."
+      },
+      {
+        "title": "Entrega Rápida",
+        "description": "Logística eficiente para todo o Brasil."
+      },
+      {
+        "title": "Suporte Dedicado",
+        "description": "Atendimento exclusivo para lojistas."
+      }
+    ],
+    "steps": [
+      {
+        "title": "Cadastro",
+        "description": "Preencha o formulário abaixo."
+      },
+      {
+        "title": "Ativação",
+        "description": "Nossa equipe entrará em contato."
+      },
+      {
+        "title": "Pedido",
+        "description": "Acesse nosso catálogo e faça seu pedido."
+      }
+    ],
+    "cta": {
+      "title": "Pronto para começar?",
+      "subtitle": "Não perca tempo e garanta seu estoque.",
+      "buttonText": "Falar no WhatsApp"
+    },
+    "whatsapp": {
+      "phoneNumber": "5511999999999",
+      "message": "Olá, gostaria de saber mais sobre revenda da Marca Exemplo."
+    }
+  },
+  "seo": {
+    "title": "Revenda Marca Exemplo - Amo Atacado",
+    "description": "Seja um revendedor oficial da Marca Exemplo e aumente seus lucros."
+  }
+}
