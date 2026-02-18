@@ -86,7 +86,7 @@ export default function SunlivPage() {
     return (
         <main className={`min-h-screen ${offWhite} font-sans selection:bg-amber-100`}>
             {/* Microsoft Clarity */}
-            <Script id="microsoft-clarity" strategy="afterInteractive">
+            <Script id="microsoft-clarity" strategy="lazyOnload">
                 {`
                     (function(c,l,a,r,i,t,y){
                         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -98,10 +98,16 @@ export default function SunlivPage() {
 
             {/* Hero Section */}
             <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
-                {/* Background Image Placeholder (High Quality Beach View) */}
-                <div className="absolute inset-0 z-0 bg-slate-900">
+                {/* Optimized Hero Image */}
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="/images/sunliv/catalog-4.jpg"
+                        alt="Background Sunliv"
+                        fill
+                        priority
+                        className="object-cover opacity-80"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70 z-10" />
-                    <div className="absolute inset-0 bg-[url('/images/sunliv/catalog-4.jpg')] bg-cover bg-center opacity-80" />
                 </div>
 
                 <div className="container mx-auto px-4 relative z-20 text-center text-white">
@@ -116,6 +122,7 @@ export default function SunlivPage() {
                                 src="/images/sunliv/logo_raw.png"
                                 alt="Sunliv Logo"
                                 fill
+                                priority
                                 className="object-contain filter brightness-0 invert"
                             />
                         </div>

@@ -1,4 +1,5 @@
 import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
 interface HeroProps {
     title: string;
@@ -14,10 +15,12 @@ export default function Hero({ title, subtitle, ctaText, backgroundImage, onCtaC
             {/* Background Image with Overlay */}
             {backgroundImage && (
                 <div className="absolute inset-0 z-0">
-                    <img
+                    <Image
                         src={backgroundImage}
                         alt="Hero Background"
-                        className="h-full w-full object-cover opacity-40"
+                        fill
+                        priority
+                        className="object-cover opacity-40"
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/30" />
                 </div>

@@ -32,37 +32,75 @@ export async function POST(request: Request) {
         }
 
         // 2. Send email notification (Sunliv Specific)
-        if (body.clientSlug === 'sunliv-moda-praia-atacado' && process.env.SMTP_PASS) {
+        const isSunliv = body.clientSlug === 'sunliv' || body.clientSlug === 'sunliv-moda-praia-atacado';
+
+        if (isSunliv) {
+            const smtpPass = process.env.SMTP_PASS;
+            if (!smtpPass) {
+                console.error('[SMTP] Skip email: SMTP_PASS not found in env');
+            } else {
+                try {
+                    const transporter = nodemailer.createTransport({
+                        host: 'mail.amoatacado.com.br',
+                        port: 465,
+                        secure: true,
+                        auth: {
+                            user: 'sunliv@amoatacado.com.br',
+                            pass: smtpPass,
+                        },
+                        // Timeout increased for slower SMTP servers
+                        connectionTimeout: 10000,
+                        greetingTimeout: 10000,
+                    });
+
+                    await transporter.sendMail({
+                        from: '"Sunliv Leads" <sunliv@amoatacado.com.br>',
+                        to: 'sunliv@amoatacado.com.br',
+                        subject: `Novo Lead Sunliv: ${body.name}`,
+                        html: `
+                            <div style="font-family: sans-serif; max-width: 600px;">
+                                <h2 style="color: #0A3D4D;">Novo Lead Recebido - Sunliv</h2>
+                                <p><strong>Nome:</strong> ${body.name}</p>
+                                <p><strong>Email:</strong> ${body.email}</p>
+                                <p><strong>WhatsApp:</strong> ${body.phone}</p>
+                                <p><strong>Data/Hora:</strong> ${new Date().toLocaleString('pt-BR')}</p>
+                                <hr />
+                                <p style="font-size: 12px; color: #666;">Enviado via API AmoAtacado</p>
+                            </div>
+                        `,
+                    });
+                    console.log(`[SMTP] Success: Lead from ${body.name} sent to sunliv@amoatacado.com.br`);
+                } catch (emailError) {
+                    const error = emailError as {
+                        message?: string;
+                        code?: string;
+                        command?: string;
+                        response?: string;
+                        stack?: string
+                    };
+                    // Log specific error details to Vercel Logs for debugging
+                    console.error('[SMTP] Failed to send email:', {
+                        message: error.message,
+                        code: error.code,
+                        command: error.command,
+                        response: error.response,
+                        stack: error.stack
+                    });
+                }
+            }
+        }
+
+        // 3. Backup delivery (Optional: Google Sheets / Secondary Webhook)
+        const backupUrl = process.env.LEADS_BACKUP_URL;
+        if (backupUrl) {
             try {
-                const transporter = nodemailer.createTransport({
-                    host: 'mail.amoatacado.com.br',
-                    port: 465,
-                    secure: true,
-                    auth: {
-                        user: 'sunliv@amoatacado.com.br',
-                        pass: process.env.SMTP_PASS,
-                    },
+                await fetch(backupUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ...body, backup: true }),
                 });
-
-                const mailOptions = {
-                    from: '"Amo Atacado Leads" <sunliv@amoatacado.com.br>',
-                    to: 'sunliv@amoatacado.com.br',
-                    subject: `Novo Lead Sunliv: ${body.name}`,
-                    html: `
-                        <h3>Novo lead recebido na página Sunliv</h3>
-                        <p><strong>Nome:</strong> ${body.name}</p>
-                        <p><strong>Email:</strong> ${body.email}</p>
-                        <p><strong>WhatsApp:</strong> ${body.phone}</p>
-                        <p><strong>Loja:</strong> ${body.companyName || 'Não informado'}</p>
-                        <br>
-                        <p><i>Dados técnicos do envio:</i></p>
-                        <pre>${JSON.stringify(body, null, 2)}</pre>
-                    `,
-                };
-
-                await transporter.sendMail(mailOptions);
-            } catch (emailError) {
-                console.error('Error sending email:', emailError);
+            } catch (backupError) {
+                console.error('[BACKUP] Failed to send to backup URL:', backupError);
             }
         }
 

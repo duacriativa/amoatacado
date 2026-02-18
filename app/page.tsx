@@ -128,6 +128,7 @@ export default function Home() {
                   src="/images/hero-round-bg.png"
                   alt="Background Circle"
                   fill
+                  priority
                   className="object-contain"
                 />
               </div>
