@@ -1,23 +1,16 @@
 'use client';
 
 import { useState, Suspense } from 'react';
-import Head from 'next/head';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     ChevronDown,
     Check,
-    Star,
     TrendingUp,
     ShoppingBag,
     Zap,
     BarChart3,
-    Truck,
-    ShieldCheck,
-    ThumbsUp,
-    Instagram,
-    MessageCircle,
-    Phone
+    MessageCircle
 } from 'lucide-react';
 import LeadForm from '@/components/LeadForm';
 import WhatsAppButton from '@/components/WhatsAppButton';
@@ -26,20 +19,6 @@ const goldGradient = "bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600
 const tealBg = "bg-[#0A3D4D]";
 const offWhite = "bg-[#FDFCF8]";
 
-const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-};
-
-const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: {
-            staggerChildren: 0.1
-        }
-    }
-};
 
 export default function SunlivPage() {
     const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);

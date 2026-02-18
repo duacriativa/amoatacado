@@ -61,7 +61,7 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
 
             setSubmitSuccess(true);
             reset();
-        } catch (error) {
+        } catch {
             setSubmitError('Ocorreu um erro. Tente novamente.');
         } finally {
             setIsSubmitting(false);

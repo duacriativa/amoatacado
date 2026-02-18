@@ -213,7 +213,7 @@ export default function Home() {
             transition={{ delay: 0.2 }}
             className="text-xl text-gray-600 leading-relaxed"
           >
-            O mercado mudou. Depender de representantes antigos, feiras caras ou "boca a boca" não é mais suficiente.
+            O mercado mudou. Depender de representantes antigos, feiras caras ou &quot;boca a boca&quot; não é mais suficiente.
             Nós implementamos um ecossistema digital que coloca sua marca na frente de quem compra de verdade.
           </motion.p>
         </div>
@@ -228,7 +228,7 @@ export default function Home() {
               O Ecossistema de Vendas
             </h2>
             <p className="max-w-2xl mx-auto text-gray-400 text-lg">
-              Não fazemos apenas "posts". Criamos uma estrutura de aquisição previsível para o seu negócio.
+              Não fazemos apenas &quot;posts&quot;. Criamos uma estrutura de aquisição previsível para o seu negócio.
             </p>
           </div>
 
@@ -253,11 +253,11 @@ export default function Home() {
               </motion.div>
             ))}
           </motion.div>
-        </div>
-      </section>
+        </div >
+      </section >
 
       {/* Case Study Section */}
-      <section className="py-24 bg-blue-50/50">
+      < section className="py-24 bg-blue-50/50" >
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-16">
             <motion.div
@@ -307,10 +307,10 @@ export default function Home() {
             </motion.div>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Team Section */}
-      <section className="py-24 bg-white">
+      < section className="py-24 bg-white" >
         <div className="container mx-auto px-4">
           <div className="text-center mb-20">
             <span className="text-blue-600 font-bold uppercase tracking-wider text-sm">OS ESPECIALISTAS</span>
@@ -336,12 +336,12 @@ export default function Home() {
             Combinamos experiência em moda com domínio técnico de ferramentas de performance para entregar o que importa: <strong>Vendas.</strong>
           </p>
         </div>
-      </section>
+      </section >
 
       {/* Contact Form Section */}
-      <section id="contact" className="py-24 bg-gray-900 text-white relative overflow-hidden">
+      < section id="contact" className="py-24 bg-gray-900 text-white relative overflow-hidden" >
         {/* Decorative Circles */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+        < div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-600/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 
         <div className="container mx-auto px-4 relative z-10">
@@ -382,10 +382,10 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Footer */}
-      <footer className="bg-black text-white py-16 border-t border-gray-800">
+      < footer className="bg-black text-white py-16 border-t border-gray-800" >
         <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
           <div>
             <span className="text-2xl font-black text-white tracking-tighter">AMO ATACADO</span>
@@ -402,7 +402,7 @@ export default function Home() {
         <div className="container mx-auto px-4 mt-8 pt-8 border-t border-gray-900 text-center text-gray-600 text-xs">
           © {new Date().getFullYear()} Amo Atacado. Todos os direitos reservados.
         </div>
-      </footer>
+      </footer >
 
       <Suspense fallback={null}>
         <WhatsAppButton
@@ -410,6 +410,6 @@ export default function Home() {
           message="Olá! Vim pelo site da Amo Atacado e gostaria de saber mais sobre como ser um parceiro."
         />
       </Suspense>
-    </main>
+    </main >
   );
 }
