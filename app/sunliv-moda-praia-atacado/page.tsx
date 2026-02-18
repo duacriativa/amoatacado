@@ -2,6 +2,7 @@
 
 import { useState, Suspense } from 'react';
 import Image from 'next/image';
+import Script from 'next/script';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     ChevronDown,
@@ -84,6 +85,17 @@ export default function SunlivPage() {
 
     return (
         <main className={`min-h-screen ${offWhite} font-sans selection:bg-amber-100`}>
+            {/* Microsoft Clarity */}
+            <Script id="microsoft-clarity" strategy="afterInteractive">
+                {`
+                    (function(c,l,a,r,i,t,y){
+                        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+                    })(window, document, "clarity", "script", "vj3eb84q9y");
+                `}
+            </Script>
+
             {/* Hero Section */}
             <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
                 {/* Background Image Placeholder (High Quality Beach View) */}
