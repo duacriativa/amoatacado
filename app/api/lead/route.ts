@@ -92,7 +92,14 @@ export async function POST(request: Request) {
         }
 
         // 3. Backup delivery (Optional: Google Sheets / Secondary Webhook)
-        const backupUrl = process.env.LEADS_BACKUP_URL;
+        let backupUrl = process.env.LEADS_BACKUP_URL; // Default/Global fallback
+
+        if (isLibertyJeans && process.env.LIBERTY_JEANS_BACKUP_URL) {
+            backupUrl = process.env.LIBERTY_JEANS_BACKUP_URL;
+        } else if (isSunliv && process.env.SUNLIV_BACKUP_URL) {
+            backupUrl = process.env.SUNLIV_BACKUP_URL;
+        }
+
         if (backupUrl) {
             try {
                 await fetch(backupUrl, {
