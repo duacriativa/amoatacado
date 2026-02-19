@@ -13,8 +13,18 @@ export async function POST(request: Request) {
             );
         }
 
-        // 1. Send data to external webhook (Global)
-        const webhookUrl = process.env.LEADS_WEBHOOK_URL;
+        // 1. Determine which webhook to use based on clientSlug
+        const isSunliv = body.clientSlug === 'sunliv' || body.clientSlug === 'sunliv-moda-praia-atacado';
+        const isLibertyJeans = body.clientSlug === 'liberty-jeans';
+
+        let webhookUrl = process.env.LEADS_WEBHOOK_URL; // Default/Global fallback
+
+        if (isLibertyJeans && process.env.LIBERTY_JEANS_WEBHOOK_URL) {
+            webhookUrl = process.env.LIBERTY_JEANS_WEBHOOK_URL;
+        } else if (isSunliv && process.env.SUNLIV_WEBHOOK_URL) {
+            webhookUrl = process.env.SUNLIV_WEBHOOK_URL;
+        }
+
         if (webhookUrl) {
             try {
                 await fetch(webhookUrl, {
@@ -32,9 +42,6 @@ export async function POST(request: Request) {
         }
 
         // 2. Send email notification (Sunliv & Liberty Jeans Specific)
-        const isSunliv = body.clientSlug === 'sunliv' || body.clientSlug === 'sunliv-moda-praia-atacado';
-        const isLibertyJeans = body.clientSlug === 'liberty-jeans';
-
         if (isSunliv || isLibertyJeans) {
             const smtpPass = process.env.SMTP_PASS;
             if (!smtpPass) {
