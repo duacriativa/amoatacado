@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import {
     CheckCircle2,
     Store,
@@ -380,7 +380,7 @@ export default function LibertyJeansPage() {
                                 Produza jeans para sua marca com quem é especialista.
                             </h2>
                             <p className="text-xl text-blue-100 mb-8 border-l-4 border-blue-500 pl-6 italic">
-                                "Qualidade que transforma negócios."<br />
+                                &quot;Qualidade que transforma negócios.&quot;<br />
                                 <span className="text-sm not-italic opacity-70">libertyjeansoficial@gmail.com</span>
                             </p>
                             <a
