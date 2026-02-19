@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import {
     CheckCircle2,
     Store,
@@ -10,11 +10,16 @@ import {
     Truck,
     Scissors,
     Phone,
-    HelpCircle
+    HelpCircle,
+    ShoppingBag,
+    Users,
+    TrendingUp,
+    Check
 } from 'lucide-react';
 import LeadForm from '@/components/LeadForm';
 import WhatsAppButton from '@/components/WhatsAppButton';
-import { useState, Suspense } from 'react';
+import SocialProofNotification from '@/components/SocialProofNotification';
+import { useState, Suspense, useRef } from 'react';
 
 const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -31,8 +36,35 @@ const staggerContainer = {
     }
 };
 
+const FloatingBalloon = ({ delay, x, y, children, color }: { delay: number, x: string, y: string, children: React.ReactNode, color: string }) => (
+    <motion.div
+        initial={{ opacity: 0, scale: 0.5, y: 20 }}
+        animate={{
+            opacity: [0, 1, 1, 0],
+            scale: [0.5, 1, 1, 0.8],
+            y: [-20, -40, -60, -80],
+            x: [0, 10, -10, 0]
+        }}
+        transition={{
+            duration: 4,
+            repeat: Infinity,
+            delay,
+            ease: "easeInOut"
+        }}
+        className={`absolute z-20 px-3 py-2 rounded-2xl shadow-lg text-[10px] font-bold whitespace-nowrap flex items-center gap-2 border ${color}`}
+        style={{ left: x, top: y }}
+    >
+        {children}
+    </motion.div>
+);
+
 export default function LibertyJeansPage() {
     const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+    const timelineRef = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: timelineRef,
+        offset: ["start end", "end start"]
+    });
 
     const toggleFaq = (index: number) => {
         setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -69,10 +101,10 @@ export default function LibertyJeansPage() {
     ];
 
     const steps = [
-        { title: 'Contato', desc: 'Chame no WhatsApp ou preencha o formulário.' },
-        { title: 'Catálogo', desc: 'Receba modelos e condições comerciais.' },
-        { title: 'Pedido', desc: 'Defina volumes e modelo de compra.' },
-        { title: 'Envio', desc: 'Produção/Separação e envio para todo Brasil.' }
+        { title: 'Contato', desc: 'Chame no WhatsApp ou preencha o formulário.', icon: <Phone className="w-6 h-6" /> },
+        { title: 'Catálogo', desc: 'Receba modelos e condições comerciais.', icon: <Package className="w-6 h-6" /> },
+        { title: 'Pedido', desc: 'Defina volumes e modelo de compra.', icon: <ShoppingBag className="w-6 h-6" /> },
+        { title: 'Envio', desc: 'Produção/Separação e envio para todo Brasil.', icon: <Truck className="w-6 h-6" /> }
     ];
 
     const purchaseTypes = [
@@ -103,21 +135,22 @@ export default function LibertyJeansPage() {
     const faqs = [
         { q: 'Qual o pedido mínimo?', a: 'O pedido mínimo varia de acordo com o modelo de compra (Private Label ou Pronta Entrega). Entre em contato para condições atualizadas.' },
         { q: 'Vocês enviam para todo o Brasil?', a: 'Sim, enviamos para todo o território nacional via transportadora ou correios.' },
-        { q: 'Posso fabricar com minha própria marca?', a: 'Sim! Somos especialistas em Private Label. Colocamos sua etiqueta e personalizamos o produto.' },
+        { q: 'Posso fabricar com minha própria marca?', a: 'Sim! Somos especialistas em Private Label. Colocamos sua etiqueta e personalizamos o product.' },
         { q: 'Como recebo o catálogo?', a: 'Basta clicar no botão de WhatsApp ou preencher o formulário nesta página para receber o catálogo digital atualizado.' },
         { q: 'Qual o prazo médio?', a: 'Para pronta entrega, o envio é imediato após confirmação. Para Private Label, o prazo de produção é informado no orçamento.' }
     ];
+
+    const whatsappLink = "https://wa.me/5585991528143?text=Ol%C3%A1%2C%20quero%20receber%20o%20cat%C3%A1logo%20e%20as%20condi%C3%A7%C3%B5es%20de%20atacado%20da%20Liberty%20Jeans.";
 
     return (
         <main className="min-h-screen bg-slate-50 font-sans text-slate-900">
             {/* Hero Section */}
             <section className="relative min-h-[90vh] flex items-center bg-slate-900 overflow-hidden">
                 <div className="absolute inset-0 z-0 opacity-40">
-                    {/* Placeholder for Jeans Texture Background - keeping it dark slate for now */}
                     <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900/40 to-slate-900" />
                 </div>
 
-                <div className="container mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center gap-12">
+                <div className="container mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center gap-12 py-12">
                     <motion.div
                         initial="hidden"
                         animate="visible"
@@ -140,7 +173,7 @@ export default function LibertyJeansPage() {
 
                         <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4">
                             <a
-                                href="https://wa.me/5581935002075?text=Ol%C3%A1%2C%20quero%20receber%20o%20cat%C3%A1logo%20e%20as%20condi%C3%A7%C3%B5es%20de%20atacado%20da%20Liberty%20Jeans."
+                                href={whatsappLink}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-lg transition-all hover:scale-105 shadow-xl shadow-green-600/20"
@@ -161,10 +194,24 @@ export default function LibertyJeansPage() {
                         initial={{ opacity: 0, x: 50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="md:w-1/2 relative h-[600px] w-full flex justify-center"
+                        className="md:w-1/2 relative h-[500px] md:h-[600px] w-full flex justify-center items-center"
                     >
+                        {/* Floating Balloons */}
+                        <FloatingBalloon delay={0} x="10%" y="20%" color="bg-white/90 border-blue-100 text-slate-800">
+                            <Users className="w-3 h-3 text-blue-500" /> +150 novos lojistas este mês
+                        </FloatingBalloon>
+                        <FloatingBalloon delay={1.5} x="70%" y="15%" color="bg-blue-600 border-blue-400 text-white">
+                            <TrendingUp className="w-3 h-3" /> Vendas escalando em SP
+                        </FloatingBalloon>
+                        <FloatingBalloon delay={0.8} x="5%" y="60%" color="bg-slate-800 border-slate-600 text-white">
+                            <Check className="w-3 h-3 text-green-400" /> Pedido aprovado: 300 peças
+                        </FloatingBalloon>
+                        <FloatingBalloon delay={2.2} x="65%" y="75%" color="bg-white/90 border-green-100 text-slate-800">
+                            <ShoppingBag className="w-3 h-3 text-green-500" /> Cliente de MG acaba de comprar
+                        </FloatingBalloon>
+
                         {/* YouTube Short Embed */}
-                        <div className="relative w-full max-w-[340px] h-full bg-slate-800 rounded-2xl overflow-hidden shadow-2xl border-4 border-slate-700">
+                        <div className="relative w-full max-w-[300px] md:max-w-[340px] h-full bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-700">
                             <iframe
                                 className="w-full h-full object-cover"
                                 src="https://www.youtube.com/embed/UC14Cfknn9M?autoplay=1&mute=1&loop=1&playlist=UC14Cfknn9M&controls=0&rel=0&showinfo=0"
@@ -173,7 +220,6 @@ export default function LibertyJeansPage() {
                                 referrerPolicy="strict-origin-when-cross-origin"
                                 allowFullScreen
                             />
-                            {/* Overlay to prevent interaction if needed, or keeping it interactive */}
                             <div className="absolute inset-0 pointer-events-none ring-1 ring-inset ring-slate-700/50 rounded-2xl"></div>
                         </div>
                     </motion.div>
@@ -217,24 +263,48 @@ export default function LibertyJeansPage() {
                 </div>
             </section>
 
-            {/* How it Works */}
-            <section className="py-24 bg-slate-900 text-white">
+            {/* How it Works - Timeline */}
+            <section ref={timelineRef} className="py-24 bg-slate-900 text-white overflow-hidden">
                 <div className="container mx-auto px-4">
-                    <div className="mb-16">
-                        <h2 className="text-3xl md:text-4xl font-black mb-4">Como comprar no atacado</h2>
-                        <p className="text-slate-400 max-w-2xl">Processo simplificado para você repor seu estoque ou criar sua coleção com agilidade.</p>
+                    <div className="text-center mb-20">
+                        <h2 className="text-3xl md:text-5xl font-black mb-4">Como comprar no atacado</h2>
+                        <p className="text-slate-400 max-w-2xl mx-auto">Processo simplificado e dinâmico para você escalar seu negócio.</p>
                     </div>
 
-                    <div className="grid md:grid-cols-4 gap-4">
-                        {steps.map((step, i) => (
-                            <div key={i} className="relative">
-                                <div className="text-6xl font-black text-slate-800 absolute -top-8 -left-2 z-0 opacity-50">{i + 1}</div>
-                                <div className="relative z-10 bg-slate-800 p-6 rounded-xl border border-slate-700 h-full">
-                                    <h3 className="text-xl font-bold mb-2 text-blue-400">{step.title}</h3>
-                                    <p className="text-slate-400 text-sm">{step.desc}</p>
-                                </div>
-                            </div>
-                        ))}
+                    <div className="relative max-w-4xl mx-auto">
+                        {/* Vertical line that fills on scroll */}
+                        <div className="absolute left-[31px] md:left-1/2 top-0 bottom-0 w-[2px] bg-slate-800 z-0">
+                            <motion.div
+                                className="absolute top-0 left-0 w-full bg-blue-500 origin-top"
+                                style={{ scaleY: scrollYProgress }}
+                            />
+                        </div>
+
+                        <div className="space-y-24 relative z-10">
+                            {steps.map((step, i) => (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, y: 50 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, margin: "-100px" }}
+                                    transition={{ duration: 0.6, delay: i * 0.1 }}
+                                    className={`flex flex-col md:flex-row items-start md:items-center ${i % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
+                                >
+                                    <div className="w-full md:w-1/2 flex items-center justify-start md:justify-end px-4 md:px-12">
+                                        <div className={`text-left ${i % 2 !== 0 ? 'md:text-left' : 'md:text-right'}`}>
+                                            <h3 className="text-2xl font-bold text-white mb-2">{step.title}</h3>
+                                            <p className="text-slate-400 leading-relaxed">{step.desc}</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="absolute left-0 md:left-1/2 -translate-x-0 md:-translate-x-1/2 w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center border-4 border-slate-900 shadow-xl z-20">
+                                        <div className="text-white">{step.icon}</div>
+                                    </div>
+
+                                    <div className="hidden md:block w-1/2"></div>
+                                </motion.div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>
@@ -263,7 +333,7 @@ export default function LibertyJeansPage() {
                                     ))}
                                 </ul>
                                 <a
-                                    href="https://wa.me/5581935002075?text=Ol%C3%A1%2C%20tenho%20interesse%20em%20saber%20mais%20sobre%20os%20modelos%20de%20compra."
+                                    href={whatsappLink}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className={`w-full py-4 rounded-xl font-bold text-center transition-colors ${type.highlight ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-slate-900 text-white hover:bg-slate-800'}`}
@@ -309,11 +379,12 @@ export default function LibertyJeansPage() {
                             <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight">
                                 Produza jeans para sua marca com quem é especialista.
                             </h2>
-                            <p className="text-xl text-blue-100 mb-8">
-                                Preencha o formulário para receber o catálogo completo e falar com um consultor.
+                            <p className="text-xl text-blue-100 mb-8 border-l-4 border-blue-500 pl-6 italic">
+                                "Qualidade que transforma negócios."<br />
+                                <span className="text-sm not-italic opacity-70">libertyjeansoficial@gmail.com</span>
                             </p>
                             <a
-                                href="https://wa.me/5581935002075?text=Ol%C3%A1%2C%20quero%20receber%20o%20cat%C3%A1logo%20e%20as%20condi%C3%A7%C3%B5es%20de%20atacado%20da%20Liberty%20Jeans."
+                                href={whatsappLink}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-bold py-5 px-10 rounded-xl text-lg transition-all hover:scale-105 shadow-xl w-full md:w-auto"
@@ -323,9 +394,7 @@ export default function LibertyJeansPage() {
                             </a>
                         </div>
 
-                        <div className="bg-white text-slate-900 p-8 rounded-2xl shadow-2xl">
-                            <h3 className="text-2xl font-bold mb-2 text-center">Solicite Orçamento</h3>
-                            <p className="text-center text-slate-500 text-sm mb-6">Receba contato em até 24h</p>
+                        <div className="bg-white text-slate-900 p-8 rounded-2xl shadow-2xl overflow-hidden">
                             <Suspense fallback={<div className="p-10 text-center animate-pulse bg-slate-100 rounded-xl">Carregando formulário...</div>}>
                                 <LeadForm clientSlug="liberty-jeans" />
                             </Suspense>
@@ -336,9 +405,13 @@ export default function LibertyJeansPage() {
 
             <Suspense fallback={null}>
                 <WhatsAppButton
-                    phoneNumber="5581935002075"
+                    phoneNumber="5585991528143"
                     message="Olá, quero receber o catálogo e as condições de atacado da Liberty Jeans."
                 />
+            </Suspense>
+
+            <Suspense fallback={null}>
+                <SocialProofNotification />
             </Suspense>
         </main>
     );

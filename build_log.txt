@@ -1,0 +1,41 @@
+
+> amo-atacado@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.12
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 1595ms
+   Linting and checking validity of types ...
+
+Failed to compile.
+
+./app/liberty-jeans-atacado/page.tsx
+3:8  Warning: 'Image' is defined but never used.  @typescript-eslint/no-unused-vars
+4:8  Warning: 'Link' is defined but never used.  @typescript-eslint/no-unused-vars
+8:5  Warning: 'ArrowRight' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./app/page.tsx
+216:82  Error: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+216:94  Error: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+231:34  Error: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+231:40  Error: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+
+./app/sunliv-moda-praia-atacado/page.tsx
+4:8  Warning: 'Head' is defined but never used.  @typescript-eslint/no-unused-vars
+10:5  Warning: 'Star' is defined but never used.  @typescript-eslint/no-unused-vars
+15:5  Warning: 'Truck' is defined but never used.  @typescript-eslint/no-unused-vars
+16:5  Warning: 'ShieldCheck' is defined but never used.  @typescript-eslint/no-unused-vars
+17:5  Warning: 'ThumbsUp' is defined but never used.  @typescript-eslint/no-unused-vars
+18:5  Warning: 'Instagram' is defined but never used.  @typescript-eslint/no-unused-vars
+20:5  Warning: 'Phone' is defined but never used.  @typescript-eslint/no-unused-vars
+29:7  Warning: 'fadeIn' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+34:7  Warning: 'staggerContainer' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./components/Hero.tsx
+17:21  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./components/LeadForm.tsx
+64:18  Warning: 'error' is defined but never used.  @typescript-eslint/no-unused-vars
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules

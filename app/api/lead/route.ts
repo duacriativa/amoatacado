@@ -31,61 +31,55 @@ export async function POST(request: Request) {
             }
         }
 
-        // 2. Send email notification (Sunliv Specific)
+        // 2. Send email notification (Sunliv & Liberty Jeans Specific)
         const isSunliv = body.clientSlug === 'sunliv' || body.clientSlug === 'sunliv-moda-praia-atacado';
+        const isLibertyJeans = body.clientSlug === 'liberty-jeans';
 
-        if (isSunliv) {
+        if (isSunliv || isLibertyJeans) {
             const smtpPass = process.env.SMTP_PASS;
             if (!smtpPass) {
                 console.error('[SMTP] Skip email: SMTP_PASS not found in env');
             } else {
                 try {
+                    const clientEmail = isSunliv ? 'sunliv@amoatacado.com.br' : 'libertyjeansoficial@gmail.com';
+                    const clientName = isSunliv ? 'Sunliv' : 'Liberty Jeans';
+
                     const transporter = nodemailer.createTransport({
                         host: 'mail.amoatacado.com.br',
                         port: 465,
                         secure: true,
                         auth: {
-                            user: 'sunliv@amoatacado.com.br',
+                            user: 'comercial@amoatacado.com.br', // Using a generic sender if available, or sunliv if forced
                             pass: smtpPass,
                         },
-                        // Timeout increased for slower SMTP servers
                         connectionTimeout: 10000,
                         greetingTimeout: 10000,
                     });
 
                     await transporter.sendMail({
-                        from: '"Sunliv Leads" <sunliv@amoatacado.com.br>',
-                        to: 'sunliv@amoatacado.com.br',
-                        subject: `Novo Lead Sunliv: ${body.name}`,
+                        from: `"${clientName} Leads" <comercial@amoatacado.com.br>`,
+                        to: clientEmail,
+                        subject: `Novo Lead ${clientName}: ${body.name}`,
                         html: `
                             <div style="font-family: sans-serif; max-width: 600px;">
-                                <h2 style="color: #0A3D4D;">Novo Lead Recebido - Sunliv</h2>
+                                <h2 style="color: #0A3D4D;">Novo Lead Recebido - ${clientName}</h2>
                                 <p><strong>Nome:</strong> ${body.name}</p>
                                 <p><strong>Email:</strong> ${body.email}</p>
                                 <p><strong>WhatsApp:</strong> ${body.phone}</p>
+                                ${body.modelType ? `<p><strong>Modelo:</strong> ${body.modelType}</p>` : ''}
+                                ${body.brandMoment ? `<p><strong>Momento da Marca:</strong> ${body.brandMoment}</p>` : ''}
+                                ${body.orderVolume ? `<p><strong>Volume:</strong> ${body.orderVolume}</p>` : ''}
+                                ${body.mainFocus ? `<p><strong>Foco:</strong> ${body.mainFocus}</p>` : ''}
+                                ${body.startDate ? `<p><strong>Previsão Início:</strong> ${body.startDate}</p>` : ''}
                                 <p><strong>Data/Hora:</strong> ${new Date().toLocaleString('pt-BR')}</p>
                                 <hr />
                                 <p style="font-size: 12px; color: #666;">Enviado via API AmoAtacado</p>
                             </div>
                         `,
                     });
-                    console.log(`[SMTP] Success: Lead from ${body.name} sent to sunliv@amoatacado.com.br`);
+                    console.log(`[SMTP] Success: Lead from ${body.name} sent to ${clientEmail}`);
                 } catch (emailError) {
-                    const error = emailError as {
-                        message?: string;
-                        code?: string;
-                        command?: string;
-                        response?: string;
-                        stack?: string
-                    };
-                    // Log specific error details to Vercel Logs for debugging
-                    console.error('[SMTP] Failed to send email:', {
-                        message: error.message,
-                        code: error.code,
-                        command: error.command,
-                        response: error.response,
-                        stack: error.stack
-                    });
+                    console.error('[SMTP] Failed to send email:', emailError);
                 }
             }
         }
