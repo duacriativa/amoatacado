@@ -163,41 +163,35 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
                 <>
                     <hr className="my-4 border-slate-100" />
 
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Qual modelo você busca?
-                        </label>
-                        <div className="space-y-2">
-                            {['White Label', 'Private Label', 'Ainda não sei'].map((opt) => (
-                                <label key={opt} className="flex items-center">
-                                    <input
-                                        {...register('modelType')}
-                                        type="radio"
-                                        value={opt}
-                                        className="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
-                                    />
-                                    <span className="ml-2 text-sm text-gray-600">{opt}</span>
-                                </label>
-                            ))}
+                    <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Qual modelo você busca?
+                            </label>
+                            <select
+                                {...register('modelType')}
+                                className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
+                            >
+                                <option value="">Selecione...</option>
+                                <option value="White Label">White Label</option>
+                                <option value="Private Label">Private Label</option>
+                                <option value="Ainda não sei">Ainda não sei</option>
+                            </select>
                         </div>
-                    </div>
 
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Sua marca hoje está em qual momento?
-                        </label>
-                        <div className="space-y-2">
-                            {['Estou começando agora', 'Já vendo, mas quero estruturar melhor', 'Já vendo bem e quero escalar'].map((opt) => (
-                                <label key={opt} className="flex items-center">
-                                    <input
-                                        {...register('brandMoment')}
-                                        type="radio"
-                                        value={opt}
-                                        className="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
-                                    />
-                                    <span className="ml-2 text-sm text-gray-600">{opt}</span>
-                                </label>
-                            ))}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Momento da sua marca:
+                            </label>
+                            <select
+                                {...register('brandMoment')}
+                                className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
+                            >
+                                <option value="">Selecione...</option>
+                                <option value="Estou começando agora">Estou começando agora</option>
+                                <option value="Já vendo, mas quero estruturar melhor">Já vendo, mas quero estruturar</option>
+                                <option value="Já vendo bem e quero escalar">Já vendo bem e quero escalar</option>
+                            </select>
                         </div>
                     </div>
 
@@ -235,22 +229,19 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
                             Quando você pretende iniciar a produção?
                         </label>
-                        <div className="grid grid-cols-2 gap-2">
-                            {['Imediato', 'Até 30 dias', '30 a 60 dias', 'Pesquisando'].map((opt) => (
-                                <label key={opt} className="flex items-center p-2 border border-gray-100 rounded-lg hover:bg-slate-50 cursor-pointer">
-                                    <input
-                                        {...register('startDate')}
-                                        type="radio"
-                                        value={opt}
-                                        className="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
-                                    />
-                                    <span className="ml-2 text-xs text-gray-600">{opt}</span>
-                                </label>
-                            ))}
-                        </div>
+                        <select
+                            {...register('startDate')}
+                            className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
+                        >
+                            <option value="">Selecione...</option>
+                            <option value="Imediato">Imediato</option>
+                            <option value="Até 30 dias">Até 30 dias</option>
+                            <option value="30 a 60 dias">30 a 60 dias</option>
+                            <option value="Pesquisando">Pesquisando</option>
+                        </select>
                     </div>
                 </>
             )}

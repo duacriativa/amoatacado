@@ -58,9 +58,9 @@ export default function SocialProofNotification() {
                     initial={{ opacity: 0, x: -50, scale: 0.8 }}
                     animate={{ opacity: 1, x: 0, scale: 1 }}
                     exit={{ opacity: 0, x: -50, scale: 0.8 }}
-                    className="fixed bottom-6 left-6 z-[60] max-w-[320px] w-full"
+                    className="fixed bottom-24 sm:bottom-6 left-4 sm:left-6 z-[60] max-w-[280px] sm:max-w-[320px] w-full"
                 >
-                    <div className="bg-white rounded-xl shadow-2xl border border-slate-100 p-4 flex items-center gap-4">
+                    <div className="bg-white/95 backdrop-blur-md rounded-xl shadow-2xl border border-white/20 p-4 flex items-center gap-4">
                         <div className="flex-shrink-0 relative">
                             <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-600">
                                 <CheckCircle2 size={24} />

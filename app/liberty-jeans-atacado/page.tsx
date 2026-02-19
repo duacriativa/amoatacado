@@ -183,7 +183,7 @@ export default function LibertyJeansPage() {
                             </a>
                             <a
                                 href="#types"
-                                className="inline-flex items-center justify-center px-8 py-4 rounded-lg text-white border border-slate-600 hover:bg-slate-800 transition-all font-semibold"
+                                className="inline-flex items-center justify-center px-8 py-4 rounded-lg text-white bg-blue-600 sm:bg-transparent border border-blue-500 sm:border-slate-600 hover:bg-blue-700 sm:hover:bg-slate-800 transition-all font-semibold"
                             >
                                 Quero fabricar com minha marca
                             </a>
@@ -214,7 +214,7 @@ export default function LibertyJeansPage() {
                         <div className="relative w-full max-w-[300px] md:max-w-[340px] h-full bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-700">
                             <iframe
                                 className="w-full h-full object-cover"
-                                src="https://www.youtube.com/embed/UC14Cfknn9M?autoplay=1&mute=1&loop=1&playlist=UC14Cfknn9M&controls=0&rel=0&showinfo=0"
+                                src="https://www.youtube.com/embed/UC14Cfknn9M?autoplay=1&mute=0&loop=1&playlist=UC14Cfknn9M&controls=0&rel=0&showinfo=0"
                                 title="Liberty Jeans Factory Tour"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 referrerPolicy="strict-origin-when-cross-origin"
@@ -290,7 +290,7 @@ export default function LibertyJeansPage() {
                                     transition={{ duration: 0.6, delay: i * 0.1 }}
                                     className={`flex flex-col md:flex-row items-start md:items-center ${i % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
                                 >
-                                    <div className="w-full md:w-1/2 flex items-center justify-start md:justify-end px-4 md:px-12">
+                                    <div className="w-full md:w-1/2 flex items-center justify-start md:justify-end pl-20 pr-4 md:px-12">
                                         <div className={`text-left ${i % 2 !== 0 ? 'md:text-left' : 'md:text-right'}`}>
                                             <h3 className="text-2xl font-bold text-white mb-2">{step.title}</h3>
                                             <p className="text-slate-400 leading-relaxed">{step.desc}</p>
