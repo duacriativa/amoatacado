@@ -214,7 +214,7 @@ export default function LibertyJeansPage() {
                         <div className="relative w-full max-w-[300px] md:max-w-[340px] h-full bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-700">
                             <iframe
                                 className="w-full h-full object-cover"
-                                src="https://www.youtube.com/embed/UC14Cfknn9M?autoplay=1&mute=0&loop=1&playlist=UC14Cfknn9M&controls=0&rel=0&showinfo=0"
+                                src="https://www.youtube.com/embed/UC14Cfknn9M?autoplay=1&mute=1&loop=1&playlist=UC14Cfknn9M&controls=0&rel=0&showinfo=0"
                                 title="Liberty Jeans Factory Tour"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 referrerPolicy="strict-origin-when-cross-origin"
