@@ -20,6 +20,7 @@ import LeadForm from '@/components/LeadForm';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import SocialProofNotification from '@/components/SocialProofNotification';
 import { useState, Suspense, useRef } from 'react';
+import Script from 'next/script';
 
 const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -144,6 +145,30 @@ export default function LibertyJeansPage() {
 
     return (
         <main className="min-h-screen bg-slate-50 font-sans text-slate-900">
+            {/* Meta Pixel Code */}
+            <Script id="fb-pixel-liberty" strategy="afterInteractive">
+                {`
+                    !function(f,b,e,v,n,t,s)
+                    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                    n.queue=[];t=b.createElement(e);t.async=!0;
+                    t.src=v;s=b.getElementsByTagName(e)[0];
+                    s.parentNode.insertBefore(t,s)}(window, document,'script',
+                    'https://connect.facebook.net/en_US/fbevents.js');
+                    fbq('init', '2142799419805931');
+                    fbq('track', 'PageView');
+                `}
+            </Script>
+            <noscript>
+                <img
+                    height="1"
+                    width="1"
+                    style={{ display: 'none' }}
+                    src="https://www.facebook.com/tr?id=2142799419805931&ev=PageView&noscript=1"
+                    alt=""
+                />
+            </noscript>
             {/* Hero Section */}
             <section className="relative min-h-[90vh] flex items-center bg-slate-900 overflow-hidden">
                 <div className="absolute inset-0 z-0 opacity-40">
