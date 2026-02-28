@@ -68,8 +68,8 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
 
             // Track Google Ads Conversion for Sunliv
             if (clientSlug === 'sunliv' || clientSlug === 'sunliv-moda-praia-atacado') {
-                if (typeof window !== 'undefined' && (window as any).gtag) {
-                    (window as any).gtag('event', 'conversion', {
+                if (typeof window !== 'undefined' && (window as any).gtag) { // eslint-disable-line @typescript-eslint/no-explicit-any
+                    (window as any).gtag('event', 'conversion', { // eslint-disable-line @typescript-eslint/no-explicit-any
                         'send_to': 'AW-401775500/49tfCOGnnYAcEIy3yr8B'
                     });
                 }

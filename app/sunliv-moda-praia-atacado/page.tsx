@@ -84,8 +84,8 @@ export default function SunlivPage() {
     const waLink = "https://wa.me/5585994399401?text=Olá! Vim pela AmoAtacado e gostaria de revender Sunliv, ou obter mais informações.";
 
     const trackWhatsAppConversion = () => {
-        if (typeof window !== 'undefined' && (window as any).gtag) {
-            (window as any).gtag('event', 'conversion', {
+        if (typeof window !== 'undefined' && (window as any).gtag) { // eslint-disable-line @typescript-eslint/no-explicit-any
+            (window as any).gtag('event', 'conversion', { // eslint-disable-line @typescript-eslint/no-explicit-any
                 'send_to': 'AW-401775500/FHUdCLqlloAcEIy3yr8B'
             });
         }

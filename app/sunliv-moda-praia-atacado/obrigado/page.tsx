@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { Suspense } from 'react';
 import Script from 'next/script';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import { motion } from 'framer-motion';
@@ -10,8 +10,8 @@ export default function SunlivObrigado() {
     const waLink = "https://wa.me/5585994399401?text=Olá! Acabei de me cadastrar no site da Sunliv e gostaria de receber o catálogo.";
 
     const trackWhatsAppConversion = () => {
-        if (typeof window !== 'undefined' && (window as any).gtag) {
-            (window as any).gtag('event', 'conversion', {
+        if (typeof window !== 'undefined' && (window as any).gtag) { // eslint-disable-line @typescript-eslint/no-explicit-any
+            (window as any).gtag('event', 'conversion', { // eslint-disable-line @typescript-eslint/no-explicit-any
                 'send_to': 'AW-401775500/FHUdCLqlloAcEIy3yr8B'
             });
         }
@@ -90,11 +90,13 @@ export default function SunlivObrigado() {
                 <p className="text-slate-300 text-xs italic">© 2026 Sun Liv - Todos os direitos reservados.</p>
             </footer>
 
-            <WhatsAppButton
-                phoneNumber="5585994399401"
-                message="Olá! Acabei de me cadastrar no site da Sunliv e gostaria de receber o catálogo."
-                onClick={trackWhatsAppConversion}
-            />
+            <Suspense fallback={null}>
+                <WhatsAppButton
+                    phoneNumber="5585994399401"
+                    message="Olá! Acabei de me cadastrar no site da Sunliv e gostaria de receber o catálogo."
+                    onClick={trackWhatsAppConversion}
+                />
+            </Suspense>
         </main>
     );
 }
