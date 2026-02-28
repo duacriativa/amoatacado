@@ -66,6 +66,15 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
                 throw new Error('Erro ao enviar formulário');
             }
 
+            // Track Google Ads Conversion for Sunliv
+            if (clientSlug === 'sunliv' || clientSlug === 'sunliv-moda-praia-atacado') {
+                if (typeof window !== 'undefined' && (window as any).gtag) {
+                    (window as any).gtag('event', 'conversion', {
+                        'send_to': 'AW-401775500/49tfCOGnnYAcEIy3yr8B'
+                    });
+                }
+            }
+
             setSubmitSuccess(true);
             reset();
         } catch {

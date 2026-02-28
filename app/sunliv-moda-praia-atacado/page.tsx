@@ -83,6 +83,14 @@ export default function SunlivPage() {
 
     const waLink = "https://wa.me/5585994399401?text=Olá! Vim pela AmoAtacado e gostaria de revender Sunliv, ou obter mais informações.";
 
+    const trackWhatsAppConversion = () => {
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+            (window as any).gtag('event', 'conversion', {
+                'send_to': 'AW-401775500/FHUdCLqlloAcEIy3yr8B'
+            });
+        }
+    };
+
     return (
         <main className={`min-h-screen ${offWhite} font-sans selection:bg-amber-100`}>
             {/* Microsoft Clarity */}
@@ -120,6 +128,20 @@ export default function SunlivPage() {
                     alt=""
                 />
             </noscript>
+
+            {/* Google Ads Global Tag */}
+            <Script
+                src="https://www.googletagmanager.com/gtag/js?id=AW-401775500"
+                strategy="afterInteractive"
+            />
+            <Script id="google-ads-gtag" strategy="afterInteractive">
+                {`
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', 'AW-401775500');
+                `}
+            </Script>
 
             {/* Hero Section */}
             <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
@@ -181,7 +203,13 @@ export default function SunlivPage() {
                         <a href="#lead" className={`${goldGradient} hover:scale-105 transition-transform text-slate-900 font-black py-5 px-10 rounded-xl text-lg shadow-xl uppercase tracking-wider`}>
                             QUERO SER REVENDEDORA
                         </a>
-                        <a href={waLink} target="_blank" rel="noopener" className="bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all text-white border border-white/40 font-black py-5 px-10 rounded-xl text-lg uppercase tracking-wider">
+                        <a
+                            href={waLink}
+                            target="_blank"
+                            rel="noopener"
+                            onClick={trackWhatsAppConversion}
+                            className="bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all text-white border border-white/40 font-black py-5 px-10 rounded-xl text-lg uppercase tracking-wider"
+                        >
                             VER CATÁLOGO
                         </a>
                     </motion.div>
@@ -260,7 +288,11 @@ export default function SunlivPage() {
                     </div>
 
                     <div className="mt-20">
-                        <a href={waLink} className={`${goldGradient} inline-flex items-center text-slate-900 font-black py-5 px-12 rounded-2xl text-lg hover:scale-105 transition-transform`}>
+                        <a
+                            href={waLink}
+                            onClick={trackWhatsAppConversion}
+                            className={`${goldGradient} inline-flex items-center text-slate-900 font-black py-5 px-12 rounded-2xl text-lg hover:scale-105 transition-transform`}
+                        >
                             SOLICITE O CATÁLOGO COMPLETO
                         </a>
                     </div>
@@ -392,6 +424,7 @@ export default function SunlivPage() {
                 <WhatsAppButton
                     phoneNumber="5585994399401"
                     message="Olá! Vim pela AmoAtacado e gostaria de revender Sunliv, ou obter mais informações."
+                    onClick={trackWhatsAppConversion}
                 />
             </Suspense>
         </main>
