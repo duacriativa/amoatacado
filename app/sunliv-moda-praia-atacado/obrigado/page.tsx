@@ -59,7 +59,7 @@ export default function SunlivObrigado() {
 
                 <div className="grid gap-4 md:grid-cols-2 mb-10">
                     <a
-                        href="https://www.instagram.com/sunlivmoda"
+                        href="https://www.instagram.com/sunlivoficial/"
                         target="_blank"
                         rel="noopener"
                         className="flex items-center justify-center gap-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-4 px-6 rounded-2xl hover:scale-105 transition-transform shadow-lg shadow-pink-500/20"
