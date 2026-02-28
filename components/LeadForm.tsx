@@ -73,6 +73,10 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
                         'send_to': 'AW-401775500/49tfCOGnnYAcEIy3yr8B'
                     });
                 }
+
+                // Redirect to Thank You page for Sunliv
+                window.location.href = '/sunliv-moda-praia-atacado/obrigado';
+                return;
             }
 
             setSubmitSuccess(true);
