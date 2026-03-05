@@ -94,10 +94,17 @@ export async function POST(request: Request) {
         // 3. Backup delivery (Optional: Google Sheets / Secondary Webhook)
         let backupUrl = process.env.LEADS_BACKUP_URL; // Default/Global fallback
 
+        console.log(`[DEBUG] Processing lead for slug: ${body.clientSlug}`);
+        console.log(`[DEBUG] isSunliv: ${isSunliv}, isLibertyJeans: ${isLibertyJeans}`);
+
         if (isLibertyJeans && process.env.LIBERTY_JEANS_BACKUP_URL) {
             backupUrl = process.env.LIBERTY_JEANS_BACKUP_URL;
-        } else if (isSunliv && process.env.SUNLIV_BACKUP_URL) {
-            backupUrl = process.env.SUNLIV_BACKUP_URL;
+            console.log('[DEBUG] Using Liberty Jeans Backup URL');
+        } else if (isSunliv && (process.env.SUNLIV_BACKUP_URL || process.env.LEADS_BACKUP_sunliv)) {
+            backupUrl = process.env.SUNLIV_BACKUP_URL || process.env.LEADS_BACKUP_sunliv;
+            console.log('[DEBUG] Using Sunliv Backup URL');
+        } else {
+            console.log('[DEBUG] Using Default/No Backup URL');
         }
 
         if (backupUrl) {
