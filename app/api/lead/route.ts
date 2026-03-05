@@ -13,16 +13,19 @@ export async function POST(request: Request) {
             );
         }
 
-        // 1. Determine which webhook to use based on clientSlug
+        // 1. Determine which webhook and email settings to use
         const isSunliv = body.clientSlug === 'sunliv' || body.clientSlug === 'sunliv-moda-praia-atacado';
         const isLibertyJeans = body.clientSlug === 'liberty-jeans';
+        const isAmoAtacado = body.clientSlug === 'amo-atacado';
 
-        let webhookUrl = process.env.LEADS_WEBHOOK_URL; // Default/Global fallback
+        let webhookUrl = process.env.LEADS_WEBHOOK_URL;
 
         if (isLibertyJeans && process.env.LIBERTY_JEANS_WEBHOOK_URL) {
             webhookUrl = process.env.LIBERTY_JEANS_WEBHOOK_URL;
         } else if (isSunliv && process.env.SUNLIV_WEBHOOK_URL) {
             webhookUrl = process.env.SUNLIV_WEBHOOK_URL;
+        } else if (isAmoAtacado && process.env.AMO_ATACADO_WEBHOOK_URL) {
+            webhookUrl = process.env.AMO_ATACADO_WEBHOOK_URL;
         }
 
         // Create a list of background tasks to run in parallel
@@ -47,9 +50,17 @@ export async function POST(request: Request) {
         }
 
         // 2. Email Notification
-        if ((isSunliv || isLibertyJeans) && process.env.SMTP_PASS) {
-            const clientEmail = isSunliv ? 'sunliv@amoatacado.com.br' : 'libertyjeansoficial@gmail.com';
-            const clientName = isSunliv ? 'Sunliv' : 'Liberty Jeans';
+        if ((isSunliv || isLibertyJeans || isAmoAtacado) && process.env.SMTP_PASS) {
+            let clientEmail = 'comercial@amoatacado.com.br';
+            let clientName = 'Amo Atacado';
+
+            if (isSunliv) {
+                clientEmail = 'sunliv@amoatacado.com.br';
+                clientName = 'Sunliv';
+            } else if (isLibertyJeans) {
+                clientEmail = 'libertyjeansoficial@gmail.com';
+                clientName = 'Liberty Jeans';
+            }
 
             const transporter = nodemailer.createTransport({
                 host: 'mail.amoatacado.com.br',
@@ -59,7 +70,7 @@ export async function POST(request: Request) {
                     user: 'comercial@amoatacado.com.br',
                     pass: process.env.SMTP_PASS,
                 },
-                connectionTimeout: 5000, // Reduced timeout for speed
+                connectionTimeout: 5000,
                 greetingTimeout: 5000,
             });
 
@@ -74,15 +85,26 @@ export async function POST(request: Request) {
                             <p><strong>Nome:</strong> ${body.name}</p>
                             <p><strong>Email:</strong> ${body.email}</p>
                             <p><strong>WhatsApp:</strong> ${body.phone}</p>
-                            ${body.companyName ? `<p><strong>Empresa:</strong> ${body.companyName}</p>` : ''}
+                            <p><strong>Empresa:</strong> ${body.companyName || 'Não informado'}</p>
+                            
+                            ${body.businessType ? `<p><strong>Tipo de Negócio:</strong> ${body.businessType}</p>` : ''}
+                            ${body.monthlyRevenue ? `<p><strong>Faturamento:</strong> ${body.monthlyRevenue}</p>` : ''}
+                            ${body.mainChallenge ? `<p><strong>Principal Desafio:</strong> ${body.mainChallenge}</p>` : ''}
+                            
                             ${body.modelType ? `<p><strong>Modelo:</strong> ${body.modelType}</p>` : ''}
                             ${body.brandMoment ? `<p><strong>Momento da Marca:</strong> ${body.brandMoment}</p>` : ''}
                             ${body.orderVolume ? `<p><strong>Volume:</strong> ${body.orderVolume}</p>` : ''}
                             ${body.mainFocus ? `<p><strong>Foco:</strong> ${body.mainFocus}</p>` : ''}
                             ${body.startDate ? `<p><strong>Previsão Início:</strong> ${body.startDate}</p>` : ''}
+                            
                             <p><strong>Data/Hora:</strong> ${new Date().toLocaleString('pt-BR')}</p>
                             <hr />
-                            <p style="font-size: 12px; color: #666;">Enviado via API AmoAtacado</p>
+                            <div style="font-size: 12px; color: #666; background: #f9f9f9; padding: 10px; border-radius: 5px;">
+                                <p><strong>UTMs:</strong></p>
+                                <p>Source: ${body.utm_source || '-'}</p>
+                                <p>Medium: ${body.utm_medium || '-'}</p>
+                                <p>Campaign: ${body.utm_campaign || '-'}</p>
+                            </div>
                         </div>
                     `,
                 }).then(() => {
@@ -99,6 +121,8 @@ export async function POST(request: Request) {
             backupUrl = process.env.LIBERTY_JEANS_BACKUP_URL;
         } else if (isSunliv && (process.env.SUNLIV_BACKUP_URL || process.env.LEADS_BACKUP_sunliv)) {
             backupUrl = process.env.SUNLIV_BACKUP_URL || process.env.LEADS_BACKUP_sunliv;
+        } else if (isAmoAtacado && process.env.LEADS_BACKUP_amo_atacado) {
+            backupUrl = process.env.LEADS_BACKUP_amo_atacado;
         }
 
         if (backupUrl) {
