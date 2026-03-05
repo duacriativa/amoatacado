@@ -94,6 +94,13 @@ export async function POST(request: Request) {
         }
 
         // 3. Backup delivery (Google Sheets)
+        let backupUrl = process.env.LEADS_BACKUP_URL;
+        if (isLibertyJeans && process.env.LIBERTY_JEANS_BACKUP_URL) {
+            backupUrl = process.env.LIBERTY_JEANS_BACKUP_URL;
+        } else if (isSunliv && (process.env.SUNLIV_BACKUP_URL || process.env.LEADS_BACKUP_sunliv)) {
+            backupUrl = process.env.SUNLIV_BACKUP_URL || process.env.LEADS_BACKUP_sunliv;
+        }
+
         if (backupUrl) {
             tasks.push(
                 fetch(backupUrl, {
