@@ -16,6 +16,9 @@ const schema = z.object({
     orderVolume: z.string().optional(),
     mainFocus: z.string().optional(),
     startDate: z.string().optional(),
+    businessType: z.string().optional(),
+    monthlyRevenue: z.string().optional(),
+    mainChallenge: z.string().optional(),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -27,6 +30,7 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
     const [submitError, setSubmitError] = useState<string | null>(null);
 
     const isLibertyJeans = clientSlug === 'liberty-jeans';
+    const isAmoAtacado = clientSlug === 'amo-atacado';
 
     const {
         register,
@@ -160,7 +164,7 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
 
                 <div>
                     <label htmlFor="companyName" className="block text-sm font-medium text-gray-700">
-                        Nome da Loja / Marca
+                        {isAmoAtacado ? 'Nome da sua Marca' : 'Nome da Loja / Marca'}
                     </label>
                     <input
                         {...register('companyName')}
@@ -171,6 +175,62 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
                     />
                 </div>
             </div>
+
+            {isAmoAtacado && (
+                <>
+                    <hr className="my-4 border-slate-100" />
+                    <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Tipo de Negócio:
+                            </label>
+                            <select
+                                {...register('businessType')}
+                                className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
+                            >
+                                <option value="">Selecione...</option>
+                                <option value="Confecção / Indústria">Confecção / Indústria</option>
+                                <option value="Lojista Atacado">Lojista Atacado</option>
+                                <option value="Lojista Varejo">Lojista Varejo</option>
+                                <option value="Ainda não tenho negócio">Ainda não tenho negócio</option>
+                                <option value="Outros">Outros</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Faturamento Mensal Médio:
+                            </label>
+                            <select
+                                {...register('monthlyRevenue')}
+                                className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
+                            >
+                                <option value="">Selecione...</option>
+                                <option value="Iniciante (R$ 0 a R$ 10k)">Iniciante (Até R$ 10k)</option>
+                                <option value="R$ 10k a R$ 50k">R$ 10k a R$ 50k</option>
+                                <option value="R$ 50k a R$ 100k">R$ 50k a R$ 100k</option>
+                                <option value="Acima de R$ 100k">Acima de R$ 100k</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Qual seu principal desafio hoje?
+                        </label>
+                        <select
+                            {...register('mainChallenge')}
+                            className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
+                        >
+                            <option value="">Selecione...</option>
+                            <option value="Escalar Vendas">Escalar Vendas</option>
+                            <option value="Branding / Reposicionamento">Branding / Reposicionamento</option>
+                            <option value="Tráfego Qualificado">Tráfego Qualificado</option>
+                            <option value="Estruturação Comercial">Estruturação Comercial</option>
+                        </select>
+                    </div>
+                </>
+            )}
 
             {isLibertyJeans && (
                 <>
