@@ -29,7 +29,7 @@ export async function POST(request: Request) {
         }
 
         // Create a list of background tasks to run in parallel
-        const tasks: Promise<any>[] = [];
+        const tasks: Promise<unknown>[] = [];
 
         // 1. Webhook
         if (webhookUrl) {
@@ -42,7 +42,7 @@ export async function POST(request: Request) {
                         timestamp: new Date().toISOString(),
                         source_url: request.url
                     }),
-                }).catch(err => {
+                }).catch((err: unknown) => {
                     console.error('Error sending lead to webhook:', err);
                     return null;
                 })
@@ -109,7 +109,7 @@ export async function POST(request: Request) {
                     `,
                 }).then(() => {
                     console.log(`[SMTP] Success: Lead from ${body.name} sent to ${clientEmail}`);
-                }).catch(err => {
+                }).catch((err: unknown) => {
                     console.error('[SMTP] Failed to send email:', err);
                 })
             );
@@ -133,7 +133,7 @@ export async function POST(request: Request) {
                     body: JSON.stringify({ ...body, backup: true }),
                 }).then(() => {
                     console.log(`[BACKUP] Success: Lead from ${body.name} sent to backup`);
-                }).catch(err => {
+                }).catch((err: unknown) => {
                     console.error('[BACKUP] Failed to send to backup URL:', err);
                 })
             );
