@@ -200,7 +200,12 @@ export default function SunlivPage() {
                         transition={{ delay: 0.5 }}
                         className="flex flex-col sm:flex-row gap-4 justify-center"
                     >
-                        <a href="#lead" className={`${goldGradient} hover:scale-105 transition-transform text-slate-900 font-black py-5 px-10 rounded-xl text-lg shadow-xl uppercase tracking-wider`}>
+                        <a 
+                            href={waLink} 
+                            target="_blank"
+                            rel="noopener"
+                            onClick={trackWhatsAppConversion}
+                            className={`${goldGradient} hover:scale-105 transition-transform text-slate-900 font-black py-5 px-10 rounded-xl text-lg shadow-xl uppercase tracking-wider`}>
                             QUERO SER REVENDEDORA
                         </a>
                         <a
