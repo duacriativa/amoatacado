@@ -61,6 +61,7 @@ export default function Home() {
             src="/images/hero-bg.jpg"
             alt="Background Aurora"
             fill
+            sizes="100vw"
             className="object-cover opacity-80"
             priority
           />
@@ -129,6 +130,7 @@ export default function Home() {
                   alt="Background Circle"
                   fill
                   priority
+                  sizes="(max-width: 768px) 280px, (max-width: 1024px) 450px, 550px"
                   className="object-contain"
                 />
               </div>
@@ -138,6 +140,7 @@ export default function Home() {
               src="/images/hero-models.png"
               alt="Modelos Fashion"
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-contain object-bottom drop-shadow-2xl relative z-10"
               priority
             />
@@ -299,6 +302,7 @@ export default function Home() {
                 src="/images/clients/marry-blue-1.png"
                 alt="Case Marry Blue"
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black/80 to-transparent text-white">
