@@ -273,12 +273,12 @@ export default function SunlivPage() {
                     <p className="text-white/60 mb-20 max-w-xl mx-auto">Fabricação própria com o melhor custo-benefício do mercado. Solicite o catálogo para ver todos os modelos.</p>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-                        {[1, 2, 3, 4].map((idx) => (
+                        {[1, 2, 3, 4, 5, 6, 7, 8].map((idx) => (
                             <motion.div
                                 key={idx}
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: idx * 0.1 }}
+                                transition={{ delay: (idx % 4) * 0.1 }}
                                 className="group relative aspect-[3/4] rounded-2xl overflow-hidden border border-white/10 shadow-2xl"
                             >
                                 <Image
