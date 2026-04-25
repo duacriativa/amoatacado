@@ -32,6 +32,7 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
 
     const isLibertyJeans = clientSlug === 'liberty-jeans';
     const isAmoAtacado = clientSlug === 'amo-atacado';
+    const isSunliv = clientSlug === 'sunliv';
 
     const {
         register,
@@ -192,6 +193,43 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
                     />
                 </div>
             </div>
+
+            {isSunliv && (
+                <>
+                    <hr className="my-2 border-slate-100" />
+                    <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Você já revende moda?
+                            </label>
+                            <select
+                                {...register('businessType')}
+                                className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 text-sm"
+                            >
+                                <option value="">Selecione...</option>
+                                <option value="Sim, já revendo">Sim, já revendo</option>
+                                <option value="Não, quero começar">Não, quero começar</option>
+                                <option value="Tenho loja física">Tenho loja física</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Como pretende vender?
+                            </label>
+                            <select
+                                {...register('mainFocus')}
+                                className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 text-sm"
+                            >
+                                <option value="">Selecione...</option>
+                                <option value="WhatsApp / Instagram">WhatsApp / Instagram</option>
+                                <option value="Loja física">Loja física</option>
+                                <option value="Marketplace">Marketplace (Shopee, ML...)</option>
+                                <option value="Vários canais">Vários canais</option>
+                            </select>
+                        </div>
+                    </div>
+                </>
+            )}
 
             {isAmoAtacado && (
                 <>
