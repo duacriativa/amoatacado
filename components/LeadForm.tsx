@@ -11,6 +11,7 @@ const schema = z.object({
     email: z.string().email('Email inválido'),
     phone: z.string().min(10, 'Telefone inválido'),
     companyName: z.string().optional(),
+    instagramHandle: z.string().optional(),
     modelType: z.string().optional(),
     brandMoment: z.string().optional(),
     orderVolume: z.string().optional(),
@@ -172,6 +173,22 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
                         type="text"
                         placeholder="Opcional"
                         className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    />
+                </div>
+            </div>
+
+            <div>
+                <label htmlFor="instagramHandle" className="block text-sm font-medium text-gray-700">
+                    @ do Instagram da loja <span className="text-gray-400 font-normal">(se tiver)</span>
+                </label>
+                <div className="mt-1 flex rounded-md shadow-sm">
+                    <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">@</span>
+                    <input
+                        {...register('instagramHandle')}
+                        id="instagramHandle"
+                        type="text"
+                        placeholder="sualojanoinsta"
+                        className="block w-full rounded-none rounded-r-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     />
                 </div>
             </div>

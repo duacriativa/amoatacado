@@ -89,6 +89,7 @@ export async function POST(request: Request) {
                             <p><strong>Email:</strong> ${body.email}</p>
                             <p><strong>WhatsApp:</strong> ${body.phone}</p>
                             <p><strong>Empresa:</strong> ${body.companyName || 'Não informado'}</p>
+                            ${body.instagramHandle ? `<p><strong>Instagram:</strong> @${body.instagramHandle}</p>` : ''}
                             
                             ${body.businessType ? `<p><strong>Tipo de Negócio:</strong> ${body.businessType}</p>` : ''}
                             ${body.monthlyRevenue ? `<p><strong>Faturamento:</strong> ${body.monthlyRevenue}</p>` : ''}
