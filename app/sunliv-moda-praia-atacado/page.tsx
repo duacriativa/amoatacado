@@ -24,8 +24,8 @@ const goldGradient = "bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500
 const waLink = "https://wa.me/5585994399401?text=Olá! Vim pela AmoAtacado e gostaria de revender Sunliv, ou obter mais informações.";
 
 const trackWhatsAppConversion = () => {
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-        (window as any).gtag('event', 'conversion', {
+    if (typeof window !== 'undefined' && (window as any).gtag) { // eslint-disable-line @typescript-eslint/no-explicit-any
+        (window as any).gtag('event', 'conversion', { // eslint-disable-line @typescript-eslint/no-explicit-any
             'send_to': 'AW-401775500/FHUdCLqlloAcEIy3yr8B'
         });
     }
@@ -289,7 +289,7 @@ export default function SunlivPage() {
                                         <Star key={s} className="w-4 h-4 fill-amber-400 text-amber-400" />
                                     ))}
                                 </div>
-                                <p className="text-slate-600 leading-relaxed mb-6 text-sm">"{t.text}"</p>
+                                <p className="text-slate-600 leading-relaxed mb-6 text-sm">&ldquo;{t.text}&rdquo;</p>
                                 <div>
                                     <div className="font-bold text-slate-900 text-sm">{t.name}</div>
                                     <div className="text-slate-400 text-xs mt-0.5">{t.city}</div>
