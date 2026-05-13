@@ -21,7 +21,7 @@ import LeadForm from '@/components/LeadForm';
 import WhatsAppButton from '@/components/WhatsAppButton';
 
 const goldGradient = "bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500";
-const waLink = "https://wa.me/5585994399401?text=Olá! Vim pela AmoAtacado e gostaria de revender Sunliv, ou obter mais informações.";
+const waLink = "https://wa.me/5585991613500?text=Olá! Vim pela AmoAtacado e gostaria de revender Sunliv, ou obter mais informações.";
 
 const trackWhatsAppConversion = () => {
     if (typeof window !== 'undefined' && (window as any).gtag) { // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -397,7 +397,7 @@ export default function SunlivPage() {
             </footer>
 
             <Suspense fallback={null}>
-                <WhatsAppButton phoneNumber="5585994399401" message="Olá! Vim pela AmoAtacado e gostaria de revender Sunliv, ou obter mais informações." onClick={trackWhatsAppConversion} />
+                <WhatsAppButton phoneNumber="5585991613500" message="Olá! Vim pela AmoAtacado e gostaria de revender Sunliv, ou obter mais informações." onClick={trackWhatsAppConversion} />
             </Suspense>
         </main>
     );
