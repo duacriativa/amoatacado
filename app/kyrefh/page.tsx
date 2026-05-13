@@ -150,47 +150,72 @@ export default function KyrefhPage() {
                     <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-zinc-950 to-transparent pointer-events-none z-10" />
                 </div>
 
-                <div className="container mx-auto px-4 relative z-20 py-20 flex flex-col items-center justify-center text-center">
+                <div className="container mx-auto px-4 relative z-20 py-12 flex flex-col lg:flex-row items-center gap-12">
                     <motion.div
                         initial="hidden"
                         animate="visible"
                         variants={staggerContainer}
-                        className="max-w-4xl mx-auto"
+                        className="lg:w-1/2 text-white"
                     >
-                        <motion.div variants={fadeIn} className="inline-block px-5 py-2 mb-8 rounded-full bg-zinc-900 border border-zinc-800 shadow-xl">
+                        <motion.div variants={fadeIn} className="inline-block px-5 py-2 mb-6 rounded-full bg-zinc-900 border border-zinc-800 shadow-xl">
                             <span className="text-xs sm:text-sm font-black tracking-[0.2em] uppercase text-amber-500">
                                 KYREFH JEANS ATACADO
                             </span>
                         </motion.div>
 
-                        <motion.h1 variants={fadeIn} className="text-5xl md:text-7xl font-black leading-tight mb-8 text-white tracking-tight">
-                            Eleve o nível da sua loja com <br className="hidden md:block" />
+                        <motion.h1 variants={fadeIn} className="text-4xl md:text-6xl lg:text-7xl font-black leading-tight mb-6 tracking-tight">
+                            Eleve o nível da sua loja com <br className="hidden lg:block" />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-600">
                                 moda masculina premium.
                             </span>
                         </motion.h1>
 
-                        <motion.p variants={fadeIn} className="text-lg md:text-xl text-zinc-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+                        <motion.p variants={fadeIn} className="text-lg md:text-xl text-zinc-400 mb-10 max-w-xl leading-relaxed">
                             Qualidade excepcional, design moderno e conforto inigualável. Somos a fábrica referência em Fortaleza, pronta para abastecer o seu negócio.
                         </motion.p>
 
-                        <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-5 justify-center">
+                        <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4">
                             <a
                                 href={whatsappLink}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black py-4 px-10 rounded-xl transition-all hover:scale-105 shadow-xl shadow-amber-500/20 text-lg uppercase tracking-wide"
+                                className="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black py-4 px-8 rounded-xl transition-all hover:scale-105 shadow-xl shadow-amber-500/20 text-lg uppercase tracking-wide"
                             >
                                 <Phone className="mr-3 h-5 w-5" />
                                 Falar com a Thalya
                             </a>
                             <a
                                 href="#produtos"
-                                className="inline-flex items-center justify-center px-10 py-4 rounded-xl text-white bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 hover:border-zinc-700 transition-all font-bold uppercase tracking-wide text-lg"
+                                className="inline-flex items-center justify-center px-8 py-4 rounded-xl text-white bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 hover:border-zinc-700 transition-all font-bold uppercase tracking-wide text-lg"
                             >
                                 Conhecer Produtos
                             </a>
                         </motion.div>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="lg:w-1/2 w-full flex justify-center items-center relative"
+                    >
+                        {/* Decorative background glow behind the video */}
+                        <div className="absolute inset-0 bg-amber-500/20 blur-3xl rounded-full scale-75 z-0"></div>
+                        
+                        {/* Video Container */}
+                        <div className="relative z-10 w-full max-w-[340px] bg-zinc-900 rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-zinc-800 flex flex-col">
+                            <div className="flex-1 w-full bg-zinc-950 relative" style={{ aspectRatio: '9/16' }}>
+                                <iframe
+                                    src="https://www.instagram.com/p/DYGN9NWR8Cy/embed"
+                                    className="absolute inset-0 w-full h-full"
+                                    frameBorder="0"
+                                    scrolling="no"
+                                    allowTransparency={true}
+                                    allow="encrypted-media"
+                                    title="Kyrefh Loja"
+                                ></iframe>
+                            </div>
+                        </div>
                     </motion.div>
                 </div>
             </section>
