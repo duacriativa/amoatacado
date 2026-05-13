@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { Instagram, Users, CheckCircle } from 'lucide-react';
 
 export default function SunlivObrigado() {
-    const waLink = "https://wa.me/5585994399401?text=Olá! Acabei de me cadastrar no site da Sunliv e gostaria de receber o catálogo.";
+    const waLink = "https://wa.me/5585991613500?text=Olá! Acabei de me cadastrar no site da Sunliv e gostaria de receber o catálogo.";
 
     const trackWhatsAppConversion = () => {
         if (typeof window !== 'undefined' && (window as any).gtag) { // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -92,7 +92,7 @@ export default function SunlivObrigado() {
 
             <Suspense fallback={null}>
                 <WhatsAppButton
-                    phoneNumber="5585994399401"
+                    phoneNumber="5585991613500"
                     message="Olá! Acabei de me cadastrar no site da Sunliv e gostaria de receber o catálogo."
                     onClick={trackWhatsAppConversion}
                 />
