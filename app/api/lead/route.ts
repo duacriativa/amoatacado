@@ -20,6 +20,7 @@ export async function POST(request: Request) {
         const isSunliv = body.clientSlug === 'sunliv' || body.clientSlug === 'sunliv-moda-praia-atacado';
         const isLibertyJeans = body.clientSlug === 'liberty-jeans';
         const isAmoAtacado = body.clientSlug === 'amo-atacado';
+        const isKyrefh = body.clientSlug === 'kyrefh';
 
         let webhookUrl = process.env.LEADS_WEBHOOK_URL;
 
@@ -29,6 +30,8 @@ export async function POST(request: Request) {
             webhookUrl = process.env.SUNLIV_WEBHOOK_URL;
         } else if (isAmoAtacado && process.env.AMO_ATACADO_WEBHOOK_URL) {
             webhookUrl = process.env.AMO_ATACADO_WEBHOOK_URL;
+        } else if (isKyrefh && process.env.KYREFH_WEBHOOK_URL) {
+            webhookUrl = process.env.KYREFH_WEBHOOK_URL;
         }
 
         // Create a list of background tasks to run in parallel
@@ -53,7 +56,7 @@ export async function POST(request: Request) {
         }
 
         // 2. Email Notification
-        if ((isSunliv || isLibertyJeans || isAmoAtacado) && process.env.SMTP_PASS) {
+        if ((isSunliv || isLibertyJeans || isAmoAtacado || isKyrefh) && process.env.SMTP_PASS) {
             let clientEmail = 'comercial@amoatacado.com.br';
             let clientName = 'Amo Atacado';
 
@@ -63,6 +66,9 @@ export async function POST(request: Request) {
             } else if (isLibertyJeans) {
                 clientEmail = 'libertyjeansoficial@gmail.com';
                 clientName = 'Liberty Jeans';
+            } else if (isKyrefh) {
+                clientEmail = 'comercial@amoatacado.com.br';
+                clientName = 'Kyrefh Jeans';
             }
 
             const transporter = nodemailer.createTransport({
@@ -127,6 +133,8 @@ export async function POST(request: Request) {
             backupUrl = process.env.SUNLIV_BACKUP_URL || process.env.LEADS_BACKUP_sunliv;
         } else if (isAmoAtacado && process.env.LEADS_BACKUP_amo_atacado) {
             backupUrl = process.env.LEADS_BACKUP_amo_atacado;
+        } else if (isKyrefh && process.env.KYREFH_BACKUP_URL) {
+            backupUrl = process.env.KYREFH_BACKUP_URL;
         }
 
         if (backupUrl) {

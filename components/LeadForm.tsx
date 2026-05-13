@@ -32,7 +32,8 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
 
     const isLibertyJeans = clientSlug === 'liberty-jeans';
     const isAmoAtacado = clientSlug === 'amo-atacado';
-    const isSunliv = clientSlug === 'sunliv';
+    const isSunliv = clientSlug === 'sunliv' || clientSlug === 'sunliv-moda-praia-atacado';
+    const isKyrefh = clientSlug === 'kyrefh';
 
     const {
         register,
@@ -73,7 +74,7 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
             }
 
             // Track Google Ads Conversion for Sunliv
-            if (clientSlug === 'sunliv' || clientSlug === 'sunliv-moda-praia-atacado') {
+            if (isSunliv) {
                 if (typeof window !== 'undefined' && (window as any).gtag) { // eslint-disable-line @typescript-eslint/no-explicit-any
                     (window as any).gtag('event', 'conversion', { // eslint-disable-line @typescript-eslint/no-explicit-any
                         'send_to': 'AW-401775500/49tfCOGnnYAcEIy3yr8B'
@@ -82,6 +83,12 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
 
                 // Redirect to Thank You page for Sunliv
                 window.location.href = '/sunliv-moda-praia-atacado/obrigado';
+                return;
+            }
+
+            if (isKyrefh) {
+                // Redirect to VIP Group
+                window.location.href = 'https://chat.whatsapp.com/DJxPtkp2XJkBIrxwpT0R6o?mode=gi_t';
                 return;
             }
 
@@ -194,7 +201,7 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
                 </div>
             </div>
 
-            {isSunliv && (
+            {(isSunliv || isKyrefh) && (
                 <>
                     <hr className="my-2 border-slate-100" />
                     <div className="grid md:grid-cols-2 gap-4">
@@ -204,7 +211,7 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
                             </label>
                             <select
                                 {...register('businessType')}
-                                className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 text-sm"
+                                className={`block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-1 text-sm ${isKyrefh ? 'focus:border-slate-900 focus:ring-slate-900' : 'focus:border-amber-400 focus:ring-amber-400'}`}
                             >
                                 <option value="">Selecione...</option>
                                 <option value="Sim, já revendo">Sim, já revendo</option>
@@ -218,7 +225,7 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
                             </label>
                             <select
                                 {...register('mainFocus')}
-                                className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 text-sm"
+                                className={`block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-1 text-sm ${isKyrefh ? 'focus:border-slate-900 focus:ring-slate-900' : 'focus:border-amber-400 focus:ring-amber-400'}`}
                             >
                                 <option value="">Selecione...</option>
                                 <option value="WhatsApp / Instagram">WhatsApp / Instagram</option>
