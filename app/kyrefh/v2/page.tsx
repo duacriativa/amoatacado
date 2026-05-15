@@ -14,12 +14,12 @@ const ACCENT = '#1a2747';
 
 /* ─── Lookbook images from kyrefhjeans.com.br ────────────────────────────── */
 const LOOKBOOK_IMAGES = [
-  'https://kyrefhjeans.com.br/wp-content/uploads/2024/02/IMG_9963-scaled.jpg',
-  'https://kyrefhjeans.com.br/wp-content/uploads/2024/02/IMG_9963-scaled.jpg',
-  'https://kyrefhjeans.com.br/wp-content/uploads/2024/02/IMG_9963-scaled.jpg',
-  'https://kyrefhjeans.com.br/wp-content/uploads/2024/02/IMG_9963-scaled.jpg',
-  'https://kyrefhjeans.com.br/wp-content/uploads/2024/02/IMG_9963-scaled.jpg',
-  'https://kyrefhjeans.com.br/wp-content/uploads/2024/02/IMG_9963-scaled.jpg',
+  '/kyrefh/lookbook/1.png',
+  '/kyrefh/lookbook/2.png',
+  '/kyrefh/lookbook/3.png',
+  '/kyrefh/lookbook/4.png',
+  '/kyrefh/lookbook/5.png',
+  '/kyrefh/lookbook/6.png',
 ];
 
 /* ─── Data ────────────────────────────────────────────────────────────────── */
