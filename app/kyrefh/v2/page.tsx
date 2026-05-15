@@ -137,7 +137,7 @@ function KyrefhV2Form() {
       const res = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, ...utms, clientSlug: 'kyrefh-v2', source: 'website' }),
+        body: JSON.stringify({ ...data, ...utms, clientSlug: 'kyrefh-v2' }),
       });
       if (!res.ok) throw new Error();
       window.location.href = '/kyrefh/v2/obrigado';
