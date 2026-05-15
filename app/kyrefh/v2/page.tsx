@@ -22,6 +22,15 @@ const LOOKBOOK_IMAGES = [
   '/kyrefh/lookbook/6.png',
 ];
 
+const SHORTS_VIDEOS = [
+  '3caDvEBTs04',
+  'xIq64pU2Klo',
+  'kEA-EP7BTdU',
+  '3XZ3wL5UfS0',
+  'xUWCTNa5d0U',
+];
+const HERO_VIDEO = SHORTS_VIDEOS[0];
+
 /* ─── Data ────────────────────────────────────────────────────────────────── */
 const MARQUEE_ITEMS = [
   'Fabricação Própria', '★', 'A partir de R$ 50', '★', 'Pronta Entrega',
@@ -390,12 +399,24 @@ export default function KyrefhV2Page() {
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section style={{ position: 'relative', minHeight: '100vh', background: '#050505', color: '#f5efe6', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-        {/* Background image */}
-        <div style={{
-          position: 'absolute', inset: 0, zIndex: 0,
-          backgroundImage: `url('https://kyrefhjeans.com.br/wp-content/uploads/2024/02/IMG_9963-scaled.jpg')`,
-          backgroundSize: 'cover', backgroundPosition: 'center',
-        }} />
+        {/* Background video */}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0, overflow: 'hidden', background: '#050505' }}>
+          <iframe
+            src={`https://www.youtube.com/embed/${HERO_VIDEO}?autoplay=1&mute=1&loop=1&playlist=${HERO_VIDEO}&controls=0&rel=0&playsinline=1&modestbranding=1&showinfo=0`}
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              /* Cover any viewport with a 9:16 Short */
+              height: 'max(100vh, calc(100vw * 1.7778))',
+              width: 'calc(max(100vh, calc(100vw * 1.7778)) * 0.5625)',
+              transform: 'translate(-50%, -50%)',
+              border: 'none',
+              pointerEvents: 'none',
+            }}
+            allow="autoplay; encrypted-media"
+          />
+        </div>
         {/* Dark editorial overlays */}
         <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(180deg,rgba(5,5,5,0.7) 0%,rgba(5,5,5,0.35) 30%,rgba(5,5,5,0.6) 65%,rgba(5,5,5,0.95) 100%)' }} />
         <div style={{ position: 'absolute', inset: 0, zIndex: 1, backgroundImage: 'repeating-radial-gradient(circle at 30% 40%,rgba(255,255,255,0.012) 0 1px,transparent 1px 3px),repeating-linear-gradient(45deg,rgba(0,0,0,0.05) 0 1px,transparent 1px 2px)', mixBlendMode: 'overlay', pointerEvents: 'none' }} />
@@ -531,6 +552,54 @@ export default function KyrefhV2Page() {
               <Instagram size={16} />Ver mais no @kyrefh
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* ── SHORTS ───────────────────────────────────────────────────────── */}
+      <section style={{ padding: '120px 0', background: '#050505', color: '#f5efe6', overflow: 'hidden' }}>
+        <div className="px-6 sm:px-12 max-w-7xl mx-auto mb-12">
+          <p style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(245,239,230,0.4)', marginBottom: 12 }}>Na prática</p>
+          <h2 style={{ fontFamily: 'var(--font-bebas), sans-serif', fontSize: 'clamp(56px, 8vw, 100px)', fontWeight: 400, lineHeight: 0.92, letterSpacing: '-0.01em', color: '#f5efe6', margin: 0 }}>
+            Veja a coleção<br />em movimento.
+          </h2>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            gap: 12,
+            paddingLeft: 'max(24px, calc((100vw - 1280px) / 2 + 48px))',
+            paddingRight: 24,
+            overflowX: 'auto',
+            scrollSnapType: 'x mandatory',
+            WebkitOverflowScrolling: 'touch',
+            scrollbarWidth: 'none',
+          }}
+        >
+          {SHORTS_VIDEOS.map((id, i) => (
+            <motion.div
+              key={id}
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              style={{
+                flex: '0 0 260px',
+                aspectRatio: '9 / 16',
+                borderRadius: 8,
+                overflow: 'hidden',
+                scrollSnapAlign: 'start',
+                background: '#111',
+                position: 'relative',
+              }}
+            >
+              <iframe
+                src={`https://www.youtube.com/embed/${id}?rel=0&modestbranding=1`}
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none' }}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </motion.div>
+          ))}
         </div>
       </section>
 
