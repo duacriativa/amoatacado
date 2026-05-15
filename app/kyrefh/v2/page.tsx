@@ -7,13 +7,10 @@ import { z } from 'zod';
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Instagram, MapPin, Truck, CheckCircle2 } from 'lucide-react';
-import WhatsAppButton from '@/components/WhatsAppButton';
 import SocialProofNotification from '@/components/SocialProofNotification';
 import Script from 'next/script';
 
 const ACCENT = '#1a2747';
-const WA_LINK =
-  'https://wa.me/5585988839020?text=Ol%C3%A1%2C%20quero%20receber%20o%20cat%C3%A1logo%20e%20as%20condi%C3%A7%C3%B5es%20de%20atacado%20da%20Kyrefh%20Jeans.';
 
 /* ─── Lookbook images from kyrefhjeans.com.br ────────────────────────────── */
 const LOOKBOOK_IMAGES = [
@@ -140,10 +137,10 @@ function KyrefhV2Form() {
       const res = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, ...utms, clientSlug: 'kyrefh', source: 'website' }),
+        body: JSON.stringify({ ...data, ...utms, clientSlug: 'kyrefh-v2', source: 'website' }),
       });
       if (!res.ok) throw new Error();
-      window.location.href = 'https://chat.whatsapp.com/DJxPtkp2XJkBIrxwpT0R6o?mode=gi_t';
+      window.location.href = '/kyrefh/v2/obrigado';
     } catch {
       setSubmitError('Ocorreu um erro. Tente novamente.');
       setIsSubmitting(false);
@@ -416,10 +413,6 @@ export default function KyrefhV2Page() {
           <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-end">
             {/* Left: big headline */}
             <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }}>
-              <p style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(245,239,230,0.5)', marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12 }}>
-                <span style={{ display: 'inline-block', width: 32, height: 1, background: 'currentColor' }} />
-                Capa · Atacado direto da fábrica
-              </p>
               <h1 style={{ fontFamily: 'var(--font-bebas), sans-serif', fontSize: 'clamp(80px, 13vw, 180px)', fontWeight: 400, lineHeight: 0.88, letterSpacing: '-0.01em', color: '#f5efe6', margin: 0, textShadow: '0 4px 40px rgba(0,0,0,0.5)' }}>
                 Atacado<br />
                 <span style={{ color: ACCENT }}>direto</span><br />
@@ -435,10 +428,7 @@ export default function KyrefhV2Page() {
               </p>
               <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
                 <a href="#capturar" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', background: '#f5efe6', color: '#0a0a0a', fontFamily: 'var(--font-manrope), sans-serif', fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none', borderRadius: 4 }}>
-                  Receber tabela ↓
-                </a>
-                <a href={WA_LINK} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', background: 'transparent', color: '#f5efe6', border: '1px solid rgba(245,239,230,0.3)', fontFamily: 'var(--font-manrope), sans-serif', fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none', borderRadius: 4 }}>
-                  WhatsApp da Thalya
+                  Seja revendedor(a)
                 </a>
               </div>
             </motion.div>
@@ -477,10 +467,10 @@ export default function KyrefhV2Page() {
                 A gente acredita que <em style={{ fontStyle: 'italic', color: ACCENT }}>vender bem</em> começa antes da venda. Começa no tecido escolhido, no corte preciso, na costura que aguenta a lavagem, no preço justo que deixa margem pro lojista respirar.
               </p>
               <p style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: 17, lineHeight: 1.7, color: 'rgba(10,10,10,0.65)', margin: '0 0 20px' }}>
-                Desde Fortaleza, fabricamos jeans, sarja e blusas masculinas pra lojistas que querem girar estoque rápido sem abrir mão da qualidade. Pronta entrega, pedido mínimo baixo, novidade toda semana.
+                Fabricamos jeans, sarja e blusas masculinas pra lojistas que querem girar estoque rápido sem abrir mão da qualidade. Pronta entrega, pedido mínimo baixo, novidade toda semana.
               </p>
               <p style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: 17, lineHeight: 1.7, color: 'rgba(10,10,10,0.65)', margin: 0 }}>
-                Hoje somos a casa de <strong style={{ color: '#0a0a0a' }}>+1.200 lojistas em 26 estados</strong>. E queremos ser a sua também.
+                <strong style={{ color: '#0a0a0a' }}>+ de 1.200 lojistas atendidos.</strong> E queremos ser a sua casa também.
               </p>
             </div>
           </div>
@@ -572,7 +562,7 @@ export default function KyrefhV2Page() {
             ))}
           </div>
           <div className="mt-14 text-center">
-            <a href={WA_LINK} target="_blank" rel="noopener noreferrer"
+            <a href="#capturar"
               style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 40px', background: '#f5efe6', color: '#0a0a0a', fontFamily: 'var(--font-manrope), sans-serif', fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none', borderRadius: 4 }}>
               Solicitar catálogo completo
             </a>
@@ -716,9 +706,6 @@ export default function KyrefhV2Page() {
         </div>
       </footer>
 
-      <Suspense fallback={null}>
-        <WhatsAppButton phoneNumber="5585988839020" message="Olá, quero receber o catálogo e as condições de atacado da Kyrefh Jeans." />
-      </Suspense>
       <Suspense fallback={null}>
         <SocialProofNotification />
       </Suspense>
