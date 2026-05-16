@@ -501,7 +501,7 @@ export default function Home() {
                 icon: <Zap className="w-6 h-6 text-blue-600" />,
                 title: 'Kommo já integrado',
                 description:
-                  'Somos parceiros Kommo. Você não paga pela integração nem contrata o CRM separado.',
+                  'Somos parceiros Kommo. Você não precisa contratar, configurar nem entender de tecnologia — entregamos tudo pronto e integrado.',
               },
               {
                 icon: <Clock className="w-6 h-6 text-blue-600" />,
