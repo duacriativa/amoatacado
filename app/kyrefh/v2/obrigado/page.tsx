@@ -1,26 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
 const WA_URL =
   'https://wa.me/5585988839020?text=Ol%C3%A1%20gostaria%20de%20revender%20Kyrefh%2C%20vim%20pela%20amoatacado%2F2';
 
 export default function KyrefhV2ObrigadoPage() {
-  const [countdown, setCountdown] = useState(3);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCountdown((n) => {
-        if (n <= 1) {
-          clearInterval(timer);
-          window.location.href = WA_URL;
-          return 0;
-        }
-        return n - 1;
-      });
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
 
   return (
     <main
@@ -102,7 +85,7 @@ export default function KyrefhV2ObrigadoPage() {
             margin: '0 0 40px',
           }}
         >
-          Recebemos seus dados. Em até 30 minutos nossa equipe vai entrar em
+          Recebemos seus dados. Em até 1 minuto nossa equipe vai entrar em
           contato pelo WhatsApp com a tabela e as fotos da coleção.
         </p>
 
@@ -128,18 +111,6 @@ export default function KyrefhV2ObrigadoPage() {
           Ir para o WhatsApp
         </a>
 
-        <p
-          style={{
-            fontFamily: 'var(--font-manrope), sans-serif',
-            fontSize: 12,
-            color: 'rgba(245,239,230,0.3)',
-            margin: 0,
-          }}
-        >
-          {countdown > 0
-            ? `Redirecionando automaticamente em ${countdown}s...`
-            : 'Redirecionando...'}
-        </p>
       </div>
     </main>
   );
