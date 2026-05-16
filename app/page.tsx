@@ -320,9 +320,9 @@ export default function Home() {
                   ⚡ Tempo real
                 </span>
                 <p className="text-7xl font-black text-gray-800 mb-4 leading-none">01</p>
-                <h3 className="text-2xl md:text-3xl font-black text-white mb-4">Lead chega, CRM já sabe.</h3>
+                <h3 className="text-2xl md:text-3xl font-black text-white mb-4">Lojista pediu catálogo. CRM já sabe.</h3>
                 <p className="text-gray-400 leading-relaxed">
-                  Assim que o lojista preenche o formulário, o lead aparece automaticamente no Kommo com nome, telefone, plano de interesse e canal de venda — pronto para ser abordado.
+                  Assim que o lojista preenche o formulário na sua página, o lead entra automaticamente no CRM com nome, telefone e interesse — pronto para você abordar, sem nenhum dado perdido.
                 </p>
               </motion.div>
 
@@ -340,7 +340,7 @@ export default function Home() {
                         </div>
                         <div>
                           <p className="text-white text-xs font-semibold">Kommo CRM</p>
-                          <p className="text-gray-400 text-[10px]">Amo Atacado — Funil</p>
+                          <p className="text-gray-400 text-[10px]">Sua Marca — Funil de Vendas</p>
                         </div>
                       </div>
                       <motion.div
@@ -355,7 +355,7 @@ export default function Home() {
                           <span className="text-blue-100 text-[10px] font-semibold uppercase tracking-wider">Novo Lead</span>
                         </div>
                         <p className="text-white font-bold text-sm mb-1">Ana Rodrigues</p>
-                        <p className="text-blue-100 text-xs">Plano Conectado · WhatsApp + Insta</p>
+                        <p className="text-blue-100 text-xs">Quer revender · Solicita catálogo</p>
                       </motion.div>
                       <motion.div
                         initial={{ opacity: 0 }}
@@ -368,7 +368,7 @@ export default function Home() {
                         <div className="space-y-2">
                           {[
                             { label: 'Telefone', value: '(11) 99999-0000', color: 'text-white' },
-                            { label: 'Plano', value: 'Conectado', color: 'text-blue-400 font-bold' },
+                            { label: 'Interesse', value: 'Revenda', color: 'text-blue-400 font-bold' },
                             { label: 'Etapa', value: 'Novo Lead ✓', color: 'text-green-400' },
                           ].map((row) => (
                             <div key={row.label} className="flex justify-between">
@@ -416,9 +416,9 @@ export default function Home() {
                       </div>
                       <div className="p-3 space-y-2">
                         {[
-                          { text: 'Oi Ana! 👋 Vi que você se interessou pelo plano Conectado da AmoAtacado.', delay: 0.3, time: '14:32' },
-                          { text: 'Sou Daniel, vou te ajudar a dar o próximo passo 😊', delay: 0.9, time: '14:32' },
-                          { text: 'Posso te explicar como funciona?', delay: 1.5, time: '14:33' },
+                          { text: 'Oi Ana! 👋 Vi que você quer conhecer nossa linha pra revender — que boa escolha! 💙', delay: 0.3, time: '14:32' },
+                          { text: 'Já vou te mandar o catálogo completo com todos os modelos e condições de atacado 😊', delay: 0.9, time: '14:32' },
+                          { text: 'Tem algum modelo específico que te interessa?', delay: 1.5, time: '14:33' },
                         ].map((bubble, i) => (
                           <motion.div
                             key={i}
@@ -455,7 +455,7 @@ export default function Home() {
                 <p className="text-7xl font-black text-gray-800 mb-4 leading-none">02</p>
                 <h3 className="text-2xl md:text-3xl font-black text-white mb-4">Primeiro contato em menos de 30 segundos.</h3>
                 <p className="text-gray-400 leading-relaxed">
-                  O SalesBot envia uma mensagem personalizada com o nome e o plano que o lead escolheu. Parece mensagem digitada na hora — mas é 100% automático.
+                  O bot responde pelo nome do lojista, apresenta a marca e já avisa que o catálogo está a caminho. Parece mensagem digitada na hora — mas é 100% automático.
                 </p>
               </motion.div>
             </motion.div>
@@ -475,7 +475,7 @@ export default function Home() {
                 <p className="text-7xl font-black text-gray-800 mb-4 leading-none">03</p>
                 <h3 className="text-2xl md:text-3xl font-black text-white mb-4">Catálogo enviado sem ninguém apertar um botão.</h3>
                 <p className="text-gray-400 leading-relaxed">
-                  Assim que o lead confirma interesse, o bot envia o link do catálogo digital automaticamente. O vendedor só entra quando o lead está quente.
+                  O link do catálogo vai no WhatsApp do lojista na hora — sem você enviar, sem esquecer, sem depender do vendedor estar online. O vendedor só entra quando o cliente está pronto.
                 </p>
               </motion.div>
 
@@ -500,7 +500,7 @@ export default function Home() {
                           transition={{ delay: 0.2 }}
                         >
                           <div className="bg-[#202c33] rounded-2xl rounded-tl-none px-3 py-2 max-w-[180px]">
-                            <p className="text-white text-[11px]">Sim, quero ver! 😊</p>
+                            <p className="text-white text-[11px]">Sim! Manda o catálogo 🙏</p>
                             <p className="text-gray-500 text-[9px] text-right mt-1">14:33</p>
                           </div>
                         </motion.div>
@@ -513,11 +513,11 @@ export default function Home() {
                           <div className="bg-[#202c33] rounded-2xl rounded-tl-none overflow-hidden max-w-[220px]">
                             <div className="bg-blue-900/50 px-3 py-2 border-l-2 border-blue-500">
                               <p className="text-blue-400 text-[9px] font-semibold uppercase tracking-wider mb-1">Catálogo Digital</p>
-                              <p className="text-white text-[11px] font-semibold">Coleção Verão 2025</p>
-                              <p className="text-gray-400 text-[9px]">Kyrefh Jeans — Atacado</p>
+                              <p className="text-white text-[11px] font-semibold">Coleção Nova · Condições de Atacado</p>
+                              <p className="text-gray-400 text-[9px]">Sua Marca — Revenda</p>
                             </div>
                             <div className="px-3 py-2">
-                              <p className="text-white text-[11px] leading-relaxed">Aqui está o nosso catálogo completo com todos os modelos e condições de atacado! 👆</p>
+                              <p className="text-white text-[11px] leading-relaxed">Aqui está o catálogo completo 👆 Qualquer dúvida sobre modelos ou pedido mínimo é só falar!</p>
                               <p className="text-gray-500 text-[9px] text-right mt-1">14:33 ✓✓</p>
                             </div>
                           </div>
@@ -576,7 +576,7 @@ export default function Home() {
                           transition={{ delay: 0.8, duration: 0.4 }}
                         >
                           <div className="bg-[#202c33] rounded-2xl rounded-tl-none px-3 py-2 max-w-[210px]">
-                            <p className="text-white text-[11px] leading-relaxed">Ana, passando pra ver se ficou alguma dúvida sobre o plano Conectado 😊 É só me chamar!</p>
+                            <p className="text-white text-[11px] leading-relaxed">Ana, vi que você recebeu o catálogo mas não voltou 😊 Ficou alguma dúvida sobre os modelos ou condições?</p>
                             <p className="text-gray-500 text-[9px] text-right mt-1">10:15 ✓✓</p>
                           </div>
                         </motion.div>
@@ -588,7 +588,7 @@ export default function Home() {
                           className="flex justify-end"
                         >
                           <div className="bg-[#005c4b] rounded-2xl rounded-tr-none px-3 py-2 max-w-[160px]">
-                            <p className="text-white text-[11px]">Oi! Sim, quero fechar! 🙌</p>
+                            <p className="text-white text-[11px]">Oi! Quero fechar pedido! 🛍️</p>
                             <p className="text-[#8ecea2] text-[9px] text-right mt-1">10:18 ✓✓</p>
                           </div>
                         </motion.div>
@@ -612,9 +612,9 @@ export default function Home() {
                   🔁 Follow-up automático
                 </span>
                 <p className="text-7xl font-black text-gray-800 mb-4 leading-none">04</p>
-                <h3 className="text-2xl md:text-3xl font-black text-white mb-4">Nenhum lead esquecido. Jamais.</h3>
+                <h3 className="text-2xl md:text-3xl font-black text-white mb-4">Nenhum lojista esquecido. Jamais.</h3>
                 <p className="text-gray-400 leading-relaxed">
-                  Se o lead não responder em 24h, o bot manda um follow-up automaticamente. Sem você precisar lembrar, sem lead morrer no vácuo.
+                  Se o lojista recebeu o catálogo mas sumiu, o bot dispara follow-ups sequenciais automaticamente. Você recupera vendas que antes morriam no vácuo — sem esforço nenhum.
                 </p>
               </motion.div>
             </motion.div>
