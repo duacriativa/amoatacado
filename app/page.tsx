@@ -21,7 +21,15 @@ import {
   Smartphone,
 } from 'lucide-react';
 
-const plans = [
+const plans: {
+  name: string;
+  price: string;
+  description: string;
+  highlight: boolean;
+  badge: string | null;
+  features: string[];
+  kommoNote?: boolean;
+}[] = [
   {
     name: 'Essencial',
     price: '247',
@@ -45,12 +53,13 @@ const plans = [
     badge: 'Mais popular',
     features: [
       'Tudo do Essencial',
-      'Kommo CRM incluso',
+      'Kommo CRM — 1 usuário incluso',
       'Pipeline de vendas automático',
       'Histórico de todas as conversas',
       'App mobile para o time',
       'Integração com WhatsApp',
     ],
+    kommoNote: true,
   },
   {
     name: 'Automatizado',
@@ -66,6 +75,7 @@ const plans = [
       'Relatórios de performance',
       'Onboarding dedicado',
     ],
+    kommoNote: true,
   },
 ];
 
@@ -80,7 +90,11 @@ const faqs = [
   },
   {
     q: 'O Kommo está incluso no plano?',
-    a: 'Sim. Nos planos Conectado e Automatizado o Kommo já está incluso. Você não precisa contratar o CRM separado.',
+    a: 'Sim. Nos planos Conectado e Automatizado o Kommo já está incluso para 1 usuário. Você não precisa contratar o CRM separado nem se preocupar com a integração.',
+  },
+  {
+    q: 'E se eu precisar de mais de 1 usuário no Kommo?',
+    a: 'Cada usuário adicional custa +R$135/mês, contratado em ciclos semestrais (R$810 por usuário a cada 6 meses). Basta nos avisar e adicionamos sem burocracia.',
   },
   {
     q: 'Posso mudar de plano depois?',
@@ -393,7 +407,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                <ul className="space-y-3 mb-10 flex-1">
+                <ul className="space-y-3 mb-5 flex-1">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-3 text-sm">
                       <Check
@@ -405,6 +419,22 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
+
+                {plan.kommoNote && (
+                  <div
+                    className={`mb-6 px-3 py-2.5 rounded-xl text-xs leading-snug ${
+                      plan.highlight
+                        ? 'bg-blue-500/40 text-blue-100'
+                        : 'bg-amber-50 border border-amber-100 text-amber-700'
+                    }`}
+                  >
+                    <span className="font-semibold">Kommo: 1 usuário incluso.</span>{' '}
+                    Usuário adicional: +R$135/mês{' '}
+                    <span className={plan.highlight ? 'text-blue-200' : 'text-amber-500'}>
+                      (contratado semestralmente)
+                    </span>
+                  </div>
+                )}
 
                 <a
                   href="#contato"
