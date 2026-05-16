@@ -9,7 +9,6 @@ import {
   Check,
   Zap,
   Database,
-  Bot,
   Globe,
   Clock,
   DollarSign,
@@ -286,67 +285,341 @@ export default function Home() {
       </section>
 
       {/* ── How it works ── */}
-      <section id="como-funciona" className="py-24 px-5 bg-gray-950 text-white">
+      <section id="como-funciona" className="py-24 px-5 bg-gray-950 text-white overflow-hidden">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-80px' }}
             variants={stagger}
-            className="text-center mb-20"
+            className="text-center mb-24"
           >
             <motion.p variants={fadeUp} className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-4">
               Como funciona
             </motion.p>
             <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-black text-white leading-tight">
-              Da conversa ao digital em 3 etapas
+              Veja o sistema funcionando
             </motion.h2>
+            <motion.p variants={fadeUp} className="text-gray-400 mt-4 text-lg max-w-2xl mx-auto">
+              Do lead à venda — sem você fazer nada manualmente.
+            </motion.p>
           </motion.div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={stagger}
-            className="grid md:grid-cols-3 gap-8"
-          >
-            {[
-              {
-                step: '01',
-                icon: <Globe className="w-7 h-7 text-blue-400" />,
-                title: 'Criamos sua página',
-                description:
-                  'Em até 72h sua landing page está no ar: SEO, fotos da coleção, filtros por produto e formulário de captura — do jeito certo para atacado de moda.',
-              },
-              {
-                step: '02',
-                icon: <Database className="w-7 h-7 text-blue-400" />,
-                title: 'Conectamos ao Kommo',
-                description:
-                  'Cada lead que entrar vai direto pro CRM. Pipeline de vendas, histórico, follow-up — tudo organizado. Seu time recebe o lead pronto para abordagem.',
-              },
-              {
-                step: '03',
-                icon: <Bot className="w-7 h-7 text-blue-400" />,
-                title: 'Ativamos a automação',
-                description:
-                  'O bot responde na hora, qualifica o lead e avisa seu time só quando ele está pronto para comprar. Mais eficiência, menos esforço manual.',
-              },
-            ].map((step) => (
-              <motion.div
-                key={step.step}
-                variants={fadeUp}
-                className="relative p-8 rounded-3xl bg-gray-900 border border-gray-800 hover:border-blue-500/30 transition-colors group"
-              >
-                <span className="text-6xl font-black text-gray-800 absolute top-6 right-6 leading-none select-none group-hover:text-blue-900 transition-colors">
-                  {step.step}
+          <div className="space-y-32">
+
+            {/* Step 1 — Lead chega */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-100px' }}
+              variants={stagger}
+              className="grid md:grid-cols-2 gap-12 items-center"
+            >
+              <motion.div variants={fadeUp}>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-500/10 border border-green-500/20 rounded-full text-xs font-bold text-green-400 uppercase tracking-widest mb-6">
+                  ⚡ Tempo real
                 </span>
-                <div className="mb-6 p-3 bg-gray-800 rounded-2xl w-fit">{step.icon}</div>
-                <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
-                <p className="text-gray-400 leading-relaxed text-sm">{step.description}</p>
+                <p className="text-7xl font-black text-gray-800 mb-4 leading-none">01</p>
+                <h3 className="text-2xl md:text-3xl font-black text-white mb-4">Lead chega, CRM já sabe.</h3>
+                <p className="text-gray-400 leading-relaxed">
+                  Assim que o lojista preenche o formulário, o lead aparece automaticamente no Kommo com nome, telefone, plano de interesse e canal de venda — pronto para ser abordado.
+                </p>
               </motion.div>
-            ))}
-          </motion.div>
+
+              <motion.div variants={fadeUp} className="flex justify-center">
+                <div className="relative">
+                  <div className="w-[272px] bg-gray-800 rounded-[40px] p-3 shadow-2xl border border-gray-700">
+                    <div className="bg-gray-900 rounded-[32px] overflow-hidden h-[460px]">
+                      <div className="flex justify-between items-center px-5 pt-4 pb-2">
+                        <span className="text-white text-xs font-semibold">9:41</span>
+                        <div className="w-4 h-2.5 border border-white/40 rounded-sm"><div className="w-3 h-1.5 bg-white/60 rounded-sm m-px" /></div>
+                      </div>
+                      <div className="px-4 py-2 bg-gray-800/50 flex items-center gap-3">
+                        <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                          <span className="text-white text-xs font-bold">K</span>
+                        </div>
+                        <div>
+                          <p className="text-white text-xs font-semibold">Kommo CRM</p>
+                          <p className="text-gray-400 text-[10px]">Amo Atacado — Funil</p>
+                        </div>
+                      </div>
+                      <motion.div
+                        initial={{ opacity: 0, y: -16, scale: 0.95 }}
+                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.4, duration: 0.45, type: 'spring' }}
+                        className="mx-3 mt-4 bg-blue-600 rounded-2xl p-4"
+                      >
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                          <span className="text-blue-100 text-[10px] font-semibold uppercase tracking-wider">Novo Lead</span>
+                        </div>
+                        <p className="text-white font-bold text-sm mb-1">Ana Rodrigues</p>
+                        <p className="text-blue-100 text-xs">Plano Conectado · WhatsApp + Insta</p>
+                      </motion.div>
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.9, duration: 0.4 }}
+                        className="mx-3 mt-3 bg-gray-800 rounded-2xl p-4 border border-gray-700"
+                      >
+                        <p className="text-gray-500 text-[10px] uppercase tracking-wider mb-3">Detalhes do lead</p>
+                        <div className="space-y-2">
+                          {[
+                            { label: 'Telefone', value: '(11) 99999-0000', color: 'text-white' },
+                            { label: 'Plano', value: 'Conectado', color: 'text-blue-400 font-bold' },
+                            { label: 'Etapa', value: 'Novo Lead ✓', color: 'text-green-400' },
+                          ].map((row) => (
+                            <div key={row.label} className="flex justify-between">
+                              <span className="text-gray-500 text-xs">{row.label}</span>
+                              <span className={`text-xs ${row.color}`}>{row.value}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    </div>
+                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 1.2, duration: 0.4 }}
+                    className="absolute -right-3 top-14 bg-green-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap"
+                  >
+                    ✓ Lead no CRM
+                  </motion.div>
+                </div>
+              </motion.div>
+            </motion.div>
+
+            {/* Step 2 — Robô atende */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-100px' }}
+              variants={stagger}
+              className="grid md:grid-cols-2 gap-12 items-center"
+            >
+              <motion.div variants={fadeUp} className="flex justify-center order-2 md:order-1">
+                <div className="relative">
+                  <div className="w-[272px] bg-gray-800 rounded-[40px] p-3 shadow-2xl border border-gray-700">
+                    <div className="bg-[#0b141a] rounded-[32px] overflow-hidden h-[460px]">
+                      <div className="bg-[#1f2c34] px-4 pt-8 pb-3 flex items-center gap-3">
+                        <div className="w-9 h-9 bg-blue-600 rounded-full flex items-center justify-center">
+                          <span className="text-white text-xs font-black">A</span>
+                        </div>
+                        <div>
+                          <p className="text-white text-sm font-semibold">Daniel</p>
+                          <p className="text-gray-400 text-[10px]">online agora</p>
+                        </div>
+                      </div>
+                      <div className="p-3 space-y-2">
+                        {[
+                          { text: 'Oi Ana! 👋 Vi que você se interessou pelo plano Conectado da AmoAtacado.', delay: 0.3, time: '14:32' },
+                          { text: 'Sou Daniel, vou te ajudar a dar o próximo passo 😊', delay: 0.9, time: '14:32' },
+                          { text: 'Posso te explicar como funciona?', delay: 1.5, time: '14:33' },
+                        ].map((bubble, i) => (
+                          <motion.div
+                            key={i}
+                            initial={{ opacity: 0, x: -16 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: bubble.delay, duration: 0.4 }}
+                          >
+                            <div className="bg-[#202c33] rounded-2xl rounded-tl-none px-3 py-2 max-w-[210px]">
+                              <p className="text-white text-[11px] leading-relaxed">{bubble.text}</p>
+                              <p className="text-gray-500 text-[9px] text-right mt-1">{bubble.time} ✓✓</p>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 2, duration: 0.4 }}
+                    className="absolute -left-3 top-24 bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap"
+                  >
+                    ⚡ Respondido em 30s
+                  </motion.div>
+                </div>
+              </motion.div>
+
+              <motion.div variants={fadeUp} className="order-1 md:order-2">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-xs font-bold text-blue-400 uppercase tracking-widest mb-6">
+                  🤖 Robô ativo
+                </span>
+                <p className="text-7xl font-black text-gray-800 mb-4 leading-none">02</p>
+                <h3 className="text-2xl md:text-3xl font-black text-white mb-4">Primeiro contato em menos de 30 segundos.</h3>
+                <p className="text-gray-400 leading-relaxed">
+                  O SalesBot envia uma mensagem personalizada com o nome e o plano que o lead escolheu. Parece mensagem digitada na hora — mas é 100% automático.
+                </p>
+              </motion.div>
+            </motion.div>
+
+            {/* Step 3 — Catálogo */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-100px' }}
+              variants={stagger}
+              className="grid md:grid-cols-2 gap-12 items-center"
+            >
+              <motion.div variants={fadeUp}>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-500/10 border border-purple-500/20 rounded-full text-xs font-bold text-purple-400 uppercase tracking-widest mb-6">
+                  📦 Automático
+                </span>
+                <p className="text-7xl font-black text-gray-800 mb-4 leading-none">03</p>
+                <h3 className="text-2xl md:text-3xl font-black text-white mb-4">Catálogo enviado sem ninguém apertar um botão.</h3>
+                <p className="text-gray-400 leading-relaxed">
+                  Assim que o lead confirma interesse, o bot envia o link do catálogo digital automaticamente. O vendedor só entra quando o lead está quente.
+                </p>
+              </motion.div>
+
+              <motion.div variants={fadeUp} className="flex justify-center">
+                <div className="relative">
+                  <div className="w-[272px] bg-gray-800 rounded-[40px] p-3 shadow-2xl border border-gray-700">
+                    <div className="bg-[#0b141a] rounded-[32px] overflow-hidden h-[460px]">
+                      <div className="bg-[#1f2c34] px-4 pt-8 pb-3 flex items-center gap-3">
+                        <div className="w-9 h-9 bg-blue-600 rounded-full flex items-center justify-center">
+                          <span className="text-white text-xs font-black">A</span>
+                        </div>
+                        <div>
+                          <p className="text-white text-sm font-semibold">Daniel</p>
+                          <p className="text-gray-400 text-[10px]">online agora</p>
+                        </div>
+                      </div>
+                      <div className="p-3 space-y-2">
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          whileInView={{ opacity: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.2 }}
+                        >
+                          <div className="bg-[#202c33] rounded-2xl rounded-tl-none px-3 py-2 max-w-[180px]">
+                            <p className="text-white text-[11px]">Sim, quero ver! 😊</p>
+                            <p className="text-gray-500 text-[9px] text-right mt-1">14:33</p>
+                          </div>
+                        </motion.div>
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.7, duration: 0.4 }}
+                        >
+                          <div className="bg-[#202c33] rounded-2xl rounded-tl-none overflow-hidden max-w-[220px]">
+                            <div className="bg-blue-900/50 px-3 py-2 border-l-2 border-blue-500">
+                              <p className="text-blue-400 text-[9px] font-semibold uppercase tracking-wider mb-1">Catálogo Digital</p>
+                              <p className="text-white text-[11px] font-semibold">Coleção Verão 2025</p>
+                              <p className="text-gray-400 text-[9px]">Kyrefh Jeans — Atacado</p>
+                            </div>
+                            <div className="px-3 py-2">
+                              <p className="text-white text-[11px] leading-relaxed">Aqui está o nosso catálogo completo com todos os modelos e condições de atacado! 👆</p>
+                              <p className="text-gray-500 text-[9px] text-right mt-1">14:33 ✓✓</p>
+                            </div>
+                          </div>
+                        </motion.div>
+                      </div>
+                    </div>
+                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 1.2, duration: 0.4 }}
+                    className="absolute -right-3 bottom-20 bg-purple-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap"
+                  >
+                    📦 Catálogo enviado
+                  </motion.div>
+                </div>
+              </motion.div>
+            </motion.div>
+
+            {/* Step 4 — Follow-up */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-100px' }}
+              variants={stagger}
+              className="grid md:grid-cols-2 gap-12 items-center"
+            >
+              <motion.div variants={fadeUp} className="flex justify-center order-2 md:order-1">
+                <div className="relative">
+                  <div className="w-[272px] bg-gray-800 rounded-[40px] p-3 shadow-2xl border border-gray-700">
+                    <div className="bg-[#0b141a] rounded-[32px] overflow-hidden h-[460px]">
+                      <div className="bg-[#1f2c34] px-4 pt-8 pb-3 flex items-center gap-3">
+                        <div className="w-9 h-9 bg-blue-600 rounded-full flex items-center justify-center">
+                          <span className="text-white text-xs font-black">A</span>
+                        </div>
+                        <div>
+                          <p className="text-white text-sm font-semibold">Daniel</p>
+                          <p className="text-gray-400 text-[10px]">online agora</p>
+                        </div>
+                      </div>
+                      <div className="p-3 space-y-2">
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          whileInView={{ opacity: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.3 }}
+                          className="text-center"
+                        >
+                          <span className="text-gray-500 text-[9px] bg-gray-800/50 px-3 py-1 rounded-full">24 horas depois</span>
+                        </motion.div>
+                        <motion.div
+                          initial={{ opacity: 0, x: -16 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.8, duration: 0.4 }}
+                        >
+                          <div className="bg-[#202c33] rounded-2xl rounded-tl-none px-3 py-2 max-w-[210px]">
+                            <p className="text-white text-[11px] leading-relaxed">Ana, passando pra ver se ficou alguma dúvida sobre o plano Conectado 😊 É só me chamar!</p>
+                            <p className="text-gray-500 text-[9px] text-right mt-1">10:15 ✓✓</p>
+                          </div>
+                        </motion.div>
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          whileInView={{ opacity: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 1.5 }}
+                          className="flex justify-end"
+                        >
+                          <div className="bg-[#005c4b] rounded-2xl rounded-tr-none px-3 py-2 max-w-[160px]">
+                            <p className="text-white text-[11px]">Oi! Sim, quero fechar! 🙌</p>
+                            <p className="text-[#8ecea2] text-[9px] text-right mt-1">10:18 ✓✓</p>
+                          </div>
+                        </motion.div>
+                      </div>
+                    </div>
+                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 1.8, duration: 0.4 }}
+                    className="absolute -left-3 bottom-20 bg-green-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap"
+                  >
+                    🎉 Venda fechada!
+                  </motion.div>
+                </div>
+              </motion.div>
+
+              <motion.div variants={fadeUp} className="order-1 md:order-2">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-orange-500/10 border border-orange-500/20 rounded-full text-xs font-bold text-orange-400 uppercase tracking-widest mb-6">
+                  🔁 Follow-up automático
+                </span>
+                <p className="text-7xl font-black text-gray-800 mb-4 leading-none">04</p>
+                <h3 className="text-2xl md:text-3xl font-black text-white mb-4">Nenhum lead esquecido. Jamais.</h3>
+                <p className="text-gray-400 leading-relaxed">
+                  Se o lead não responder em 24h, o bot manda um follow-up automaticamente. Sem você precisar lembrar, sem lead morrer no vácuo.
+                </p>
+              </motion.div>
+            </motion.div>
+
+          </div>
         </div>
       </section>
 
