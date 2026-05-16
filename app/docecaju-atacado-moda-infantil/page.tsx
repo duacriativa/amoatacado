@@ -417,7 +417,7 @@ export default function DoceCajuPage() {
                                         <Star key={si} className="w-5 h-5 text-pink-400 fill-pink-400" />
                                     ))}
                                 </div>
-                                <p className="text-zinc-600 leading-relaxed mb-6 italic">"{review.text}"</p>
+                                <p className="text-zinc-600 leading-relaxed mb-6 italic">&ldquo;{review.text}&rdquo;</p>
                                 <div>
                                     <div className="font-black text-zinc-900">{review.name}</div>
                                     <div className="text-zinc-400 text-sm flex items-center gap-1 mt-1">
