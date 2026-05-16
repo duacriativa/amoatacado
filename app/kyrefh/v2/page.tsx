@@ -29,7 +29,7 @@ const SHORTS_VIDEOS = [
   '3XZ3wL5UfS0',
   'xUWCTNa5d0U',
 ];
-const HERO_VIDEO = SHORTS_VIDEOS[1];
+const HERO_VIDEO = 'WbVKwg3rG88';
 
 /* ─── Data ────────────────────────────────────────────────────────────────── */
 const MARQUEE_ITEMS = [
@@ -319,7 +319,7 @@ function KyrefhV2Form() {
         style={{
           width: '100%',
           padding: '16px',
-          background: ACCENT,
+          background: '#25D366',
           color: '#fff',
           border: 'none',
           borderRadius: 4,
@@ -337,7 +337,7 @@ function KyrefhV2Form() {
           gap: 8,
         }}
       >
-        {isSubmitting ? 'Enviando...' : 'Solicitar Tabela →'}
+        {isSubmitting ? 'Enviando...' : 'Solicitar Catálogo →'}
       </button>
 
       <p style={{
@@ -598,7 +598,7 @@ export default function KyrefhV2Page() {
               className="col-span-12 md:col-span-7"
               style={{ position: 'relative', paddingBottom: '60%', overflow: 'hidden', borderRadius: 4, background: '#111' }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={LOOKBOOK_IMAGES[0]} alt="Kyrefh Jeans — produto destaque" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src="/kyrefh/loja/hero-mobile.jpg" alt="Kyrefh Jeans — produto destaque" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
             </motion.div>
 
             {/* Side column */}
