@@ -8,8 +8,9 @@ export async function POST(request: Request) {
     try {
         const body = await request.json();
 
-        // Validate required fields
-        if (!body.name || !body.email || !body.phone) {
+        // Validate required fields (email not required for kyrefh-v2)
+        const isKyrefhV2 = body.clientSlug === 'kyrefh-v2';
+        if (!body.name || (!isKyrefhV2 && !body.email) || !body.phone) {
             return NextResponse.json(
                 { error: 'Missing required fields' },
                 { status: 400 }
@@ -32,6 +33,8 @@ export async function POST(request: Request) {
             webhookUrl = process.env.AMO_ATACADO_WEBHOOK_URL;
         } else if (isKyrefh && process.env.KYREFH_WEBHOOK_URL) {
             webhookUrl = process.env.KYREFH_WEBHOOK_URL;
+        } else if (isKyrefhV2 && process.env.KYREFH_V2_WEBHOOK_URL) {
+            webhookUrl = process.env.KYREFH_V2_WEBHOOK_URL;
         }
 
         // Create a list of background tasks to run in parallel
@@ -55,8 +58,61 @@ export async function POST(request: Request) {
             );
         }
 
-        // 2. Email Notification
-        if ((isSunliv || isLibertyJeans || isAmoAtacado || isKyrefh) && process.env.SMTP_PASS) {
+        // 2. Google Sheets via Apps Script webhook (kyrefh-v2)
+        if (isKyrefhV2 && process.env.KYREFH_V2_SHEETS_URL) {
+            tasks.push(
+                fetch(process.env.KYREFH_V2_SHEETS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        timestamp: new Date().toISOString(),
+                        name: body.name,
+                        phone: body.phone,
+                        cidade: body.cidade,
+                        uf: body.uf,
+                        businessType: body.businessType,
+                        volume: body.volume,
+                        source: body.source,
+                        utm_source: body.utm_source || '',
+                        utm_medium: body.utm_medium || '',
+                        utm_campaign: body.utm_campaign || '',
+                    }),
+                }).then(() => {
+                    console.log('[SHEETS] kyrefh-v2 lead written to Google Sheets');
+                }).catch((err: unknown) => {
+                    console.error('[SHEETS] Failed to write to Google Sheets:', err);
+                })
+            );
+        }
+
+        // 2b. Google Sheets via Apps Script webhook (amo-atacado)
+        if (isAmoAtacado && process.env.AMO_ATACADO_SHEETS_URL) {
+            tasks.push(
+                fetch(process.env.AMO_ATACADO_SHEETS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        timestamp: new Date().toISOString(),
+                        name: body.name,
+                        phone: body.phone,
+                        email: body.email || '',
+                        companyName: body.companyName || '',
+                        salesChannel: body.salesChannel || '',
+                        planInterest: body.planInterest || '',
+                        utm_source: body.utm_source || '',
+                        utm_medium: body.utm_medium || '',
+                        utm_campaign: body.utm_campaign || '',
+                    }),
+                }).then(() => {
+                    console.log('[SHEETS] amo-atacado lead written to Google Sheets');
+                }).catch((err: unknown) => {
+                    console.error('[SHEETS] Failed to write amo-atacado lead to Google Sheets:', err);
+                })
+            );
+        }
+
+        // 3. Email Notification
+        if ((isSunliv || isLibertyJeans || isAmoAtacado || isKyrefh || isKyrefhV2) && process.env.SMTP_PASS) {
             let clientEmail = 'comercial@amoatacado.com.br';
             let clientName = 'Amo Atacado';
 
@@ -69,6 +125,9 @@ export async function POST(request: Request) {
             } else if (isKyrefh) {
                 clientEmail = 'comercial@amoatacado.com.br';
                 clientName = 'Kyrefh Jeans';
+            } else if (isKyrefhV2) {
+                clientEmail = 'comercial@amoatacado.com.br';
+                clientName = 'Kyrefh Jeans v2';
             }
 
             const transporter = nodemailer.createTransport({
@@ -125,7 +184,7 @@ export async function POST(request: Request) {
             );
         }
 
-        // 3. Backup delivery (Google Sheets)
+        // 4. Backup delivery
         let backupUrl = process.env.LEADS_BACKUP_URL;
         if (isLibertyJeans && process.env.LIBERTY_JEANS_BACKUP_URL) {
             backupUrl = process.env.LIBERTY_JEANS_BACKUP_URL;
@@ -135,6 +194,8 @@ export async function POST(request: Request) {
             backupUrl = process.env.LEADS_BACKUP_amo_atacado;
         } else if (isKyrefh && process.env.KYREFH_BACKUP_URL) {
             backupUrl = process.env.KYREFH_BACKUP_URL;
+        } else if (isKyrefhV2 && process.env.KYREFH_V2_BACKUP_URL) {
+            backupUrl = process.env.KYREFH_V2_BACKUP_URL;
         }
 
         if (backupUrl) {
