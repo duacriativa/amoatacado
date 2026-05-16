@@ -399,15 +399,33 @@ export default function KyrefhV2Page() {
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section style={{ position: 'relative', minHeight: '100vh', background: '#050505', color: '#f5efe6', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-        {/* Background video */}
-        <div style={{ position: 'absolute', inset: 0, zIndex: 0, overflow: 'hidden', background: '#050505' }}>
+        {/* Background: denim texture (always visible) + video on top */}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0, overflow: 'hidden', background: '#0a1220' }}>
+          {/* Denim twill texture — floats slowly */}
+          <motion.div
+            animate={{ x: [0, -14, 8, -6, 0], y: [0, 8, -10, 6, 0], scale: [1.08, 1.12, 1.09, 1.13, 1.08] }}
+            transition={{ duration: 28, ease: 'easeInOut', repeat: Infinity }}
+            style={{
+              position: 'absolute',
+              inset: '-15%',
+              backgroundImage: [
+                /* warp threads — strong diagonal */
+                'repeating-linear-gradient(132deg, transparent 0px, transparent 2px, rgba(255,255,255,0.028) 2px, rgba(255,255,255,0.028) 3px, transparent 3px, transparent 9px)',
+                /* weft threads — cross diagonal */
+                'repeating-linear-gradient(42deg, transparent 0px, transparent 3px, rgba(0,0,0,0.07) 3px, rgba(0,0,0,0.07) 4px, transparent 4px, transparent 10px)',
+                /* subtle indigo depth */
+                'radial-gradient(ellipse at 30% 60%, rgba(30,48,90,0.6) 0%, transparent 65%)',
+                'radial-gradient(ellipse at 75% 20%, rgba(15,25,55,0.5) 0%, transparent 55%)',
+              ].join(','),
+            }}
+          />
+          {/* YouTube video — autoplays on desktop, hidden on iOS (texture shows) */}
           <iframe
             src={`https://www.youtube.com/embed/${HERO_VIDEO}?autoplay=1&mute=1&loop=1&playlist=${HERO_VIDEO}&controls=0&rel=0&playsinline=1&modestbranding=1&showinfo=0`}
             style={{
               position: 'absolute',
               top: '50%',
               left: '50%',
-              /* Cover any viewport with a 9:16 Short */
               height: 'max(100vh, calc(100vw * 1.7778))',
               width: 'calc(max(100vh, calc(100vw * 1.7778)) * 0.5625)',
               transform: 'translate(-50%, -50%)',
