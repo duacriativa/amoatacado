@@ -401,8 +401,9 @@ export default function KyrefhV2Page() {
       <section style={{ position: 'relative', minHeight: '100vh', background: '#050505', color: '#f5efe6', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
         {/* Background: denim texture (always visible) + video on top */}
         <div style={{ position: 'absolute', inset: 0, zIndex: 0, overflow: 'hidden', background: '#0a1220' }}>
-          {/* Denim twill texture — floats slowly */}
+          {/* Denim twill texture — mobile only (video autoplays on desktop) */}
           <motion.div
+            className="md:hidden"
             animate={{ x: [0, -14, 8, -6, 0], y: [0, 8, -10, 6, 0], scale: [1.08, 1.12, 1.09, 1.13, 1.08] }}
             transition={{ duration: 28, ease: 'easeInOut', repeat: Infinity }}
             style={{
@@ -419,8 +420,9 @@ export default function KyrefhV2Page() {
               ].join(','),
             }}
           />
-          {/* YouTube video — autoplays on desktop, hidden on iOS (texture shows) */}
+          {/* YouTube video — desktop only */}
           <iframe
+            className="hidden md:block"
             src={`https://www.youtube.com/embed/${HERO_VIDEO}?autoplay=1&mute=1&loop=1&playlist=${HERO_VIDEO}&controls=0&rel=0&playsinline=1&modestbranding=1&showinfo=0`}
             style={{
               position: 'absolute',
