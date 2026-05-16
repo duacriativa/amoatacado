@@ -20,6 +20,8 @@ const schema = z.object({
     businessType: z.string().optional(),
     monthlyRevenue: z.string().optional(),
     mainChallenge: z.string().optional(),
+    salesChannel: z.string().optional(),
+    planInterest: z.string().optional(),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -241,54 +243,35 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
             {isAmoAtacado && (
                 <>
                     <hr className="my-4 border-slate-100" />
-                    <div className="grid md:grid-cols-2 gap-4">
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                                Tipo de Negócio:
-                            </label>
-                            <select
-                                {...register('businessType')}
-                                className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
-                            >
-                                <option value="">Selecione...</option>
-                                <option value="Confecção / Indústria">Confecção / Indústria</option>
-                                <option value="Lojista Atacado">Lojista Atacado</option>
-                                <option value="Lojista Varejo">Lojista Varejo</option>
-                                <option value="Ainda não tenho negócio">Ainda não tenho negócio</option>
-                                <option value="Outros">Outros</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                                Faturamento Mensal Médio:
-                            </label>
-                            <select
-                                {...register('monthlyRevenue')}
-                                className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
-                            >
-                                <option value="">Selecione...</option>
-                                <option value="Iniciante (R$ 0 a R$ 10k)">Iniciante (Até R$ 10k)</option>
-                                <option value="R$ 10k a R$ 50k">R$ 10k a R$ 50k</option>
-                                <option value="R$ 50k a R$ 100k">R$ 50k a R$ 100k</option>
-                                <option value="Acima de R$ 100k">Acima de R$ 100k</option>
-                            </select>
-                        </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Como você vende hoje?
+                        </label>
+                        <select
+                            {...register('salesChannel')}
+                            className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
+                        >
+                            <option value="">Selecione...</option>
+                            <option value="Só pelo WhatsApp">Só pelo WhatsApp</option>
+                            <option value="WhatsApp + Instagram">WhatsApp + Instagram</option>
+                            <option value="Já tenho site mas não gera leads">Já tenho site mas não gera leads</option>
+                            <option value="Outros canais">Outros canais</option>
+                        </select>
                     </div>
 
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Qual seu principal desafio hoje?
+                            Qual plano te interessa?
                         </label>
                         <select
-                            {...register('mainChallenge')}
+                            {...register('planInterest')}
                             className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
                         >
                             <option value="">Selecione...</option>
-                            <option value="Escalar Vendas">Escalar Vendas</option>
-                            <option value="Branding / Reposicionamento">Branding / Reposicionamento</option>
-                            <option value="Tráfego Qualificado">Tráfego Qualificado</option>
-                            <option value="Estruturação Comercial">Estruturação Comercial</option>
+                            <option value="Essencial — R$197/mês">Essencial — R$197/mês (só a página)</option>
+                            <option value="Conectado — R$397/mês">Conectado — R$397/mês + integração (página + CRM)</option>
+                            <option value="Automatizado — R$597/mês">Automatizado — R$597/mês + integração (completo)</option>
+                            <option value="Ainda não sei">Ainda não sei, quero entender melhor</option>
                         </select>
                     </div>
                 </>
