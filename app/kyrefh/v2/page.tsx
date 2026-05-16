@@ -19,7 +19,7 @@ const LOOKBOOK_IMAGES = [
   '/kyrefh/lookbook/3.png',
   '/kyrefh/lookbook/4.png',
   '/kyrefh/lookbook/5.png',
-  '/kyrefh/lookbook/6.png',
+  '/kyrefh/lookbook/4.png',
 ];
 
 const SHORTS_VIDEOS = [
