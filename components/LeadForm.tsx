@@ -36,6 +36,7 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
     const isAmoAtacado = clientSlug === 'amo-atacado';
     const isSunliv = clientSlug === 'sunliv' || clientSlug === 'sunliv-moda-praia-atacado';
     const isKyrefh = clientSlug === 'kyrefh';
+    const isDoceCaju = clientSlug === 'doce-caju';
 
     const {
         register,
@@ -92,6 +93,12 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
                 // Redirect to VIP Group
                 window.location.href = 'https://chat.whatsapp.com/DJxPtkp2XJkBIrxwpT0R6o?mode=gi_t';
                 return;
+            }
+
+            if (isDoceCaju) {
+                if (typeof window !== 'undefined' && (window as { fbq?: (...args: unknown[]) => void }).fbq) {
+                    (window as { fbq?: (...args: unknown[]) => void }).fbq?.('track', 'Lead');
+                }
             }
 
             setSubmitSuccess(true);
