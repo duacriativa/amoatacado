@@ -24,15 +24,15 @@ import {
 const plans: {
   name: string;
   price: string;
+  setup?: string;
   description: string;
   highlight: boolean;
   badge: string | null;
   features: string[];
-  kommoNote?: boolean;
 }[] = [
   {
     name: 'Essencial',
-    price: '247',
+    price: '197',
     description: 'Sua marca no digital com página profissional e banco de dados de leads.',
     highlight: false,
     badge: null,
@@ -47,8 +47,9 @@ const plans: {
   },
   {
     name: 'Conectado',
-    price: '447',
-    description: 'Página profissional + CRM Kommo integrado para seu time não perder nenhum lead.',
+    price: '397',
+    setup: '900',
+    description: 'Página + CRM Kommo integrado para seu time não perder nenhum lead.',
     highlight: true,
     badge: 'Mais popular',
     features: [
@@ -59,23 +60,22 @@ const plans: {
       'App mobile para o time',
       'Integração com WhatsApp',
     ],
-    kommoNote: true,
   },
   {
     name: 'Automatizado',
-    price: '647',
-    description: 'Solução completa com automação de atendimento e qualificação automática de leads.',
+    price: '597',
+    setup: '900',
+    description: 'Solução completa: recepção automática, envio de catálogo e follow-up no piloto automático.',
     highlight: false,
     badge: null,
     features: [
       'Tudo do Conectado',
-      'Bot de atendimento automático',
-      'Fluxos de qualificação de leads',
-      'Notificações automáticas para o time',
-      'Relatórios de performance',
+      'Recepção automática de leads',
+      'Envio automático de catálogo',
+      'Follow-up automático',
+      'Notificações para o time',
       'Onboarding dedicado',
     ],
-    kommoNote: true,
   },
 ];
 
@@ -89,8 +89,8 @@ const faqs = [
     a: 'Não. Fazemos tudo por você — desenvolvimento, hospedagem e configuração. Você só aprova o resultado.',
   },
   {
-    q: 'O Kommo está incluso no plano?',
-    a: 'Sim. Nos planos Conectado e Automatizado o Kommo já está incluso para 1 usuário. Você não precisa contratar o CRM separado nem se preocupar com a integração.',
+    q: 'O que está incluso na integração de R$900?',
+    a: 'A integração cobre os primeiros 6 meses de licença do Kommo (1 usuário) + toda a configuração e conexão com sua página. Você não contrata o Kommo separado, não instala nada — fazemos tudo.',
   },
   {
     q: 'E se eu precisar de mais de 1 usuário no Kommo?',
@@ -210,7 +210,7 @@ export default function Home() {
           >
             {[
               { value: '72h', label: 'Página no ar' },
-              { value: '0', label: 'Setup fee' },
+              { value: 'R$197', label: 'A partir de' },
               { value: 'Kommo', label: 'CRM incluso' },
               { value: 'SEO', label: 'Do Google pra você' },
             ].map((stat) => (
@@ -366,7 +366,7 @@ export default function Home() {
               Escolha seu ponto de partida
             </motion.h2>
             <motion.p variants={fadeUp} className="text-gray-500 mt-4 text-lg">
-              Sem setup. Sem fidelidade. Cancela quando quiser.
+              Essencial sem integração. Planos com CRM têm integração única de R$900.
             </motion.p>
           </motion.div>
 
@@ -397,11 +397,20 @@ export default function Home() {
                   <h3 className={`text-lg font-bold mb-2 ${plan.highlight ? 'text-blue-100' : 'text-gray-500'}`}>
                     {plan.name}
                   </h3>
-                  <div className="flex items-end gap-1 mb-3">
+                  <div className="flex items-end gap-1 mb-1">
                     <span className={`text-sm font-semibold ${plan.highlight ? 'text-blue-200' : 'text-gray-400'}`}>R$</span>
                     <span className="text-5xl font-black leading-none">{plan.price}</span>
                     <span className={`text-sm mb-1 ${plan.highlight ? 'text-blue-200' : 'text-gray-400'}`}>/mês</span>
                   </div>
+                  {plan.setup ? (
+                    <p className={`text-xs font-medium mb-4 ${plan.highlight ? 'text-blue-200' : 'text-gray-400'}`}>
+                      + R${plan.setup} integração única
+                    </p>
+                  ) : (
+                    <p className={`text-xs font-medium mb-4 ${plan.highlight ? 'text-blue-200' : 'text-gray-400'}`}>
+                      sem integração
+                    </p>
+                  )}
                   <p className={`text-sm leading-relaxed ${plan.highlight ? 'text-blue-100' : 'text-gray-500'}`}>
                     {plan.description}
                   </p>
@@ -420,7 +429,7 @@ export default function Home() {
                   ))}
                 </ul>
 
-                {plan.kommoNote && (
+                {plan.setup && (
                   <div
                     className={`mb-6 px-3 py-2.5 rounded-xl text-xs leading-snug ${
                       plan.highlight
@@ -429,9 +438,12 @@ export default function Home() {
                     }`}
                   >
                     <span className="font-semibold">Kommo: 1 usuário incluso.</span>{' '}
-                    Usuário adicional: +R$135/mês{' '}
+                    Usuário adicional:{' '}
+                    <span className={plan.highlight ? 'text-blue-100 font-semibold' : 'text-amber-700 font-semibold'}>
+                      +R$135/mês
+                    </span>{' '}
                     <span className={plan.highlight ? 'text-blue-200' : 'text-amber-500'}>
-                      (contratado semestralmente)
+                      (ciclo semestral)
                     </span>
                   </div>
                 )}
@@ -500,7 +512,7 @@ export default function Home() {
                 icon: <DollarSign className="w-6 h-6 text-blue-600" />,
                 title: 'Fração do custo de agência',
                 description:
-                  'Agências cobram R$5.000 só de setup. Aqui você começa por R$247/mês sem contrato.',
+                  'Agências cobram R$5.000 só de setup. Aqui você começa por R$197/mês, e planos com CRM têm integração única de R$900 — já inclui 6 meses de Kommo.',
               },
             ].map((item) => (
               <motion.div
@@ -592,7 +604,7 @@ export default function Home() {
               {[
                 { icon: <Clock className="w-5 h-5 text-blue-400" />, text: 'Resposta em até 1 minuto' },
                 { icon: <Smartphone className="w-5 h-5 text-blue-400" />, text: 'Página no ar em até 72h' },
-                { icon: <DollarSign className="w-5 h-5 text-blue-400" />, text: 'Sem setup, sem fidelidade' },
+                { icon: <DollarSign className="w-5 h-5 text-blue-400" />, text: 'Essencial sem integração. CRM com integração única.' },
               ].map((item) => (
                 <div key={item.text} className="flex items-center gap-3 text-sm text-gray-300">
                   {item.icon}
