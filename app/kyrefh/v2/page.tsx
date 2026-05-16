@@ -724,7 +724,7 @@ export default function KyrefhV2Page() {
                 <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.1 }}
                   style={{ position: 'relative', paddingBottom: '100%', borderRadius: 6, overflow: 'hidden', background: '#1a1a1a' }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={src} alt={`Kyrefh fábrica ${i + 1}`} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <img src={src} alt={`Kyrefh fábrica ${i + 1}`} onClick={() => setLightbox(src)} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', cursor: 'zoom-in' }} />
                 </motion.div>
               ))}
             </div>
