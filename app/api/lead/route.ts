@@ -85,6 +85,35 @@ export async function POST(request: Request) {
             );
         }
 
+        // 2b. Google Sheets via Apps Script webhook (amo-atacado)
+        if (isAmoAtacado && process.env.AMO_ATACADO_SHEETS_URL) {
+            tasks.push(
+                fetch(process.env.AMO_ATACADO_SHEETS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        timestamp: new Date().toISOString(),
+                        name: body.name,
+                        email: body.email || '',
+                        phone: body.phone,
+                        companyName: body.companyName || '',
+                        instagramHandle: body.instagramHandle || '',
+                        businessType: body.businessType || '',
+                        monthlyRevenue: body.monthlyRevenue || '',
+                        mainChallenge: body.mainChallenge || '',
+                        source: body.source || 'website',
+                        utm_source: body.utm_source || '',
+                        utm_medium: body.utm_medium || '',
+                        utm_campaign: body.utm_campaign || '',
+                    }),
+                }).then(() => {
+                    console.log('[SHEETS] amo-atacado lead written to Google Sheets');
+                }).catch((err: unknown) => {
+                    console.error('[SHEETS] Failed to write amo-atacado lead to Google Sheets:', err);
+                })
+            );
+        }
+
         // 3. Email Notification
         if ((isSunliv || isLibertyJeans || isAmoAtacado || isKyrefh || isKyrefhV2) && process.env.SMTP_PASS) {
             let clientEmail = 'comercial@amoatacado.com.br';

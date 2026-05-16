@@ -386,10 +386,16 @@ export default function LeadForm({ clientSlug }: { clientSlug?: string }) {
             <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full rounded-md px-4 py-3 text-white font-bold transition-all shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 ${isLibertyJeans ? 'bg-blue-600 hover:bg-blue-700' : 'bg-slate-900 hover:bg-slate-800'
-                    }`}
+                className={`w-full rounded-md px-4 py-3 text-white font-bold transition-all shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 ${
+                    isLibertyJeans ? 'bg-blue-600 hover:bg-blue-700'
+                    : isAmoAtacado ? 'bg-blue-600 hover:bg-blue-700'
+                    : 'bg-slate-900 hover:bg-slate-800'
+                }`}
             >
-                {isSubmitting ? 'Enviando...' : isLibertyJeans ? 'Enviar Solicitação' : 'Quero revender'}
+                {isSubmitting ? 'Enviando...'
+                    : isLibertyJeans ? 'Enviar Solicitação'
+                    : isAmoAtacado ? 'Quero minha página'
+                    : 'Quero revender'}
             </button>
 
             {isLibertyJeans && (
