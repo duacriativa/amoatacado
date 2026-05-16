@@ -40,8 +40,26 @@ const PHONE = '558581127189';
 const WA_MESSAGE = 'Olá! Vim pela página da Doce Caju e quero saber mais sobre o atacado.';
 const WA_LINK = `https://wa.me/${PHONE}?text=${encodeURIComponent(WA_MESSAGE)}`;
 
+const gdrive = (id: string, size = 800) =>
+    `https://drive.google.com/thumbnail?id=${id}&sz=w${size}`;
+
+const HERO_BG = gdrive('1IoQn08aXzpX0qh2t0BjwX3vahyyJ1uss', 1600);
+
+const LOOKBOOK_IMAGES = [
+    { thumb: gdrive('1cw64ty9ra_ACRlygyh02iShvHHMmdK7E'), full: gdrive('1cw64ty9ra_ACRlygyh02iShvHHMmdK7E', 1600) },
+    { thumb: gdrive('1VlKcfWWGyK7TEkx835QKqFoA4TfW7d9i'), full: gdrive('1VlKcfWWGyK7TEkx835QKqFoA4TfW7d9i', 1600) },
+    { thumb: gdrive('1SeyTIXw48SUoAYTcV0SvwCYMDuOrK4Dd'), full: gdrive('1SeyTIXw48SUoAYTcV0SvwCYMDuOrK4Dd', 1600) },
+    { thumb: gdrive('1fifIkVarbJ61u-HzyqQtH3sifcLMBBLl'), full: gdrive('1fifIkVarbJ61u-HzyqQtH3sifcLMBBLl', 1600) },
+    { thumb: gdrive('112CtrIF0N6V0UnyXMaDUVw0Be3zQ-trb'), full: gdrive('112CtrIF0N6V0UnyXMaDUVw0Be3zQ-trb', 1600) },
+    { thumb: gdrive('1ouGg8sCDPRgLgo2mVhBuoOo1WM0rVgbF'), full: gdrive('1ouGg8sCDPRgLgo2mVhBuoOo1WM0rVgbF', 1600) },
+    { thumb: gdrive('1WZ2NEczeWxTcgW8ntzyPTj8o6UVXvYPf'), full: gdrive('1WZ2NEczeWxTcgW8ntzyPTj8o6UVXvYPf', 1600) },
+    { thumb: gdrive('1xu9joqRZn1yag4w_T2iCmcN0N29pL3lI'), full: gdrive('1xu9joqRZn1yag4w_T2iCmcN0N29pL3lI', 1600) },
+    { thumb: gdrive('1SDmwOCvmRGwEF5aauOxB0ugLtQKMQ3uD'), full: gdrive('1SDmwOCvmRGwEF5aauOxB0ugLtQKMQ3uD', 1600) },
+];
+
 export default function DoceCajuPage() {
     const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+    const [lightbox, setLightbox] = useState<string | null>(null);
 
     const toggleFaq = (index: number) => {
         setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -160,21 +178,24 @@ export default function DoceCajuPage() {
             </Script>
 
             {/* ── HERO ── */}
-            <section className="relative min-h-[90vh] flex items-center bg-gradient-to-br from-pink-950 via-rose-900 to-pink-800 overflow-hidden">
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-pink-400/20 rounded-full blur-3xl pointer-events-none" />
-                    <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-pink-950 to-transparent pointer-events-none" />
-                    {/* decorative hearts */}
-                    <div className="absolute top-20 left-10 text-pink-300/20 text-8xl select-none pointer-events-none">♥</div>
-                    <div className="absolute bottom-40 right-16 text-pink-300/10 text-9xl select-none pointer-events-none">♥</div>
-                </div>
+            <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+                {/* Background photo */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                    src={HERO_BG}
+                    alt="Coleção Farm Girl Doce Caju"
+                    className="absolute inset-0 w-full h-full object-cover object-center"
+                />
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-pink-950/90 via-pink-950/70 to-pink-950/30" />
+                <div className="absolute inset-0 bg-gradient-to-t from-pink-950/60 via-transparent to-transparent" />
 
-                <div className="container mx-auto px-4 relative z-20 py-16 flex flex-col lg:flex-row items-center gap-12">
+                <div className="container mx-auto px-4 relative z-20 py-24">
                     <motion.div
                         initial="hidden"
                         animate="visible"
                         variants={staggerContainer}
-                        className="lg:w-1/2 text-white"
+                        className="max-w-2xl text-white"
                     >
                         <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm">
                             <Heart className="w-4 h-4 text-pink-300 fill-pink-300" />
@@ -206,10 +227,10 @@ export default function DoceCajuPage() {
                                 Quero ser revendedora
                             </a>
                             <a
-                                href="#produtos"
+                                href="#lookbook"
                                 className="inline-flex items-center justify-center px-8 py-4 rounded-xl text-white bg-white/10 border border-white/20 hover:bg-white/20 transition-all font-bold uppercase tracking-wide text-lg backdrop-blur-sm"
                             >
-                                Ver Produtos
+                                Ver Coleção
                             </a>
                         </motion.div>
 
@@ -222,29 +243,6 @@ export default function DoceCajuPage() {
                                 </span>
                             ))}
                         </motion.div>
-                    </motion.div>
-
-                    {/* Instagram embed */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.3 }}
-                        className="lg:w-1/2 w-full flex justify-center items-center relative"
-                    >
-                        <div className="absolute inset-0 bg-pink-400/20 blur-3xl rounded-full scale-75 z-0" />
-                        <div className="relative z-10 w-full max-w-[320px] bg-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl border-2 border-white/20 backdrop-blur-sm">
-                            <div className="w-full relative" style={{ aspectRatio: '9/16' }}>
-                                <iframe
-                                    src="https://www.instagram.com/docecajubrasil/embed"
-                                    className="absolute inset-0 w-full h-full"
-                                    frameBorder="0"
-                                    scrolling="no"
-                                    allowTransparency={true}
-                                    allow="encrypted-media"
-                                    title="Doce Caju Instagram"
-                                />
-                            </div>
-                        </div>
                     </motion.div>
                 </div>
             </section>
@@ -357,6 +355,57 @@ export default function DoceCajuPage() {
                             className="inline-flex items-center justify-center bg-pink-500 hover:bg-pink-400 text-white font-black py-4 px-12 rounded-xl transition-all hover:scale-105 shadow-xl text-lg uppercase tracking-wide"
                         >
                             Solicitar Catálogo Completo
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            {/* ── LOOKBOOK / GALERIA ── */}
+            <section id="lookbook" className="py-24 bg-zinc-950">
+                <div className="container mx-auto px-4 max-w-7xl">
+                    <div className="text-center mb-16">
+                        <span className="text-pink-400 font-black uppercase tracking-[0.15em] text-sm">COLEÇÃO FARM GIRL</span>
+                        <h2 className="text-4xl md:text-5xl font-black mt-4 text-white tracking-tight">Looks da Nova Coleção</h2>
+                        <p className="text-zinc-400 mt-4 max-w-xl mx-auto">Clique nas fotos para ampliar. Peças exclusivas que suas clientes vão amar.</p>
+                    </div>
+
+                    {/* Mosaic grid */}
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                        {/* destaque — ocupa 2 colunas */}
+                        <div
+                            className="col-span-2 row-span-2 relative overflow-hidden rounded-2xl cursor-zoom-in group"
+                            style={{ aspectRatio: '1/1' }}
+                            onClick={() => setLightbox(LOOKBOOK_IMAGES[0].full)}
+                        >
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src={LOOKBOOK_IMAGES[0].thumb} alt="Doce Caju — look 1" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                            <div className="absolute inset-0 bg-pink-950/0 group-hover:bg-pink-950/20 transition-colors" />
+                        </div>
+
+                        {/* demais fotos */}
+                        {LOOKBOOK_IMAGES.slice(1).map((img, idx) => (
+                            <div
+                                key={idx}
+                                className="relative overflow-hidden rounded-2xl cursor-zoom-in group"
+                                style={{ aspectRatio: '3/4' }}
+                                onClick={() => setLightbox(img.full)}
+                            >
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img src={img.thumb} alt={`Doce Caju — look ${idx + 2}`} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                <div className="absolute inset-0 bg-pink-950/0 group-hover:bg-pink-950/20 transition-colors" />
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="mt-12 text-center">
+                        <a
+                            href={WA_LINK}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center bg-pink-500 hover:bg-pink-400 text-white font-black py-4 px-12 rounded-xl transition-all hover:scale-105 shadow-xl text-lg uppercase tracking-wide"
+                        >
+                            <Phone className="mr-3 h-5 w-5" />
+                            Quero comprar essa coleção
                         </a>
                     </div>
                 </div>
@@ -517,6 +566,26 @@ export default function DoceCajuPage() {
                     </div>
                 </div>
             </section>
+
+            {/* ── LIGHTBOX ── */}
+            {lightbox && (
+                <div
+                    onClick={() => setLightbox(null)}
+                    style={{ position: 'fixed', inset: 0, zIndex: 9999, background: 'rgba(0,0,0,0.93)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'zoom-out' }}
+                >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                        src={lightbox}
+                        alt="Doce Caju — lookbook"
+                        onClick={(e) => e.stopPropagation()}
+                        style={{ maxWidth: '90vw', maxHeight: '90vh', objectFit: 'contain', borderRadius: 8, boxShadow: '0 32px 80px rgba(0,0,0,0.6)' }}
+                    />
+                    <button
+                        onClick={() => setLightbox(null)}
+                        style={{ position: 'absolute', top: 20, right: 24, background: 'none', border: 'none', color: '#fff', fontSize: 40, lineHeight: 1, cursor: 'pointer', opacity: 0.7 }}
+                    >×</button>
+                </div>
+            )}
 
             <Suspense fallback={null}>
                 <WhatsAppButton
