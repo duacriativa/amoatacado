@@ -29,7 +29,7 @@ const SHORTS_VIDEOS = [
   '3XZ3wL5UfS0',
   'xUWCTNa5d0U',
 ];
-const HERO_VIDEO = SHORTS_VIDEOS[0];
+const HERO_VIDEO = SHORTS_VIDEOS[1];
 
 /* ─── Data ────────────────────────────────────────────────────────────────── */
 const MARQUEE_ITEMS = [
@@ -436,7 +436,7 @@ export default function KyrefhV2Page() {
             <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }}>
               <h1 style={{ fontFamily: 'var(--font-bebas), sans-serif', fontSize: 'clamp(80px, 13vw, 180px)', fontWeight: 400, lineHeight: 0.88, letterSpacing: '-0.01em', color: '#f5efe6', margin: 0, textShadow: '0 4px 40px rgba(0,0,0,0.5)' }}>
                 Atacado<br />
-                <span style={{ color: ACCENT }}>direto</span><br />
+                <span style={{ color: '#f5efe6' }}>direto</span><br />
                 da fábrica.
               </h1>
             </motion.div>
@@ -454,6 +454,54 @@ export default function KyrefhV2Page() {
               </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* ── SHORTS ───────────────────────────────────────────────────────── */}
+      <section style={{ padding: '80px 0 100px', background: '#050505', color: '#f5efe6', overflow: 'hidden' }}>
+        <div className="px-6 sm:px-12 max-w-7xl mx-auto mb-12">
+          <p style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(245,239,230,0.4)', marginBottom: 12 }}>Na prática</p>
+          <h2 style={{ fontFamily: 'var(--font-bebas), sans-serif', fontSize: 'clamp(56px, 8vw, 100px)', fontWeight: 400, lineHeight: 0.92, letterSpacing: '-0.01em', color: '#f5efe6', margin: 0 }}>
+            Veja a coleção<br />em movimento.
+          </h2>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            gap: 12,
+            paddingLeft: 'max(24px, calc((100vw - 1280px) / 2 + 48px))',
+            paddingRight: 24,
+            overflowX: 'auto',
+            scrollSnapType: 'x mandatory',
+            WebkitOverflowScrolling: 'touch',
+            scrollbarWidth: 'none',
+          }}
+        >
+          {SHORTS_VIDEOS.map((id, i) => (
+            <motion.div
+              key={id}
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              style={{
+                flex: '0 0 260px',
+                aspectRatio: '9 / 16',
+                borderRadius: 8,
+                overflow: 'hidden',
+                scrollSnapAlign: 'start',
+                background: '#111',
+                position: 'relative',
+              }}
+            >
+              <iframe
+                src={`https://www.youtube.com/embed/${id}?rel=0&modestbranding=1`}
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none' }}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -552,54 +600,6 @@ export default function KyrefhV2Page() {
               <Instagram size={16} />Ver mais no @kyrefh
             </a>
           </div>
-        </div>
-      </section>
-
-      {/* ── SHORTS ───────────────────────────────────────────────────────── */}
-      <section style={{ padding: '120px 0', background: '#050505', color: '#f5efe6', overflow: 'hidden' }}>
-        <div className="px-6 sm:px-12 max-w-7xl mx-auto mb-12">
-          <p style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(245,239,230,0.4)', marginBottom: 12 }}>Na prática</p>
-          <h2 style={{ fontFamily: 'var(--font-bebas), sans-serif', fontSize: 'clamp(56px, 8vw, 100px)', fontWeight: 400, lineHeight: 0.92, letterSpacing: '-0.01em', color: '#f5efe6', margin: 0 }}>
-            Veja a coleção<br />em movimento.
-          </h2>
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            gap: 12,
-            paddingLeft: 'max(24px, calc((100vw - 1280px) / 2 + 48px))',
-            paddingRight: 24,
-            overflowX: 'auto',
-            scrollSnapType: 'x mandatory',
-            WebkitOverflowScrolling: 'touch',
-            scrollbarWidth: 'none',
-          }}
-        >
-          {SHORTS_VIDEOS.map((id, i) => (
-            <motion.div
-              key={id}
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              style={{
-                flex: '0 0 260px',
-                aspectRatio: '9 / 16',
-                borderRadius: 8,
-                overflow: 'hidden',
-                scrollSnapAlign: 'start',
-                background: '#111',
-                position: 'relative',
-              }}
-            >
-              <iframe
-                src={`https://www.youtube.com/embed/${id}?rel=0&modestbranding=1`}
-                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none' }}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </motion.div>
-          ))}
         </div>
       </section>
 
@@ -713,9 +713,8 @@ export default function KyrefhV2Page() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left */}
             <div>
-              <p style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(245,239,230,0.4)', marginBottom: 24 }}>Próxima edição</p>
               <h2 style={{ fontFamily: 'var(--font-bebas), sans-serif', fontSize: 'clamp(72px, 10vw, 130px)', fontWeight: 400, lineHeight: 0.9, letterSpacing: '-0.02em', color: '#f5efe6', margin: '0 0 28px' }}>
-                Receba a <em style={{ fontStyle: 'italic', color: ACCENT }}>tabela</em>.
+                Receba o catálogo.
               </h2>
               <p style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: 17, lineHeight: 1.6, color: 'rgba(245,239,230,0.6)', margin: '0 0 36px', maxWidth: 440 }}>
                 Em até 30 minutos, um consultor te chama no WhatsApp com a tabela completa e as fotos da coleção semanal.
@@ -739,7 +738,7 @@ export default function KyrefhV2Page() {
             {/* Right: form */}
             <div style={{ background: '#f5efe6', borderRadius: 6, padding: '40px', boxShadow: '0 24px 80px rgba(0,0,0,0.3)' }}>
               <p style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: ACCENT, marginBottom: 4 }}>Formulário de atacado</p>
-              <h3 style={{ fontFamily: 'var(--font-bebas), sans-serif', fontSize: 36, fontWeight: 400, letterSpacing: '0.01em', color: '#0a0a0a', margin: '8px 0 24px' }}>Seu acesso em 60s.</h3>
+              <h3 style={{ fontFamily: 'var(--font-bebas), sans-serif', fontSize: 36, fontWeight: 400, letterSpacing: '0.01em', color: '#0a0a0a', margin: '8px 0 24px' }}>Receba o catálogo em 60 segundos.</h3>
               <Suspense fallback={<div style={{ padding: 40, textAlign: 'center', color: 'rgba(10,10,10,0.4)' }}>Carregando...</div>}>
                 <KyrefhV2Form />
               </Suspense>
