@@ -23,7 +23,7 @@ const LOOKBOOK_IMAGES = [
 ];
 
 const SHORTS_VIDEOS = [
-  '3caDvEBTs04',
+  'WbVKwg3rG88',
   'xIq64pU2Klo',
   'kEA-EP7BTdU',
   '3XZ3wL5UfS0',
@@ -391,6 +391,8 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 
 /* ─── Page ────────────────────────────────────────────────────────────────── */
 export default function KyrefhV2Page() {
+  const [lightbox, setLightbox] = useState<string | null>(null);
+
   return (
     <main style={{ fontFamily: 'var(--font-manrope), sans-serif', color: '#0a0a0a' }} className="min-h-screen">
       <Script id="fb-pixel-kyrefh-v2" strategy="afterInteractive">
@@ -598,7 +600,7 @@ export default function KyrefhV2Page() {
               className="col-span-12 md:col-span-7"
               style={{ position: 'relative', paddingBottom: '60%', overflow: 'hidden', borderRadius: 4, background: '#111' }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/kyrefh/loja/hero-mobile.jpg" alt="Kyrefh Jeans — produto destaque" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src={LOOKBOOK_IMAGES[0]} alt="Kyrefh Jeans — produto destaque" onClick={() => setLightbox(LOOKBOOK_IMAGES[0])} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', cursor: 'zoom-in' }} />
             </motion.div>
 
             {/* Side column */}
@@ -607,7 +609,7 @@ export default function KyrefhV2Page() {
                 <motion.div key={idx} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: idx * 0.1 }}
                   style={{ position: 'relative', paddingBottom: '50%', flex: 1, overflow: 'hidden', borderRadius: 4, background: '#111' }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={LOOKBOOK_IMAGES[idx]} alt={`Kyrefh Jeans — look ${idx}`} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: idx === 2 ? 'brightness(0.85)' : 'none' }} />
+                  <img src={LOOKBOOK_IMAGES[idx]} alt={`Kyrefh Jeans — look ${idx}`} onClick={() => setLightbox(LOOKBOOK_IMAGES[idx])} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', cursor: 'zoom-in', filter: idx === 2 ? 'brightness(0.85)' : 'none' }} />
                 </motion.div>
               ))}
             </div>
@@ -618,7 +620,7 @@ export default function KyrefhV2Page() {
                 className="col-span-12 sm:col-span-4"
                 style={{ position: 'relative', paddingBottom: '100%', overflow: 'hidden', borderRadius: 4, background: '#111' }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={LOOKBOOK_IMAGES[idx]} alt={`Kyrefh Jeans — look ${idx}`} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                <img src={LOOKBOOK_IMAGES[idx]} alt={`Kyrefh Jeans — look ${idx}`} onClick={() => setLightbox(LOOKBOOK_IMAGES[idx])} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', cursor: 'zoom-in' }} />
               </motion.div>
             ))}
           </div>
@@ -718,7 +720,7 @@ export default function KyrefhV2Page() {
 
             {/* Right: photo grid */}
             <div className="grid grid-cols-2 gap-3">
-              {['/kyrefh/loja/loja-1.jpg', '/kyrefh/loja/loja-2.jpg', '/kyrefh/loja/loja-3.jpg', '/kyrefh/loja/loja-4.jpg'].map((src, i) => (
+              {['/kyrefh/loja/loja-1.jpg', '/kyrefh/loja/loja-2.jpg', '/kyrefh/loja/loja-3.jpg', '/kyrefh/loja/hero-mobile.jpg'].map((src, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.1 }}
                   style={{ position: 'relative', paddingBottom: '100%', borderRadius: 6, overflow: 'hidden', background: '#1a1a1a' }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -843,6 +845,31 @@ export default function KyrefhV2Page() {
       <Suspense fallback={null}>
         <SocialProofNotification />
       </Suspense>
+
+      {/* Lightbox */}
+      {lightbox && (
+        <div
+          onClick={() => setLightbox(null)}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 9999,
+            background: 'rgba(0,0,0,0.93)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            cursor: 'zoom-out',
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={lightbox}
+            alt="Lookbook"
+            onClick={(e) => e.stopPropagation()}
+            style={{ maxWidth: '90vw', maxHeight: '90vh', objectFit: 'contain', borderRadius: 4, boxShadow: '0 32px 80px rgba(0,0,0,0.6)' }}
+          />
+          <button
+            onClick={() => setLightbox(null)}
+            style={{ position: 'absolute', top: 20, right: 24, background: 'none', border: 'none', color: '#fff', fontSize: 40, lineHeight: 1, cursor: 'pointer', opacity: 0.7 }}
+          >×</button>
+        </div>
+      )}
     </main>
   );
 }
