@@ -19,7 +19,7 @@ const LOOKBOOK_IMAGES = [
   '/kyrefh/lookbook/3.png',
   '/kyrefh/lookbook/4.png',
   '/kyrefh/lookbook/5.png',
-  '/kyrefh/lookbook/4.png',
+  '/kyrefh/lookbook/6.png',
 ];
 
 const SHORTS_VIDEOS = [
@@ -401,7 +401,16 @@ export default function KyrefhV2Page() {
       <section style={{ position: 'relative', minHeight: '100vh', background: '#050505', color: '#f5efe6', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
         {/* Background: denim texture (always visible) + video on top */}
         <div style={{ position: 'absolute', inset: 0, zIndex: 0, overflow: 'hidden', background: '#0a1220' }}>
-          {/* Denim twill texture — mobile only (video autoplays on desktop) */}
+          {/* Mobile hero background photo */}
+          <div
+            className="md:hidden"
+            style={{
+              position: 'absolute', inset: 0,
+              backgroundImage: "url('/kyrefh/loja/hero-mobile.jpg')",
+              backgroundSize: 'cover', backgroundPosition: 'center',
+            }}
+          />
+          {/* Denim twill texture — mobile only, floats over the photo */}
           <motion.div
             className="md:hidden"
             animate={{ x: [0, -14, 8, -6, 0], y: [0, 8, -10, 6, 0], scale: [1.08, 1.12, 1.09, 1.13, 1.08] }}
@@ -653,7 +662,7 @@ export default function KyrefhV2Page() {
           <div className="mt-14 text-center">
             <a href="#capturar"
               style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 40px', background: '#f5efe6', color: '#0a0a0a', fontFamily: 'var(--font-manrope), sans-serif', fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none', borderRadius: 4 }}>
-              Solicitar catálogo completo
+              Solicitar catálogo
             </a>
           </div>
         </div>
@@ -680,6 +689,43 @@ export default function KyrefhV2Page() {
                 <p style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: 15, lineHeight: 1.6, color: 'rgba(10,10,10,0.6)', margin: 0 }}>{desc}</p>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── LOJA / FÁBRICA ───────────────────────────────────────────────── */}
+      <section style={{ padding: '120px 0', background: '#0a0a0a', color: '#f5efe6', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 70% 50%, rgba(26,39,71,0.35) 0%, transparent 60%)', pointerEvents: 'none' }} />
+        <div className="px-6 sm:px-12 max-w-7xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left: text */}
+            <motion.div initial={{ opacity: 0, x: -32 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+              <p style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(245,239,230,0.4)', marginBottom: 16 }}>A fábrica</p>
+              <h2 style={{ fontFamily: 'var(--font-bebas), sans-serif', fontSize: 'clamp(56px, 8vw, 96px)', fontWeight: 400, lineHeight: 0.92, letterSpacing: '-0.01em', color: '#f5efe6', margin: '0 0 24px' }}>
+                Direto de<br />Fortaleza.
+              </h2>
+              <p style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: 16, lineHeight: 1.65, color: 'rgba(245,239,230,0.6)', margin: '0 0 36px', maxWidth: 400 }}>
+                Nossa fábrica fica no coração do Centro de Fortaleza. Produção própria, qualidade controlada peça por peça, despacho no mesmo dia.
+              </p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '20px 24px', border: '1px solid rgba(245,239,230,0.1)', borderRadius: 6 }}>
+                <MapPin size={20} color="#6b8cda" style={{ flexShrink: 0 }} />
+                <div>
+                  <p style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: 13, fontWeight: 700, color: '#f5efe6', margin: '0 0 2px', letterSpacing: '0.04em' }}>Rua José Avelino, 256</p>
+                  <p style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: 13, color: 'rgba(245,239,230,0.45)', margin: 0 }}>Centro · Fortaleza / CE</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Right: photo grid */}
+            <div className="grid grid-cols-2 gap-3">
+              {['/kyrefh/loja/loja-1.jpg', '/kyrefh/loja/loja-2.jpg', '/kyrefh/loja/loja-3.jpg', '/kyrefh/loja/loja-4.jpg'].map((src, i) => (
+                <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.1 }}
+                  style={{ position: 'relative', paddingBottom: '100%', borderRadius: 6, overflow: 'hidden', background: '#1a1a1a' }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={src} alt={`Kyrefh fábrica ${i + 1}`} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -737,7 +783,7 @@ export default function KyrefhV2Page() {
                 Receba o catálogo.
               </h2>
               <p style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: 17, lineHeight: 1.6, color: 'rgba(245,239,230,0.6)', margin: '0 0 36px', maxWidth: 440 }}>
-                Em até 30 minutos, um consultor te chama no WhatsApp com a tabela completa e as fotos da coleção semanal.
+                Em até 3 minutos, um consultor te chama no WhatsApp com o catálogo completo e as fotos da coleção semanal.
               </p>
               <div className="flex flex-col gap-4 mb-8">
                 {[{ Icon: MapPin, text: 'Rua José Avelino, 256 · Centro · Fortaleza/CE' }, { Icon: Truck, text: 'Envios diários para todo o Brasil' }].map(({ Icon, text }, i) => (
