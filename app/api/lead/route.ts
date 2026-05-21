@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { getSupabaseClient } from '@/lib/supabase';
 
 // Prevent this route from being cached or statically optimized
 export const dynamic = 'force-dynamic';
@@ -58,7 +59,34 @@ export async function POST(request: Request) {
             );
         }
 
-        // 2. Google Sheets via Apps Script webhook (kyrefh-v2)
+        // 2. Supabase — save kyrefh and kyrefh-v2 leads for the coverage map
+        if (isKyrefh || isKyrefhV2) {
+            try {
+                const supabase = getSupabaseClient();
+                tasks.push(
+                    Promise.resolve(supabase.from('kyrefh_leads').insert({
+                        name: body.name,
+                        phone: body.phone,
+                        cidade: body.cidade || null,
+                        uf: body.uf || null,
+                        business_type: body.businessType || null,
+                        volume: body.volume || null,
+                        source: body.source || null,
+                        utm_source: body.utm_source || null,
+                        utm_medium: body.utm_medium || null,
+                        utm_campaign: body.utm_campaign || null,
+                        status: 'lead',
+                    })).then(({ error }: { error: { message: string } | null }) => {
+                        if (error) console.error('[SUPABASE] insert error:', error.message);
+                        else console.log('[SUPABASE] kyrefh lead saved');
+                    })
+                );
+            } catch (e) {
+                console.error('[SUPABASE] client error:', e);
+            }
+        }
+
+        // 2b. Google Sheets via Apps Script webhook (kyrefh-v2)
         if (isKyrefhV2 && process.env.KYREFH_V2_SHEETS_URL) {
             tasks.push(
                 fetch(process.env.KYREFH_V2_SHEETS_URL, {
