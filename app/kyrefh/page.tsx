@@ -127,15 +127,21 @@ export default function KyrefhPage() {
     return (
         <main className="min-h-screen bg-zinc-50 font-sans text-zinc-900 selection:bg-amber-500 selection:text-white">
             <Script id="fb-pixel-kyrefh" strategy="afterInteractive">
-                {`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','950646318967836');fbq('track','PageView');`}
-            </Script>
-            <Script id="clarity-kyrefh" strategy="afterInteractive">
-                {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wrs6ai9xoq");`}
+                {`
+                    !function(f,b,e,v,n,t,s)
+                    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                    n.queue=[];t=b.createElement(e);t.async=!0;
+                    t.src=v;s=b.getElementsByTagName(e)[0];
+                    s.parentNode.insertBefore(t,s)}(window, document,'script',
+                    'https://connect.facebook.net/en_US/fbevents.js');
+                    // Add Pixel ID when provided
+                `}
             </Script>
 
             {/* Hero Section */}
             <section className="relative min-h-[90vh] flex items-center bg-zinc-950 overflow-hidden">
-                {/* Abstract Background Design */}
                 <div className="absolute inset-0 z-0">
                     <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-zinc-800 via-zinc-950 to-zinc-950 opacity-80" />
                     <div className="absolute -top-40 -right-40 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -191,10 +197,7 @@ export default function KyrefhPage() {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="lg:w-1/2 w-full flex justify-center items-center relative"
                     >
-                        {/* Decorative background glow behind the video */}
                         <div className="absolute inset-0 bg-amber-500/20 blur-3xl rounded-full scale-75 z-0"></div>
-                        
-                        {/* Video Container */}
                         <div className="relative z-10 w-full max-w-[340px] bg-zinc-900 rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-zinc-800 flex flex-col">
                             <div className="flex-1 w-full bg-zinc-950 relative" style={{ aspectRatio: '9/16' }}>
                                 <iframe
@@ -233,7 +236,6 @@ export default function KyrefhPage() {
                         <span className="text-amber-500 font-black uppercase tracking-[0.15em] text-sm">NOSSOS DIFERENCIAIS</span>
                         <h2 className="text-4xl md:text-5xl font-black text-zinc-950 mt-4 tracking-tight">Por que revender Kyrefh?</h2>
                     </div>
-
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {benefits.map((benefit, index) => (
                             <div key={index} className="bg-zinc-50 p-10 rounded-3xl border border-zinc-100 hover:shadow-xl transition-all hover:-translate-y-1">
@@ -255,13 +257,9 @@ export default function KyrefhPage() {
                         <h2 className="text-4xl md:text-5xl font-black mt-4 tracking-tight">Nosso Mix de Produtos</h2>
                         <p className="text-zinc-400 mt-4 max-w-2xl mx-auto">Tudo que o homem moderno precisa, com a qualidade que sua loja exige.</p>
                     </div>
-
                     <div className="grid md:grid-cols-3 gap-8">
                         {products.map((product, index) => (
-                            <div
-                                key={index}
-                                className="bg-zinc-900 border border-zinc-800 p-10 rounded-3xl hover:border-amber-500/50 transition-colors"
-                            >
+                            <div key={index} className="bg-zinc-900 border border-zinc-800 p-10 rounded-3xl hover:border-amber-500/50 transition-colors">
                                 <h3 className="text-3xl font-black mb-8 text-white">{product.title}</h3>
                                 <ul className="space-y-5 mb-10">
                                     {product.features.map((feat, i) => (
@@ -274,14 +272,8 @@ export default function KyrefhPage() {
                             </div>
                         ))}
                     </div>
-                    
                     <div className="mt-16 text-center">
-                        <a
-                            href={whatsappLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black py-4 px-12 rounded-xl transition-all hover:scale-105 shadow-xl text-lg uppercase tracking-wide"
-                        >
+                        <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black py-4 px-12 rounded-xl transition-all hover:scale-105 shadow-xl text-lg uppercase tracking-wide">
                             Solicitar Catálogo Completo
                         </a>
                     </div>
@@ -295,36 +287,22 @@ export default function KyrefhPage() {
                         <h2 className="text-4xl md:text-5xl font-black mb-6 text-zinc-950 tracking-tight">Passo a Passo</h2>
                         <p className="text-zinc-500 max-w-2xl mx-auto text-lg">Processo simplificado e dinâmico para você escalar seu negócio sem burocracia.</p>
                     </div>
-
                     <div className="relative max-w-4xl mx-auto">
                         <div className="absolute left-[31px] md:left-1/2 top-0 bottom-0 w-[2px] bg-zinc-200 z-0">
-                            <motion.div
-                                className="absolute top-0 left-0 w-full bg-amber-500 origin-top"
-                                style={{ scaleY: scrollYProgress }}
-                            />
+                            <motion.div className="absolute top-0 left-0 w-full bg-amber-500 origin-top" style={{ scaleY: scrollYProgress }} />
                         </div>
-
                         <div className="space-y-24 relative z-10">
                             {steps.map((step, i) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, y: 50 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true, margin: "-100px" }}
-                                    transition={{ duration: 0.6, delay: i * 0.1 }}
-                                    className={`flex flex-col md:flex-row items-start md:items-center ${i % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
-                                >
+                                <motion.div key={i} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.6, delay: i * 0.1 }} className={`flex flex-col md:flex-row items-start md:items-center ${i % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
                                     <div className="w-full md:w-1/2 flex items-center justify-start md:justify-end pl-20 pr-4 md:px-12">
                                         <div className={`text-left ${i % 2 !== 0 ? 'md:text-left' : 'md:text-right'}`}>
                                             <h3 className="text-2xl font-black text-zinc-900 mb-3">{step.title}</h3>
                                             <p className="text-zinc-500 leading-relaxed text-lg">{step.desc}</p>
                                         </div>
                                     </div>
-
                                     <div className="absolute left-0 md:left-1/2 -translate-x-0 md:-translate-x-1/2 w-16 h-16 bg-zinc-950 rounded-full flex items-center justify-center border-4 border-zinc-50 shadow-xl z-20">
                                         <div className="text-amber-500">{step.icon}</div>
                                     </div>
-
                                     <div className="hidden md:block w-1/2"></div>
                                 </motion.div>
                             ))}
@@ -340,17 +318,12 @@ export default function KyrefhPage() {
                     <div className="space-y-4">
                         {faqs.map((faq, index) => (
                             <div key={index} className="bg-zinc-50 rounded-2xl border border-zinc-200 overflow-hidden">
-                                <button
-                                    onClick={() => toggleFaq(index)}
-                                    className="w-full flex justify-between items-center p-6 text-left hover:bg-zinc-100 transition-colors"
-                                >
+                                <button onClick={() => toggleFaq(index)} className="w-full flex justify-between items-center p-6 text-left hover:bg-zinc-100 transition-colors">
                                     <span className="font-bold text-zinc-900 pr-4">{faq.q}</span>
                                     <HelpCircle className={`w-6 h-6 flex-shrink-0 text-amber-500 transition-transform ${openFaqIndex === index ? 'rotate-180' : ''}`} />
                                 </button>
                                 {openFaqIndex === index && (
-                                    <div className="p-6 pt-0 text-zinc-600 border-t border-zinc-200 mt-2 leading-relaxed">
-                                        {faq.a}
-                                    </div>
+                                    <div className="p-6 pt-0 text-zinc-600 border-t border-zinc-200 mt-2 leading-relaxed">{faq.a}</div>
                                 )}
                             </div>
                         ))}
@@ -370,33 +343,21 @@ export default function KyrefhPage() {
                             <p className="text-xl text-zinc-400 mb-10 max-w-lg">
                                 Preencha o formulário para acessar nosso grupo VIP e receber o catálogo com condições exclusivas de atacado.
                             </p>
-                            
                             <div className="space-y-4 mb-10">
                                 <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-zinc-900 flex items-center justify-center text-amber-500 shrink-0">
-                                        <Store className="w-5 h-5" />
-                                    </div>
+                                    <div className="w-12 h-12 rounded-full bg-zinc-900 flex items-center justify-center text-amber-500 shrink-0"><Store className="w-5 h-5" /></div>
                                     <p className="text-zinc-300 font-medium">Matriz na Rua José Avelino, Fortaleza</p>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-zinc-900 flex items-center justify-center text-amber-500 shrink-0">
-                                        <Truck className="w-5 h-5" />
-                                    </div>
+                                    <div className="w-12 h-12 rounded-full bg-zinc-900 flex items-center justify-center text-amber-500 shrink-0"><Truck className="w-5 h-5" /></div>
                                     <p className="text-zinc-300 font-medium">Envios diários para todo Brasil</p>
                                 </div>
                             </div>
-                            
-                            <a
-                                href={whatsappLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center bg-[#25D366] hover:bg-[#1ebd5a] text-white font-black py-4 px-10 rounded-xl transition-all hover:scale-105 shadow-xl w-full md:w-auto text-lg"
-                            >
+                            <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center bg-[#25D366] hover:bg-[#1ebd5a] text-white font-black py-4 px-10 rounded-xl transition-all hover:scale-105 shadow-xl w-full md:w-auto text-lg">
                                 <Phone className="mr-3 h-6 w-6" />
                                 WhatsApp da Thalya
                             </a>
                         </div>
-
                         <div className="bg-white text-zinc-900 p-8 md:p-10 rounded-3xl shadow-2xl relative">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-bl-full pointer-events-none"></div>
                             <h3 className="text-2xl font-black mb-6">Quero revender</h3>
