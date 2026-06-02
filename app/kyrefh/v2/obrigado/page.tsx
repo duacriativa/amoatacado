@@ -1,7 +1,7 @@
 'use client';
 
 const WA_URL =
-  'https://wa.me/5585988839020?text=Ol%C3%A1%20gostaria%20de%20revender%20Kyrefh%2C%20vim%20pela%20amoatacado%2F2';
+  'https://wa.me/5585982206742?text=Ol%C3%A1%20gostaria%20de%20revender%20Kyrefh%2C%20vim%20pela%20amoatacado%2F2';
 
 export default function KyrefhV2ObrigadoPage() {
 

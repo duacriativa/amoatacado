@@ -78,7 +78,7 @@ export default function KyrefhPage() {
     ];
 
     const steps = [
-        { title: 'Contato', desc: 'Chame nossa consultora Thalya no WhatsApp ou preencha o formulário.', icon: <Phone className="w-6 h-6" /> },
+        { title: 'Contato', desc: 'Chame nossa consultora Rafaela no WhatsApp ou preencha o formulário.', icon: <Phone className="w-6 h-6" /> },
         { title: 'Catálogo', desc: 'Receba nosso catálogo digital atualizado com os lançamentos.', icon: <Package className="w-6 h-6" /> },
         { title: 'Pedido', desc: 'Escolha os modelos e grade ideal para sua loja.', icon: <ShoppingBag className="w-6 h-6" /> },
         { title: 'Envio', desc: 'Despachamos seu pedido rapidamente para todo Brasil.', icon: <Truck className="w-6 h-6" /> }
@@ -117,12 +117,12 @@ export default function KyrefhPage() {
     const faqs = [
         { q: 'Vocês enviam para todo o Brasil?', a: 'Sim, enviamos nossos produtos para todo o território nacional através de transportadoras parceiras e correios de forma segura e rápida.' },
         { q: 'Onde ficam localizados?', a: 'Nossa loja física e matriz fica na Rua José Avelino, 256, Centro - Fortaleza/CE.' },
-        { q: 'Como faço para ver o catálogo com preços?', a: 'Basta clicar no botão do WhatsApp e falar com a Thalya, ou preencher o formulário no final da página.' },
+        { q: 'Como faço para ver o catálogo com preços?', a: 'Basta clicar no botão do WhatsApp e falar com a Rafaela, ou preencher o formulário no final da página.' },
         { q: 'Quais produtos vocês fabricam?', a: 'Somos especialistas em moda masculina: Calças e Bermudas (Jeans, Alfaiataria, Cargo), T-Shirts (Básica, Oversized) e Polos.' },
         { q: 'Tem grupo VIP para lojistas?', a: 'Sim! Ao se cadastrar você receberá o link para participar do nosso grupo VIP e receber novidades em primeira mão.' }
     ];
 
-    const whatsappLink = "https://wa.me/5585988839020?text=Ol%C3%A1%2C%20quero%20receber%20o%20cat%C3%A1logo%20e%20as%20condi%C3%A7%C3%B5es%20de%20atacado%20da%20Kyrefh%20Jeans.";
+    const whatsappLink = "https://wa.me/5585982206742?text=Ol%C3%A1%2C%20quero%20receber%20o%20cat%C3%A1logo%20e%20as%20condi%C3%A7%C3%B5es%20de%20atacado%20da%20Kyrefh%20Jeans.";
 
     return (
         <main className="min-h-screen bg-zinc-50 font-sans text-zinc-900 selection:bg-amber-500 selection:text-white">
@@ -182,7 +182,7 @@ export default function KyrefhPage() {
                                 className="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black py-4 px-8 rounded-xl transition-all hover:scale-105 shadow-xl shadow-amber-500/20 text-lg uppercase tracking-wide"
                             >
                                 <Phone className="mr-3 h-5 w-5" />
-                                Falar com a Thalya
+                                Falar com a Rafaela
                             </a>
                             <a
                                 href="#produtos"
@@ -401,7 +401,7 @@ export default function KyrefhPage() {
                                 className="inline-flex items-center justify-center bg-[#25D366] hover:bg-[#1ebd5a] text-white font-black py-4 px-10 rounded-xl transition-all hover:scale-105 shadow-xl w-full md:w-auto text-lg"
                             >
                                 <Phone className="mr-3 h-6 w-6" />
-                                WhatsApp da Thalya
+                                WhatsApp da Rafaela
                             </a>
                         </div>
 
@@ -418,7 +418,7 @@ export default function KyrefhPage() {
 
             <Suspense fallback={null}>
                 <WhatsAppButton
-                    phoneNumber="5585988839020"
+                    phoneNumber="5585982206742"
                     message="Olá, quero receber o catálogo e as condições de atacado da Kyrefh Jeans."
                 />
             </Suspense>
