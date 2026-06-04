@@ -20,7 +20,6 @@ export default function KyrefhV2ObrigadoPage() {
         textAlign: 'center',
       }}
     >
-      {/* Glow */}
       <div
         style={{
           position: 'fixed',
@@ -33,7 +32,6 @@ export default function KyrefhV2ObrigadoPage() {
 
       <div style={{ position: 'relative', zIndex: 1, maxWidth: 480 }}>
 
-        {/* Check icon */}
         <div
           style={{
             width: 64,
@@ -91,7 +89,6 @@ export default function KyrefhV2ObrigadoPage() {
           completo com modelos e preços de atacado.
         </p>
 
-        {/* Message preview */}
         <div
           style={{
             background: 'rgba(245,239,230,0.05)',
@@ -125,7 +122,6 @@ export default function KyrefhV2ObrigadoPage() {
           </p>
         </div>
 
-        {/* WhatsApp button */}
         <a
           href={WA_URL}
           target="_blank"
@@ -161,7 +157,8 @@ export default function KyrefhV2ObrigadoPage() {
             lineHeight: 1.5,
           }}
         >
-          A mensagem já vem preenchida — só clique em <strong style={{ color: 'rgba(245,239,230,0.45)' }}>Enviar</strong> no WhatsApp.
+          A mensagem já vem preenchida — só clique em{' '}
+          <strong style={{ color: 'rgba(245,239,230,0.45)' }}>Enviar</strong> no WhatsApp.
         </p>
 
       </div>
