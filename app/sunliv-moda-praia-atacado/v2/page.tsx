@@ -144,12 +144,9 @@ export default function SunlivV2Page() {
 
                             <div className="text-center mb-6">
                                 <h3 className="text-white font-black text-base uppercase tracking-wider leading-tight">
-                                    Receba Lançamentos<br />e Ofertas Exclusivas
+                                    Receba o catálogo<br />em 60 segundos.
                                 </h3>
-                                <p className="text-white/40 text-xs mt-1">no WhatsApp</p>
-                                <p className="text-white/40 text-xs mt-2 leading-relaxed">
-                                    Entre para nossa lista VIP e fique por dentro de tudo em primeira mão.
-                                </p>
+                                <p className="text-white/40 text-xs mt-2">Formulário de atacado</p>
                             </div>
 
                             <LeadFormDark />
@@ -172,8 +169,8 @@ export default function SunlivV2Page() {
                     </div>
                 </div>
                 <div className="text-center mb-6">
-                    <h3 className="text-white font-black text-base uppercase tracking-wider">Receba Lançamentos e Ofertas Exclusivas</h3>
-                    <p className="text-white/40 text-xs mt-1">no WhatsApp — lista VIP</p>
+                    <h3 className="text-white font-black text-base uppercase tracking-wider">Receba o catálogo em 60 segundos.</h3>
+                    <p className="text-white/40 text-xs mt-1">Formulário de atacado</p>
                 </div>
                 <LeadFormDark />
                 <p className="text-white/25 text-[10px] text-center mt-4">🔒 Seus dados estão seguros. Não enviamos spam.</p>
@@ -343,7 +340,7 @@ function LeadFormDark() {
     };
 
     const inputClass = "w-full bg-white/8 border border-white/15 rounded-xl px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-white/40 focus:bg-white/12 transition-all";
-    const selectClass = `${inputClass} appearance-none`;
+    const selectClass = `${inputClass} text-white/70`;
 
     return (
         <div>
