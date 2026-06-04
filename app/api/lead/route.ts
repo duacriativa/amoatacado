@@ -19,7 +19,8 @@ export async function POST(request: Request) {
         }
 
         // 1. Determine which webhook and email settings to use
-        const isSunliv = body.clientSlug === 'sunliv' || body.clientSlug === 'sunliv-moda-praia-atacado';
+        const isSunliv = body.clientSlug === 'sunliv' || body.clientSlug === 'sunliv-moda-praia-atacado' || body.clientSlug === 'sunliv-v2';
+        const isSunlivV2 = body.clientSlug === 'sunliv-v2';
         const isLibertyJeans = body.clientSlug === 'liberty-jeans';
         const isAmoAtacado = body.clientSlug === 'amo-atacado';
         const isKyrefh = body.clientSlug === 'kyrefh';
@@ -113,7 +114,32 @@ export async function POST(request: Request) {
             );
         }
 
-        // 2b. Google Sheets via Apps Script webhook (amo-atacado)
+        // 2b. Google Sheets via Apps Script webhook (sunliv-v2)
+        if (isSunlivV2 && process.env.SUNLIV_V2_SHEETS_URL) {
+            tasks.push(
+                fetch(process.env.SUNLIV_V2_SHEETS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        timestamp: new Date().toISOString(),
+                        name: body.name,
+                        email: body.email || '',
+                        phone: body.phone,
+                        orderVolume: body.orderVolume || '',
+                        source: body.source || '',
+                        utm_source: body.utm_source || '',
+                        utm_medium: body.utm_medium || '',
+                        utm_campaign: body.utm_campaign || '',
+                    }),
+                }).then(() => {
+                    console.log('[SHEETS] sunliv-v2 lead written to Google Sheets');
+                }).catch((err: unknown) => {
+                    console.error('[SHEETS] Failed to write sunliv-v2 lead to Google Sheets:', err);
+                })
+            );
+        }
+
+        // 2c. Google Sheets via Apps Script webhook (amo-atacado)
         if (isAmoAtacado && process.env.AMO_ATACADO_SHEETS_URL) {
             tasks.push(
                 fetch(process.env.AMO_ATACADO_SHEETS_URL, {

@@ -324,6 +324,7 @@ function LeadFormDark() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+    const [volume, setVolume] = useState('');
     const [submitting, setSubmitting] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -333,7 +334,7 @@ function LeadFormDark() {
             await fetch('/api/lead', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, phone, clientSlug: 'sunliv', source: 'website-v2' }),
+                body: JSON.stringify({ name, email, phone, orderVolume: volume, clientSlug: 'sunliv-v2', source: 'website-v2' }),
             });
             window.location.href = '/sunliv-moda-praia-atacado/v2/obrigado';
         } catch {
@@ -342,19 +343,31 @@ function LeadFormDark() {
     };
 
     const inputClass = "w-full bg-white/8 border border-white/15 rounded-xl px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-white/40 focus:bg-white/12 transition-all";
+    const selectClass = `${inputClass} appearance-none`;
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-3">
-            <input type="text" placeholder="Seu nome" value={name} onChange={e => setName(e.target.value)} required className={inputClass} />
-            <input type="email" placeholder="Seu melhor e-mail" value={email} onChange={e => setEmail(e.target.value)} required className={inputClass} />
-            <input type="tel" placeholder="(11) 99999-9999" value={phone} onChange={e => setPhone(e.target.value)} required className={inputClass} />
-            <button
-                type="submit"
-                disabled={submitting}
-                className="w-full bg-white text-stone-900 font-black text-xs uppercase tracking-widest py-4 rounded-xl hover:bg-stone-100 transition-colors disabled:opacity-50 mt-1"
-            >
-                {submitting ? 'Enviando...' : 'Quero receber no WhatsApp ›'}
-            </button>
-        </form>
+        <div>
+            <p className="text-white/30 text-[10px] uppercase tracking-widest mb-1">Formulário de atacado</p>
+            <p className="text-white font-bold text-sm mb-5">Receba o catálogo em 60 segundos.</p>
+            <form onSubmit={handleSubmit} className="space-y-3">
+                <input type="text" placeholder="Seu nome" value={name} onChange={e => setName(e.target.value)} required className={inputClass} />
+                <input type="email" placeholder="Seu melhor e-mail" value={email} onChange={e => setEmail(e.target.value)} required className={inputClass} />
+                <input type="tel" placeholder="(11) 99999-9999" value={phone} onChange={e => setPhone(e.target.value)} required className={inputClass} />
+                <select value={volume} onChange={e => setVolume(e.target.value)} required className={selectClass}>
+                    <option value="" disabled>Volume mensal estimado</option>
+                    <option value="Até 30 peças">Até 30 peças</option>
+                    <option value="30 a 100 peças">30 a 100 peças</option>
+                    <option value="100 a 300 peças">100 a 300 peças</option>
+                    <option value="Mais de 300 peças">Mais de 300 peças</option>
+                </select>
+                <button
+                    type="submit"
+                    disabled={submitting}
+                    className="w-full bg-green-500 hover:bg-green-400 text-white font-black text-xs uppercase tracking-widest py-4 rounded-xl transition-colors disabled:opacity-50 mt-1"
+                >
+                    {submitting ? 'Enviando...' : 'Solicitar catálogo'}
+                </button>
+            </form>
+        </div>
     );
 }
