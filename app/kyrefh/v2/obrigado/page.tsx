@@ -118,7 +118,7 @@ export default function KyrefhV2ObrigadoPage() {
               fontStyle: 'italic',
             }}
           >
-            "{MESSAGE}"
+            &ldquo;{MESSAGE}&rdquo;
           </p>
         </div>
 
