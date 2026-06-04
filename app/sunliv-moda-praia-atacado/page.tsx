@@ -123,8 +123,8 @@ export default function SunlivPage() {
                                     Vende Sozinha
                                 </span>
                             </h1>
-                            <p className="text-lg text-slate-500 mb-10 leading-relaxed max-w-md">
-                                Produção própria em Fortaleza, peças de alta qualidade, com margem alta e pedido mínimo acessível.
+                            <p className="text-lg text-slate-600 font-semibold mb-10 leading-relaxed max-w-md">
+                                Peças que <span className="text-amber-500">vendem no primeiro dia</span> — produção própria em Fortaleza, margem acima de 100% e pedido mínimo de só 10 peças.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 mb-12">
                                 <a href={waLink} target="_blank" rel="noopener" onClick={trackWhatsAppConversion}
@@ -152,9 +152,15 @@ export default function SunlivPage() {
                             transition={{ duration: 0.9 }}
                             className="relative h-[500px] lg:h-full min-h-[600px] rounded-3xl lg:rounded-none overflow-hidden"
                         >
+                            <a href={waLink} target="_blank" rel="noopener" onClick={trackWhatsAppConversion} className="block w-full h-full absolute inset-0 z-10" aria-label="Fale no WhatsApp" />
                             <Image src="/images/sunliv/catalog-5.jpg" alt="Modelo Sun Liv" fill priority
                                 className="object-cover object-top" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                            <div className="absolute bottom-6 left-0 right-0 flex justify-center">
+                                <span className="bg-green-500 text-white font-bold text-sm px-5 py-2.5 rounded-xl flex items-center gap-2 shadow-lg">
+                                    <MessageCircle className="w-4 h-4" /> Toque para falar no WhatsApp
+                                </span>
+                            </div>
                         </motion.div>
                     </div>
                 </div>
@@ -183,6 +189,18 @@ export default function SunlivPage() {
                             </motion.div>
                         ))}
                     </div>
+                </div>
+            </section>
+
+            {/* CTA PÓS-VANTAGENS */}
+            <section className="py-10 px-4 bg-amber-50 border-y border-amber-100">
+                <div className="container mx-auto flex flex-col sm:flex-row items-center justify-center gap-4 text-center">
+                    <p className="text-slate-700 font-semibold text-base">Pronta para começar a lucrar com moda praia?</p>
+                    <a href={waLink} target="_blank" rel="noopener" onClick={trackWhatsAppConversion}
+                        className="flex items-center gap-2 bg-green-500 hover:bg-green-600 transition-colors text-white font-black py-3 px-7 rounded-xl text-sm shadow-md shrink-0">
+                        <MessageCircle className="w-4 h-4" />
+                        Quero receber o catálogo agora
+                    </a>
                 </div>
             </section>
 
