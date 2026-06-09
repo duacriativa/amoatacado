@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 
 const CSS = `
   .paneo-wrap *, .paneo-wrap *::before, .paneo-wrap *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -318,7 +319,7 @@ export default function PaneoBrasilPage() {
 
       {/* NAV */}
       <nav className={`p-nav${scrolled ? ' scrolled' : ''}`}>
-        <a href="/paneo" className="p-nav-logo">PANEÔ</a>
+        <Link href="/paneo" className="p-nav-logo">PANEÔ</Link>
         <ul className="p-nav-links">
           <li><a href="#produto">Produto</a></li>
           <li><a href="#atacado">Atacado</a></li>
