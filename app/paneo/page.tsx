@@ -409,7 +409,26 @@ export default function PaneoBrasilPage() {
 
       {/* HERO */}
       <section className="p-hero">
-        <div className="p-hero-bg" />
+        {/* Mobile: product photo */}
+        <div className="p-hero-bg p-hero-bg-mobile" />
+        {/* Desktop: YouTube autoplay video */}
+        <div className="p-hero-video-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/56tyw2g8RKU?autoplay=1&mute=1&loop=1&playlist=56tyw2g8RKU&controls=0&rel=0&playsinline=1&modestbranding=1&showinfo=0&start=0"
+            allow="autoplay; encrypted-media"
+            allowFullScreen={false}
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              height: 'max(100vh, calc(100vw * 1.7778))',
+              width: 'calc(max(100vh, calc(100vw * 1.7778)) * 0.5625)',
+              transform: 'translate(-50%, -50%)',
+              border: 'none',
+              pointerEvents: 'none',
+            }}
+          />
+        </div>
         <div className="p-hero-overlay" />
         <div className="p-hero-content">
           <span className="p-label">Resort 26 · Edição Atacado</span>
