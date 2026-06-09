@@ -166,7 +166,45 @@ const CSS = `
   .p-footer-logo { font-family: 'Cormorant Garamond',serif; font-size: 1rem; font-weight: 500; letter-spacing: 0.2em; }
   .p-footer-info { font-size: 0.62rem; font-weight: 300; letter-spacing: 0.1em; color: #7A6B60; }
 
-  /* MOBILE */
+
+  /* GRADE MOBILE vs DESKTOP */
+  .p-grade-desktop { display: block; }
+  .p-grade-mobile  { display: none; }
+
+  .p-color-tabs { display: flex; gap: 0; border: 1px solid #D4C8BC; margin-bottom: 1rem; }
+  .p-color-tab {
+    flex: 1; padding: 0.65rem 0.5rem; border: none; background: white; cursor: pointer;
+    font-family: 'Jost',sans-serif; font-size: 0.62rem; font-weight: 400; letter-spacing: 0.1em;
+    text-transform: uppercase; display: flex; align-items: center; justify-content: center;
+    gap: 0.4rem; border-right: 1px solid #D4C8BC; transition: background 0.15s; position: relative;
+  }
+  .p-color-tab:last-child { border-right: none; }
+  .p-color-tab.active { background: #1C1410; color: white; }
+  .p-color-tab.active .p-col-dot { border-color: rgba(255,255,255,0.3) !important; }
+  .p-tab-badge {
+    position: absolute; top: 4px; right: 4px;
+    background: #7D3018; color: white; font-size: 0.5rem; font-weight: 500;
+    width: 14px; height: 14px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  }
+  .p-size-rows { display: flex; flex-direction: column; gap: 0; border: 1px solid #D4C8BC; }
+  .p-size-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.85rem 1rem; border-bottom: 1px solid #EEEBE6;
+  }
+  .p-size-row:last-child { border-bottom: none; }
+  .p-size-row-lbl { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; color: #2C2118; }
+  .p-size-row-ctr { display: flex; align-items: center; gap: 1rem; }
+
+  @media (max-width: 768px) {
+    .p-grade-desktop { display: none; }
+    .p-grade-mobile  { display: block; }
+    .p-qty-presets { gap: 0.4rem; }
+    .p-qty-preset  { width: 36px; height: 36px; font-size: 0.7rem; }
+    .p-qty-num     { width: 52px; font-size: 1.8rem; }
+    .p-qty-btn     { width: 36px; height: 36px; }
+  }
+
+  /* MOBILE LAYOUT */
   @media (max-width: 768px) {
     .p-nav { padding: 0 1.25rem; }
     .p-nav-links, .p-nav-cta { display: none; }
@@ -243,6 +281,7 @@ export default function PaneoBrasilPage() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [lightbox, setLightbox] = useState<string | null>(null);
+  const [mobileColor, setMobileColor] = useState<ColorKey>('Coffee');
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 10);
@@ -502,6 +541,39 @@ export default function PaneoBrasilPage() {
                     </tr>
                   </tbody>
                 </table>
+              </div>
+            </div>
+
+            {/* Grade mobile: abas por cor */}
+            <div className="p-grade-mobile">
+              <div className="p-color-tabs">
+                {COLORS.map(c => (
+                  <button key={c} className={`p-color-tab${mobileColor === c ? ' active' : ''}`} onClick={() => setMobileColor(c)}>
+                    <span className="p-col-dot" style={{ background: COLOR_DOTS[c], border: c === 'Off-White' ? '1px solid #bbb' : undefined }} />
+                    {c === 'Off-White' ? 'Off' : c}
+                    {colTotal(c) > 0 && <span className="p-tab-badge">{colTotal(c)}</span>}
+                  </button>
+                ))}
+              </div>
+              <div className="p-size-rows">
+                {SIZES.map(sz => (
+                  <div key={sz} className="p-size-row">
+                    <span className="p-size-row-lbl">{sz}</span>
+                    <div className="p-size-row-ctr">
+                      <button className="p-cell-btn" style={{width:32,height:32}} onClick={() => changeCell(sz, mobileColor, -1)} disabled={grade[sz][mobileColor] <= 0}>−</button>
+                      <span className="p-cell-num" style={{fontSize:'1.8rem',width:36}}>{grade[sz][mobileColor]}</span>
+                      <button className="p-cell-btn" style={{width:32,height:32}} onClick={() => changeCell(sz, mobileColor, 1)} disabled={totalSelected >= qty}>+</button>
+                    </div>
+                  </div>
+                ))}
+                <div className="p-size-row" style={{background:'#F9F7F4'}}>
+                  <span className="p-size-row-lbl" style={{fontSize:'0.6rem',letterSpacing:'0.15em',textTransform:'uppercase',color:'#7A6B60'}}>Total {mobileColor === 'Off-White' ? 'Off' : mobileColor}</span>
+                  <span className="p-total-badge" style={colTotal(mobileColor) > 0 ? {background:'#7D3018'} : {}}>{colTotal(mobileColor)}</span>
+                </div>
+              </div>
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginTop:'0.75rem',padding:'0.5rem 0',borderTop:'2px solid #D4C8BC'}}>
+                <span style={{fontSize:'0.6rem',fontWeight:500,letterSpacing:'0.15em',textTransform:'uppercase',color:'#7A6B60'}}>Total geral</span>
+                <span className={`p-total-badge${totalSelected === qty ? '' : ' partial'}`} style={totalSelected === qty ? {background:'#2C7A3A'} : {}}>{totalSelected}/{qty}</span>
               </div>
             </div>
           </div>
