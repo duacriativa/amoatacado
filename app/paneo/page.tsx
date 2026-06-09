@@ -33,7 +33,7 @@ const CSS = `
 
   /* HERO */
   .p-hero { height: 100vh; position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: 5rem 4rem; }
-  .p-hero-bg { position: absolute; inset: 0; background-image: url('https://dcdn-us.mitiendanube.com/stores/006/453/112/products/foto-05-06-2026-09-52-55-40-f6da68d9f61586dfb117810183712604-1024-1024.webp'); background-size: cover; background-position: center 15%; }
+  .p-hero-bg { position: absolute; inset: 0; background-image: url('https://dcdn-us.mitiendanube.com/stores/006/453/112/products/foto-05-06-2026-09-52-55-2-8664be9e91868c459a17810177776839-1024-1024.webp'); background-size: cover; background-position: center 15%; }
   .p-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(18,10,6,0.82) 0%, rgba(18,10,6,0.15) 55%, transparent 100%); }
   .p-hero-content { position: relative; z-index: 2; color: white; max-width: 640px; }
   .p-label { font-size: 0.58rem; font-weight: 400; letter-spacing: 0.32em; text-transform: uppercase; opacity: 0.75; margin-bottom: 1rem; display: block; }
@@ -75,7 +75,7 @@ const CSS = `
 
   /* SOCIAL */
   .p-social { position: relative; padding: 8rem 4rem; overflow: hidden; min-height: 55vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-  .p-social-bg { position: absolute; inset: 0; background-image: url('https://dcdn-us.mitiendanube.com/stores/006/453/112/products/foto-05-06-2026-09-52-55-32-cdb99dac3bbe43225717810183711736-1024-1024.webp'); background-size: cover; background-position: center; }
+  .p-social-bg { position: absolute; inset: 0; background-image: url('https://dcdn-us.mitiendanube.com/stores/006/453/112/products/foto-05-06-2026-09-52-55-1-9601c83a44656eb54117810177783115-1024-1024.webp'); background-size: cover; background-position: center; }
   .p-social-overlay { position: absolute; inset: 0; background: rgba(18,10,6,0.8); }
   .p-social-content { position: relative; z-index: 2; color: white; }
   .p-social-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem,5vw,4rem); font-weight: 300; line-height: 1.2; margin-bottom: 4rem; }
@@ -204,6 +204,35 @@ const CSS = `
     .p-qty-btn     { width: 36px; height: 36px; }
   }
 
+
+  /* VIDEO + GUIA DE TAMANHOS */
+  .p-video-section { padding: 8rem 4rem; background: #FDFAF7; }
+  .p-video-grid { display: grid; grid-template-columns: 320px 1fr; gap: 6rem; max-width: 1060px; margin: 0 auto; align-items: start; }
+  .p-video-col {}
+  .p-video-wrap { position: relative; width: 100%; aspect-ratio: 9/16; border: 1px solid #D4C8BC; overflow: hidden; max-width: 320px; }
+  .p-video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+  .p-sizeguide-col { padding-top: 2rem; }
+  .p-size-table { width: 100%; border-collapse: collapse; margin-bottom: 2.5rem; }
+  .p-size-table th { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #7A6B60; padding: 0.75rem 1rem; text-align: left; border-bottom: 2px solid #D4C8BC; }
+  .p-size-table td { font-size: 0.84rem; font-weight: 300; padding: 1rem; border-bottom: 1px solid #EEEBE6; }
+  .p-size-table td:first-child { font-weight: 500; letter-spacing: 0.1em; font-size: 0.9rem; }
+  .p-size-table tr:last-child td { border-bottom: none; }
+  .p-price-highlight { background: #F5F0EA; padding: 1.5rem; border: 1px solid #D4C8BC; }
+  .p-price-highlight-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem; }
+  .p-price-highlight-label { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #7A6B60; width: 5rem; }
+  .p-price-highlight-value { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; }
+  .p-price-crossed { text-decoration: line-through; color: #7A6B60; font-size: 1.4rem; }
+  .p-price-main { color: #1C1410; }
+  .p-price-highlight-badge { background: #7D3018; color: white; font-size: 0.6rem; font-weight: 500; letter-spacing: 0.1em; padding: 0.25rem 0.6rem; }
+  .p-price-highlight-note { font-size: 0.72rem; font-weight: 300; color: #7A6B60; margin-top: 0.25rem; }
+
+  @media (max-width: 768px) {
+    .p-video-section { padding: 5rem 1.5rem; }
+    .p-video-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .p-video-wrap { max-width: 240px; margin: 0 auto; }
+    .p-sizeguide-col { padding-top: 0; }
+  }
+
   /* MOBILE LAYOUT */
   @media (max-width: 768px) {
     .p-nav { padding: 0 1.25rem; }
@@ -239,36 +268,33 @@ const CSS = `
   }
 `;
 
-const COLORS = ['Coffee', 'Cappuccino', 'Off-White'] as const;
+const COLORS = ['Preto', 'Cappuccino', 'Bronze'] as const;
 const SIZES = ['P', 'M', 'G'] as const;
 type ColorKey = typeof COLORS[number];
 type SizeKey = typeof SIZES[number];
 type Grade = Record<SizeKey, Record<ColorKey, number>>;
 
 const COLOR_DOTS: Record<ColorKey, string> = {
-  'Coffee': '#3A2010',
+  'Preto': '#1A1A1A',
   'Cappuccino': '#A87848',
-  'Off-White': '#E8E0D2',
+  'Bronze': '#7A4A28',
 };
 
 const tiers = [
-  { min: 6,  max: 11,   price: 160.00 },
-  { min: 12, max: 23,   price: 147.20 },
-  { min: 24, max: 47,   price: 136.00 },
-  { min: 48, max: 9999, price: 124.80 },
+  { min: 6, max: 9999, price: 145.00 },
 ];
 
 const GALLERY_IMGS = [
-  'https://dcdn-us.mitiendanube.com/stores/006/453/112/products/foto-05-06-2026-09-52-55-39-bf0e4a911fe02f43b817810183709180-1024-1024.webp',
-  'https://dcdn-us.mitiendanube.com/stores/006/453/112/products/foto-05-06-2026-09-52-55-38-34d7869b0e483f801517810183708909-1024-1024.webp',
-  'https://dcdn-us.mitiendanube.com/stores/006/453/112/products/foto-05-06-2026-09-52-55-37-6a387d2f988ef65a0417810183713588-1024-1024.webp',
-  'https://dcdn-us.mitiendanube.com/stores/006/453/112/products/foto-05-06-2026-09-52-55-40-f6da68d9f61586dfb117810183712604-1024-1024.webp',
+  'https://dcdn-us.mitiendanube.com/stores/006/453/112/products/foto-05-06-2026-09-52-55-2-8664be9e91868c459a17810177776839-1024-1024.webp',
+  'https://dcdn-us.mitiendanube.com/stores/006/453/112/products/foto-05-06-2026-09-52-55-10-af014716b29af26f7c17810177783852-1024-1024.webp',
+  'https://dcdn-us.mitiendanube.com/stores/006/453/112/products/foto-05-06-2026-09-52-55-11-e0468894119712058117810177782892-1024-1024.webp',
+  'https://dcdn-us.mitiendanube.com/stores/006/453/112/products/foto-05-06-2026-09-52-55-4-fd46358860fb94247b17810177779836-1024-1024.webp',
 ];
 
 const initGrade = (): Grade => ({
-  P: { Coffee: 0, Cappuccino: 0, 'Off-White': 0 },
-  M: { Coffee: 0, Cappuccino: 0, 'Off-White': 0 },
-  G: { Coffee: 0, Cappuccino: 0, 'Off-White': 0 },
+  P: { Preto: 0, Cappuccino: 0, Bronze: 0 },
+  M: { Preto: 0, Cappuccino: 0, Bronze: 0 },
+  G: { Preto: 0, Cappuccino: 0, Bronze: 0 },
 });
 
 function getTier(q: number) { return tiers.find(t => q >= t.min && q <= t.max) || tiers[0]; }
@@ -281,7 +307,7 @@ export default function PaneoBrasilPage() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [lightbox, setLightbox] = useState<string | null>(null);
-  const [mobileColor, setMobileColor] = useState<ColorKey>('Coffee');
+  const [mobileColor, setMobileColor] = useState<ColorKey>('Preto');
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 10);
@@ -332,13 +358,12 @@ export default function PaneoBrasilPage() {
       .filter(c => colTotal(c) > 0)
       .map(c => `${c}: ${colTotal(c)}pç (${SIZES.filter(s => grade[s][c] > 0).map(s => `${s}:${grade[s][c]}`).join(' ')})`);
     const msg = encodeURIComponent(
-      `Olá! Pedido atacado Saída Veneza 🛍️\n\n${lines.join('\n')}\n\n*Total:* ${totalSelected} peças · R$${totalStr}\n\nComo finalizo o pagamento?`
+      `Olá! Pedido atacado Vestido Creta 🛍️\n\n${lines.join('\n')}\n\n*Total:* ${totalSelected} peças · R$${totalStr}\n\nComo finalizo o pagamento?`
     );
     window.open(`https://wa.me/558592189455?text=${msg}`, '_blank');
   }
 
-  const tierLabels = ['6–11 Peças', '12–23 Peças', '24–47 Peças', '48+ Peças'];
-  const tierDiscs = ['preço base', '−8% por peça', '−15% por peça', '−22% por peça'];
+
 
   return (
     <div className="paneo-wrap">
@@ -388,8 +413,8 @@ export default function PaneoBrasilPage() {
         <div className="p-hero-overlay" />
         <div className="p-hero-content">
           <span className="p-label">Resort 26 · Edição Atacado</span>
-          <h1 className="p-hero-title">Saída <em>Veneza</em></h1>
-          <p className="p-hero-desc">Top tomara-que-caia drapeado e saia longa com fenda. Para o look pós-sol sofisticado da sua cliente. Atacado a partir de 6 peças, <strong>R$160 a unidade.</strong></p>
+          <h1 className="p-hero-title">Vestido <em>Creta</em></h1>
+          <p className="p-hero-desc">O best seller da Paneô. Fenda lateral, detalhe em nó e tecido de alta qualidade. Atacado a partir de 6 peças, <strong>R$145 a unidade.</strong></p>
           <div className="p-hero-btns">
             <a href="#pedido" className="p-btn-primary">Montar Pedido</a>
             <a href="#produto" className="p-btn-ghost">Ver Detalhes ↓</a>
@@ -410,18 +435,18 @@ export default function PaneoBrasilPage() {
           </div>
         </div>
         <div className="p-product-info">
-          <span className="p-section-label">Coleção Veneza · 2026</span>
-          <h2 className="p-product-heading">Drapeado que <em>vira desejo.</em></h2>
-          <p className="p-product-desc">Top tomara-que-caia com franzido central e saia longa transpassada com fenda lateral. Tecido fluido em jersey de viscose, modelagem que veste do P ao G — uma peça pós-praia que sua cliente vai querer usar no jantar.</p>
+          <span className="p-section-label">Best Seller · Coleção 2026</span>
+          <h2 className="p-product-heading">O vestido que <em>todo closet pede.</em></h2>
+          <p className="p-product-desc">O Vestido Creta é o nosso best seller que une elegância e modernidade com perfeição. Confeccionado em tecido de alta qualidade, destaca-se pela sofisticada fenda lateral e pelo detalhe em nó que valoriza a silhueta feminina. Ideal para ocasiões especiais, garante um visual marcante e cheio de charme.</p>
           <div className="p-specs-grid">
-            <div><p className="p-spec-label">Composição</p><p className="p-spec-val">Jersey de viscose acetinado</p></div>
-            <div><p className="p-spec-label">Modelagem</p><p className="p-spec-val">Top bandeau + saia fenda</p></div>
+            <div><p className="p-spec-label">Composição</p><p className="p-spec-val">Tecido de alta qualidade</p></div>
+            <div><p className="p-spec-label">Modelagem</p><p className="p-spec-val">Vestido com fenda + nó</p></div>
             <div><p className="p-spec-label">Tamanhos</p><p className="p-spec-val">P · M · G</p></div>
-            <div><p className="p-spec-label">Cores</p><p className="p-spec-val">Coffee · Cappuccino · Off-White</p></div>
+            <div><p className="p-spec-label">Cores</p><p className="p-spec-val">Preto · Cappuccino · Bronze</p></div>
           </div>
           <span className="p-section-label" style={{ marginBottom: '0.6rem' }}>Preço unitário no atacado</span>
-          <p className="p-price-tag">R$ 160,00 <span className="p-price-meta">/ peça · MOQ 6</span></p>
-          <p className="p-price-note">Descontos progressivos a partir de 12 peças.</p>
+          <p className="p-price-tag">R$ 145,00 <span className="p-price-meta">/ peça · MOQ 6</span></p>
+          <p className="p-price-note">Varejo R$290,00 — margem de 100% para sua loja.</p>
         </div>
       </section>
 
@@ -439,18 +464,53 @@ export default function PaneoBrasilPage() {
         </div>
       </section>
 
-      {/* TABELA */}
-      <section id="tabela" className="p-pricing">
-        <span className="p-section-label" style={{ display: 'block', marginBottom: '1rem' }}>Tabela de atacado</span>
-        <h2 className="p-section-heading">Quanto mais leva, melhor o preço.</h2>
-        <div className="p-pricing-grid">
-          {tiers.map((t, i) => (
-            <div key={i} className={`p-pricing-card${qty >= t.min && qty <= t.max ? ' active' : ''}`}>
-              <p className="p-pricing-range">{tierLabels[i]}</p>
-              <p className="p-pricing-price">{fmt(t.price)}</p>
-              <p className="p-pricing-disc">{tierDiscs[i]}</p>
+      {/* VIDEO + GUIA DE TAMANHOS */}
+      <section id="tabela" className="p-video-section">
+        <div className="p-video-grid">
+          <div className="p-video-col">
+            <span className="p-section-label" style={{ marginBottom: '1rem', display: 'block' }}>Produto em movimento</span>
+            <div className="p-video-wrap">
+              <iframe
+                src="https://www.youtube.com/embed/56tyw2g8RKU?autoplay=0&loop=1&rel=0&modestbranding=1"
+                title="Vestido Creta Paneô"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
             </div>
-          ))}
+          </div>
+          <div className="p-sizeguide-col">
+            <span className="p-section-label" style={{ marginBottom: '1rem', display: 'block' }}>Guia de tamanhos</span>
+            <h2 className="p-section-heading" style={{ fontSize: 'clamp(1.8rem,3vw,2.8rem)', marginBottom: '2rem' }}>
+              O fit perfeito para <em style={{ fontStyle: 'italic' }}>cada corpo.</em>
+            </h2>
+            <table className="p-size-table">
+              <thead>
+                <tr>
+                  <th>Tamanho</th>
+                  <th>Numeração</th>
+                  <th>Perfil</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>P</td><td>36–38</td><td>Manequim 36 a 38</td></tr>
+                <tr><td>M</td><td>40–42</td><td>Manequim 40 a 42</td></tr>
+                <tr><td>G</td><td>44–46</td><td>Manequim 44 a 46</td></tr>
+              </tbody>
+            </table>
+            <div className="p-price-highlight">
+              <div className="p-price-highlight-row">
+                <span className="p-price-highlight-label">Varejo</span>
+                <span className="p-price-highlight-value p-price-crossed">R$ 290,00</span>
+              </div>
+              <div className="p-price-highlight-row">
+                <span className="p-price-highlight-label">Atacado</span>
+                <span className="p-price-highlight-value p-price-main">R$ 145,00</span>
+                <span className="p-price-highlight-badge">-50%</span>
+              </div>
+              <p className="p-price-highlight-note">Pedido mínimo 6 peças · margem de 100%</p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -496,7 +556,7 @@ export default function PaneoBrasilPage() {
                       {COLORS.map(c => (
                         <th key={c}>
                           <div className="th-color">
-                            <span className="p-col-dot" style={{ background: COLOR_DOTS[c], border: c === 'Off-White' ? '1px solid #bbb' : undefined }} />
+                            <span className="p-col-dot" style={{ background: COLOR_DOTS[c], }} />
                             {c}
                           </div>
                         </th>
@@ -549,8 +609,8 @@ export default function PaneoBrasilPage() {
               <div className="p-color-tabs">
                 {COLORS.map(c => (
                   <button key={c} className={`p-color-tab${mobileColor === c ? ' active' : ''}`} onClick={() => setMobileColor(c)}>
-                    <span className="p-col-dot" style={{ background: COLOR_DOTS[c], border: c === 'Off-White' ? '1px solid #bbb' : undefined }} />
-                    {c === 'Off-White' ? 'Off' : c}
+                    <span className="p-col-dot" style={{ background: COLOR_DOTS[c] }} />
+                    c
                     {colTotal(c) > 0 && <span className="p-tab-badge">{colTotal(c)}</span>}
                   </button>
                 ))}
@@ -567,7 +627,7 @@ export default function PaneoBrasilPage() {
                   </div>
                 ))}
                 <div className="p-size-row" style={{background:'#F9F7F4'}}>
-                  <span className="p-size-row-lbl" style={{fontSize:'0.6rem',letterSpacing:'0.15em',textTransform:'uppercase',color:'#7A6B60'}}>Total {mobileColor === 'Off-White' ? 'Off' : mobileColor}</span>
+                  <span className="p-size-row-lbl" style={{fontSize:'0.6rem',letterSpacing:'0.15em',textTransform:'uppercase',color:'#7A6B60'}}>Total {mobileColor}</span>
                   <span className="p-total-badge" style={colTotal(mobileColor) > 0 ? {background:'#7D3018'} : {}}>{colTotal(mobileColor)}</span>
                 </div>
               </div>
@@ -584,7 +644,7 @@ export default function PaneoBrasilPage() {
             <div className="p-sum-rows">
               <div className="p-sum-row">
                 <span className="p-sum-key">Produto</span>
-                <span className="p-sum-val">Saída Veneza</span>
+                <span className="p-sum-val">Vestido Creta</span>
               </div>
               <div className="p-sum-row">
                 <span className="p-sum-key">Quantidade</span>
@@ -597,7 +657,7 @@ export default function PaneoBrasilPage() {
                   <div className="p-sum-colors">
                     {COLORS.filter(c => colTotal(c) > 0).map(c => (
                       <div key={c} className="p-sum-color-row">
-                        <span className="p-sum-color-dot" style={{ background: COLOR_DOTS[c], border: c === 'Off-White' ? '1px solid rgba(255,255,255,0.3)' : undefined }} />
+                        <span className="p-sum-color-dot" style={{ background: COLOR_DOTS[c] }} />
                         <span>{c}: {colTotal(c)} pç</span>
                         <span style={{ opacity: 0.5, fontSize: '0.65rem' }}>
                           ({SIZES.filter(s => grade[s][c] > 0).map(s => `${s}:${grade[s][c]}`).join(' ')})
