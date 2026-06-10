@@ -49,10 +49,10 @@ const CSS = `
   /* PRODUCT */
   .p-product { display: grid; grid-template-columns: 1fr 1fr; min-height: 90vh; }
   .p-gallery { overflow: hidden; }
-  .p-gallery-main { width: 100%; height: 65vh; object-fit: cover; display: block; cursor: zoom-in; transition: opacity 0.2s; }
+  .p-gallery-main { width: 100%; height: 52vh; object-fit: cover; display: block; cursor: zoom-in; transition: opacity 0.2s; }
   .p-gallery-main:hover { opacity: 0.92; }
   .p-gallery-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
-  .p-gallery-row img { width: 100%; height: 28vh; object-fit: cover; display: block; cursor: zoom-in; transition: opacity 0.2s; }
+  .p-gallery-row img { width: 100%; height: 24vh; object-fit: cover; display: block; cursor: zoom-in; transition: opacity 0.2s; }
   .p-gallery-row img:hover { opacity: 0.88; }
   .p-product-info { padding: 6rem 5.5rem; background: #FDFAF7; display: flex; flex-direction: column; justify-content: center; }
   .p-section-label { font-size: 0.58rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: #7A6B60; margin-bottom: 1.5rem; display: block; }
@@ -111,7 +111,7 @@ const CSS = `
   .p-qty-btn:hover:not(:disabled) { background: #F5F0EA; }
   .p-qty-btn:disabled { opacity: 0.3; cursor: not-allowed; }
   .p-qty-num { font-family: 'Cormorant Garamond',serif; font-size: 2.2rem; font-weight: 400; width: 64px; text-align: center; line-height: 1; padding: 0 0.25rem; }
-  .p-qty-presets { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .p-qty-presets { display: flex; gap: 0.4rem; flex-wrap: nowrap; }
   .p-qty-preset { width: 40px; height: 40px; border: 1px solid #D4C8BC; background: white; font-family: 'Jost',sans-serif; font-size: 0.75rem; font-weight: 400; cursor: pointer; transition: all 0.15s; }
   .p-qty-preset.active { background: #1C1410; color: white; border-color: #1C1410; }
 
@@ -198,10 +198,11 @@ const CSS = `
   @media (max-width: 768px) {
     .p-grade-desktop { display: none; }
     .p-grade-mobile  { display: block; }
-    .p-qty-presets { gap: 0.4rem; }
-    .p-qty-preset  { width: 36px; height: 36px; font-size: 0.7rem; }
-    .p-qty-num     { width: 52px; font-size: 1.8rem; }
-    .p-qty-btn     { width: 36px; height: 36px; }
+    .p-qty-row { flex-wrap: wrap; gap: 0.75rem; }
+    .p-qty-presets { gap: 0.4rem; flex-wrap: nowrap; }
+    .p-qty-preset  { width: 34px; height: 34px; font-size: 0.68rem; }
+    .p-qty-num     { width: 48px; font-size: 1.6rem; }
+    .p-qty-btn     { width: 34px; height: 34px; }
   }
 
 
@@ -231,6 +232,38 @@ const CSS = `
     .p-video-grid { grid-template-columns: 1fr; gap: 3rem; }
     .p-video-wrap { max-width: 240px; margin: 0 auto; }
     .p-sizeguide-col { padding-top: 0; }
+  }
+
+
+  /* SHORTS ROW */
+  .p-shorts-row { display: flex; gap: 1rem; }
+  .p-short-thumb { flex: 1; text-decoration: none; }
+  .p-short-img-wrap { position: relative; aspect-ratio: 9/16; overflow: hidden; border: 1px solid #D4C8BC; }
+  .p-short-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
+  .p-short-thumb:hover .p-short-img-wrap img { transform: scale(1.04); }
+  .p-short-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); color: white; font-size: 2rem; opacity: 0; transition: opacity 0.2s; }
+  .p-short-thumb:hover .p-short-play { opacity: 1; }
+
+  /* FAQ */
+  .p-faq { padding: 8rem 4rem; background: #F5F0EA; border-top: 1px solid #D4C8BC; }
+  .p-faq-inner { display: grid; grid-template-columns: 340px 1fr; gap: 6rem; max-width: 1060px; margin: 0 auto; }
+  .p-faq-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem,4vw,3.5rem); font-weight: 400; line-height: 1.1; margin-bottom: 1.25rem; }
+  .p-faq-heading em { font-style: italic; }
+  .p-faq-sub { font-size: 0.82rem; line-height: 1.8; color: #7A6B60; max-width: 280px; }
+  .p-faq-item { border-bottom: 1px solid #D4C8BC; padding: 1.35rem 0; cursor: pointer; user-select: none; }
+  .p-faq-q { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  .p-faq-q span:first-child { font-size: 0.9rem; font-weight: 400; line-height: 1.5; }
+  .p-faq-icon { font-size: 1.4rem; font-weight: 300; color: #7A6B60; flex-shrink: 0; transition: transform 0.2s; }
+  .p-faq-item.open .p-faq-icon { color: #7D3018; }
+  .p-faq-a { font-size: 0.82rem; font-weight: 300; line-height: 1.8; color: #7A6B60; margin-top: 0.85rem; max-width: 540px; }
+
+  @media (max-width: 768px) {
+    .p-shorts-row { gap: 0.5rem; }
+    .p-faq { padding: 5rem 1.5rem; }
+    .p-faq-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .p-faq-sub { max-width: 100%; }
+    .p-gallery-main { height: 60vw; min-height: 260px; }
+    .p-gallery-row img { height: 32vw; min-height: 130px; }
   }
 
   /* MOBILE LAYOUT */
@@ -289,6 +322,7 @@ const GALLERY_IMGS = [
   'https://dcdn-us.mitiendanube.com/stores/006/453/112/products/foto-05-06-2026-09-52-55-10-af014716b29af26f7c17810177783852-1024-1024.webp',
   'https://dcdn-us.mitiendanube.com/stores/006/453/112/products/foto-05-06-2026-09-52-55-11-e0468894119712058117810177782892-1024-1024.webp',
   'https://dcdn-us.mitiendanube.com/stores/006/453/112/products/foto-05-06-2026-09-52-55-4-fd46358860fb94247b17810177779836-1024-1024.webp',
+  'https://dcdn-us.mitiendanube.com/stores/006/453/112/products/foto-05-06-2026-09-52-55-1-9601c83a44656eb54117810177783115-1024-1024.webp',
 ];
 
 const initGrade = (): Grade => ({
@@ -301,6 +335,19 @@ function getTier(q: number) { return tiers.find(t => q >= t.min && q <= t.max) |
 function fmt(n: number) { return 'R$ ' + n.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
 function gradeTotal(g: Grade) { return SIZES.reduce((s, sz) => s + COLORS.reduce((s2, c) => s2 + g[sz][c], 0), 0); }
 
+function FaqItem({ question, answer }: { question: string; answer: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={`p-faq-item${open ? ' open' : ''}`} onClick={() => setOpen(o => !o)}>
+      <div className="p-faq-q">
+        <span>{question}</span>
+        <span className="p-faq-icon">{open ? '−' : '+'}</span>
+      </div>
+      {open && <p className="p-faq-a">{answer}</p>}
+    </div>
+  );
+}
+
 export default function PaneoBrasilPage() {
   const [qty, setQtyState] = useState(6);
   const [grade, setGrade] = useState<Grade>(initGrade());
@@ -308,11 +355,19 @@ export default function PaneoBrasilPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [lightbox, setLightbox] = useState<string | null>(null);
   const [mobileColor, setMobileColor] = useState<ColorKey>('Preto');
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 10);
     window.addEventListener('scroll', fn);
     return () => window.removeEventListener('scroll', fn);
+  }, []);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
   }, []);
 
   const closeLightbox = useCallback(() => setLightbox(null), []);
@@ -445,12 +500,12 @@ export default function PaneoBrasilPage() {
       <section id="produto" className="p-product">
         <div className="p-gallery">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="p-gallery-main" src={GALLERY_IMGS[0]} alt="Saída Veneza" onClick={() => setLightbox(GALLERY_IMGS[0])} />
+          <img className="p-gallery-main" src={GALLERY_IMGS[0]} alt="Vestido Creta" onClick={() => setLightbox(GALLERY_IMGS[0])} />
           <div className="p-gallery-row">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={GALLERY_IMGS[1]} alt="Look completo" onClick={() => setLightbox(GALLERY_IMGS[1])} />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={GALLERY_IMGS[2]} alt="Tecido" onClick={() => setLightbox(GALLERY_IMGS[2])} />
+            {[1,2,3,4].map(i => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img key={i} src={GALLERY_IMGS[i]} alt={`Vestido Creta ${i+1}`} onClick={() => setLightbox(GALLERY_IMGS[i])} />
+            ))}
           </div>
         </div>
         <div className="p-product-info">
@@ -488,14 +543,20 @@ export default function PaneoBrasilPage() {
         <div className="p-video-grid">
           <div className="p-video-col">
             <span className="p-section-label" style={{ marginBottom: '1rem', display: 'block' }}>Produto em movimento</span>
-            <div className="p-video-wrap">
-              <iframe
-                src="https://www.youtube.com/embed/56tyw2g8RKU?autoplay=0&loop=1&rel=0&modestbranding=1"
-                title="Vestido Creta Paneô"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+            <div className="p-shorts-row">
+              {[
+                { id: '56tyw2g8RKU', label: 'Look 1' },
+                { id: 'sD6dHNCjHmQ', label: 'Look 2' },
+                { id: 'BAwsWY7F63U', label: 'Look 3' },
+              ].map(v => (
+                <a key={v.id} href={`https://www.youtube.com/shorts/${v.id}`} target="_blank" rel="noopener noreferrer" className="p-short-thumb">
+                  <div className="p-short-img-wrap">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={`https://img.youtube.com/vi/${v.id}/0.jpg`} alt={v.label} />
+                    <div className="p-short-play">▶</div>
+                  </div>
+                </a>
+              ))}
             </div>
           </div>
           <div className="p-sizeguide-col">
@@ -567,7 +628,7 @@ export default function PaneoBrasilPage() {
                   {totalSelected}/{qty}
                 </span>
               </p>
-              <div className="p-grade-wrap">
+              {!isMobile && <div className="p-grade-wrap">
                 <table className="p-grade-table">
                   <thead>
                     <tr>
@@ -620,16 +681,16 @@ export default function PaneoBrasilPage() {
                     </tr>
                   </tbody>
                 </table>
-              </div>
+              </div>}
             </div>
 
             {/* Grade mobile: abas por cor */}
-            <div className="p-grade-mobile">
+            {isMobile && <div className="p-grade-mobile">
               <div className="p-color-tabs">
                 {COLORS.map(c => (
                   <button key={c} className={`p-color-tab${mobileColor === c ? ' active' : ''}`} onClick={() => setMobileColor(c)}>
                     <span className="p-col-dot" style={{ background: COLOR_DOTS[c] }} />
-                    c
+                    <span style={{fontSize:'0.6rem',letterSpacing:'0.1em'}}>{c === 'Cappuccino' ? 'Capp.' : c}</span>
                     {colTotal(c) > 0 && <span className="p-tab-badge">{colTotal(c)}</span>}
                   </button>
                 ))}
@@ -654,7 +715,7 @@ export default function PaneoBrasilPage() {
                 <span style={{fontSize:'0.6rem',fontWeight:500,letterSpacing:'0.15em',textTransform:'uppercase',color:'#7A6B60'}}>Total geral</span>
                 <span className={`p-total-badge${totalSelected === qty ? '' : ' partial'}`} style={totalSelected === qty ? {background:'#2C7A3A'} : {}}>{totalSelected}/{qty}</span>
               </div>
-            </div>
+            </div>}
           </div>
 
           {/* RESUMO */}
@@ -705,6 +766,29 @@ export default function PaneoBrasilPage() {
               Ir para o Checkout →
             </button>
             <p className="p-payment-note">Pagamento via PIX · Cartão de Crédito</p>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="p-faq">
+        <div className="p-faq-inner">
+          <div className="p-faq-left">
+            <span className="p-section-label" style={{ display: 'block', marginBottom: '1rem' }}>Dúvidas</span>
+            <h2 className="p-faq-heading">Antes de você<br /><em>perguntar.</em></h2>
+            <p className="p-faq-sub">O que mais nos perguntam, respondido direto. Se ficou alguma dúvida, é só chamar no WhatsApp.</p>
+          </div>
+          <div className="p-faq-right">
+            {[
+              { q: 'Qual o pedido mínimo?', a: '6 peças do Vestido Creta. Você pode distribuir livremente entre as cores Preto, Cappuccino e Bronze e os tamanhos P, M e G.' },
+              { q: 'Posso misturar cores e tamanhos?', a: 'Sim. A grade é totalmente livre — você monta a combinação que fizer mais sentido para a sua loja.' },
+              { q: 'Como funciona o pagamento?', a: 'PIX à vista ou cartão de crédito. O pagamento é feito diretamente pelo checkout seguro, sem necessidade de boleto ou transferência manual.' },
+              { q: 'Qual o prazo de entrega?', a: 'Até 21 dias úteis após a confirmação do pedido. Trabalhamos com produção sob demanda para garantir a qualidade.' },
+              { q: 'Vocês vendem para consumidor final?', a: 'Não. Esta página é exclusiva para lojistas. Para compra no varejo, acesse paneobrasil.com.br.' },
+              { q: 'E se vier peça com defeito?', a: 'Troca garantida. Qualquer peça com defeito de fabricação é substituída sem custo adicional. Basta entrar em contato pelo WhatsApp.' },
+            ].map((item, i) => (
+              <FaqItem key={i} question={item.q} answer={item.a} />
+            ))}
           </div>
         </div>
       </section>
