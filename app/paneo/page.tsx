@@ -208,10 +208,9 @@ const CSS = `
 
   /* VIDEO + GUIA DE TAMANHOS */
   .p-video-section { padding: 8rem 4rem; background: #FDFAF7; }
-  .p-video-grid { display: grid; grid-template-columns: 320px 1fr; gap: 6rem; max-width: 1060px; margin: 0 auto; align-items: start; }
+  .p-video-grid { display: grid; grid-template-columns: 380px 1fr; gap: 5rem; max-width: 1100px; margin: 0 auto; align-items: start; }
   .p-video-col {}
-  .p-video-wrap { position: relative; width: 100%; aspect-ratio: 9/16; border: 1px solid #D4C8BC; overflow: hidden; max-width: 320px; }
-  .p-video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+
   .p-sizeguide-col { padding-top: 2rem; }
   .p-size-table { width: 100%; border-collapse: collapse; margin-bottom: 2.5rem; }
   .p-size-table th { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #7A6B60; padding: 0.75rem 1rem; text-align: left; border-bottom: 2px solid #D4C8BC; }
@@ -235,14 +234,17 @@ const CSS = `
   }
 
 
-  /* SHORTS ROW */
-  .p-shorts-row { display: flex; gap: 1rem; }
-  .p-short-thumb { flex: 1; text-decoration: none; }
-  .p-short-img-wrap { position: relative; aspect-ratio: 9/16; overflow: hidden; border: 1px solid #D4C8BC; }
-  .p-short-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
-  .p-short-thumb:hover .p-short-img-wrap img { transform: scale(1.04); }
-  .p-short-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); color: white; font-size: 2rem; opacity: 0; transition: opacity 0.2s; }
-  .p-short-thumb:hover .p-short-play { opacity: 1; }
+  /* VIDEO PLAYER CAROUSEL */
+  .p-short-player { display: flex; flex-direction: column; align-items: center; }
+  .p-short-frame { position: relative; width: 100%; aspect-ratio: 9/16; overflow: hidden; border: 1px solid #D4C8BC; background: #0d0906; }
+  .p-short-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+  .p-short-controls { display: flex; align-items: center; gap: 1.5rem; margin-top: 1.25rem; }
+  .p-short-nav { background: none; border: 1px solid #D4C8BC; width: 40px; height: 40px; cursor: pointer; font-size: 1rem; color: #2C2118; display: flex; align-items: center; justify-content: center; transition: all 0.15s; font-family: 'Jost', sans-serif; }
+  .p-short-nav:hover { background: #1C1410; color: white; border-color: #1C1410; }
+  .p-short-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+  .p-short-dots { display: flex; gap: 0.5rem; align-items: center; }
+  .p-short-dot { width: 8px; height: 8px; border-radius: 50%; border: none; background: #D4C8BC; cursor: pointer; padding: 0; transition: background 0.2s; }
+  .p-short-dot.active { background: #1C1410; }
 
   /* FAQ */
   .p-faq { padding: 8rem 4rem; background: #F5F0EA; border-top: 1px solid #D4C8BC; }
@@ -313,6 +315,8 @@ const COLOR_DOTS: Record<ColorKey, string> = {
   'Bronze': '#7A4A28',
 };
 
+const SHORTS = ['56tyw2g8RKU', 'sD6dHNCjHmQ', 'BAwsWY7F63U'];
+
 const tiers = [
   { min: 6, max: 9999, price: 145.00 },
 ];
@@ -356,6 +360,7 @@ export default function PaneoBrasilPage() {
   const [lightbox, setLightbox] = useState<string | null>(null);
   const [mobileColor, setMobileColor] = useState<ColorKey>('Preto');
   const [isMobile, setIsMobile] = useState(false);
+  const [activeVideo, setActiveVideo] = useState(0);
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 10);
@@ -543,20 +548,33 @@ export default function PaneoBrasilPage() {
         <div className="p-video-grid">
           <div className="p-video-col">
             <span className="p-section-label" style={{ marginBottom: '1rem', display: 'block' }}>Produto em movimento</span>
-            <div className="p-shorts-row">
-              {[
-                { id: '56tyw2g8RKU', label: 'Look 1' },
-                { id: 'sD6dHNCjHmQ', label: 'Look 2' },
-                { id: 'BAwsWY7F63U', label: 'Look 3' },
-              ].map(v => (
-                <a key={v.id} href={`https://www.youtube.com/shorts/${v.id}`} target="_blank" rel="noopener noreferrer" className="p-short-thumb">
-                  <div className="p-short-img-wrap">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={`https://img.youtube.com/vi/${v.id}/0.jpg`} alt={v.label} />
-                    <div className="p-short-play">▶</div>
-                  </div>
-                </a>
-              ))}
+            <div className="p-short-player">
+              <div className="p-short-frame">
+                <iframe
+                  key={activeVideo}
+                  src={`https://www.youtube.com/embed/${SHORTS[activeVideo]}?rel=0&modestbranding=1&playsinline=1`}
+                  title={`Vestido Creta - Look ${activeVideo + 1}`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+              <div className="p-short-controls">
+                <button
+                  className="p-short-nav"
+                  onClick={() => setActiveVideo(v => (v - 1 + SHORTS.length) % SHORTS.length)}
+                  disabled={SHORTS.length <= 1}
+                >←</button>
+                <div className="p-short-dots">
+                  {SHORTS.map((_, i) => (
+                    <button key={i} className={`p-short-dot${activeVideo === i ? ' active' : ''}`} onClick={() => setActiveVideo(i)} />
+                  ))}
+                </div>
+                <button
+                  className="p-short-nav"
+                  onClick={() => setActiveVideo(v => (v + 1) % SHORTS.length)}
+                  disabled={SHORTS.length <= 1}
+                >→</button>
+              </div>
             </div>
           </div>
           <div className="p-sizeguide-col">
