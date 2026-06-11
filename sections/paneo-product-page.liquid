@@ -1,0 +1,213 @@
+{% assign current_product = product %}
+
+<section class="pp-wrap">
+
+  <!-- Imagens -->
+  <div class="pp-images">
+    {% if current_product.images.size > 0 %}
+      <div class="pp-img-main">
+        <img src="{{ current_product.images[0] | img_url: '900x' }}" alt="{{ current_product.images[0].alt | escape }}" id="pp-main-img">
+      </div>
+      {% if current_product.images.size > 1 %}
+        <div class="pp-img-thumbs">
+          {% for image in current_product.images limit: 5 %}
+            <img src="{{ image | img_url: '200x' }}" alt="{{ image.alt | escape }}"
+              class="pp-thumb{% if forloop.first %} active{% endif %}"
+              onclick="ppSetImage('{{ image | img_url: '900x' }}', this)">
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="pp-img-placeholder">
+        <span>PANEÔ</span>
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- Informações -->
+  <div class="pp-info">
+    <span class="p-label">{{ current_product.vendor }} · Atacado</span>
+    <h1 class="pp-title">{{ current_product.title }}</h1>
+
+    <div class="pp-price-block">
+      <span class="pp-price">R$ {{ section.settings.wholesale_price | default: 145 }},00</span>
+      <span class="pp-price-note">por peça · mínimo {{ section.settings.moq | default: 6 }} peças</span>
+    </div>
+
+    <form id="pp-form">
+      <input type="hidden" name="id" id="pp-variant-id" value="">
+      <input type="hidden" name="quantity" id="pp-qty-input" value="{{ section.settings.moq | default: 6 }}">
+
+      <!-- Cor -->
+      <div class="pp-opt">
+        <label class="pp-opt-lbl">Cor &middot; <span id="sel-color" class="p-accent">Selecione</span></label>
+        <div class="pp-color-btns">
+          {% assign colors = 'Preto,Cappuccino,Bronze' | split: ',' %}
+          {% assign color_hex = '#1A1A1A,#A87848,#7A4A28' | split: ',' %}
+          {% for color in colors %}
+            <button type="button" class="pp-color-btn" data-color="{{ color }}" onclick="ppSelectColor('{{ color }}')">
+              <span class="pp-color-dot" style="background:{{ color_hex[forloop.index0] }}"></span>
+              {{ color }}
+            </button>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Tamanho -->
+      <div class="pp-opt">
+        <label class="pp-opt-lbl">Tamanho &middot; <span id="sel-size" class="p-accent">Selecione</span></label>
+        <div class="pp-size-btns">
+          {% assign sizes = 'P,M,G' | split: ',' %}
+          {% for size in sizes %}
+            <button type="button" class="pp-size-btn" data-size="{{ size }}" onclick="ppSelectSize('{{ size }}')">{{ size }}</button>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Quantidade -->
+      <div class="pp-opt">
+        <label class="pp-opt-lbl">Quantidade &middot; <span class="p-accent">Mín. {{ section.settings.moq | default: 6 }} peças</span></label>
+        <div class="p-qty-counter pp-qty-row">
+          <button type="button" class="p-qty-btn" onclick="ppChangeQty(-1)">−</button>
+          <span class="p-qty-num" id="pp-qty-display">{{ section.settings.moq | default: 6 }}</span>
+          <button type="button" class="p-qty-btn" onclick="ppChangeQty(1)">+</button>
+        </div>
+      </div>
+
+      <p class="pp-warn" id="pp-warn"></p>
+
+      <div class="pp-btns">
+        <button type="submit" class="p-btn-primary pp-atc-btn" id="pp-atc">Adicionar ao Carrinho</button>
+        <button type="button" class="pp-buynow-btn" id="pp-buynow" onclick="ppBuyNow()">Comprar Agora →</button>
+      </div>
+    </form>
+
+    <!-- Especificações -->
+    <div class="pp-specs">
+      <div class="pp-spec-row"><span>Composição</span><span>{{ section.settings.spec_composition | default: 'Tecido de alta qualidade' }}</span></div>
+      <div class="pp-spec-row"><span>Tamanhos</span><span>P · M · G</span></div>
+      <div class="pp-spec-row"><span>Cores</span><span>Preto · Cappuccino · Bronze</span></div>
+      <div class="pp-spec-row"><span>Produção</span><span>Até 21 dias úteis</span></div>
+      <div class="pp-spec-row"><span>Pagamento</span><span>PIX · Cartão de Crédito</span></div>
+    </div>
+
+    {% if current_product.description != blank %}
+      <div class="pp-desc">{{ current_product.description }}</div>
+    {% endif %}
+  </div>
+</section>
+
+<script>
+  const PP_MOQ = {{ section.settings.moq | default: 6 }};
+  let ppQty = PP_MOQ;
+  let ppColor = null;
+  let ppSize = null;
+
+  const PP_VARIANTS = {};
+  {% for variant in current_product.variants %}
+    PP_VARIANTS['{{ variant.option1 }}_{{ variant.option2 }}'] = {{ variant.id }};
+  {% endfor %}
+
+  function ppSetImage(src, thumb) {
+    document.getElementById('pp-main-img').src = src;
+    document.querySelectorAll('.pp-thumb').forEach(t => t.classList.remove('active'));
+    thumb.classList.add('active');
+  }
+
+  function ppSelectColor(val) {
+    ppColor = val;
+    document.getElementById('sel-color').textContent = val;
+    document.querySelectorAll('.pp-color-btn').forEach(b => b.classList.toggle('active', b.dataset.color === val));
+    ppUpdateVariant();
+  }
+
+  function ppSelectSize(val) {
+    ppSize = val;
+    document.getElementById('sel-size').textContent = val;
+    document.querySelectorAll('.pp-size-btn').forEach(b => b.classList.toggle('active', b.dataset.size === val));
+    ppUpdateVariant();
+  }
+
+  function ppChangeQty(delta) {
+    ppQty = Math.max(PP_MOQ, ppQty + delta);
+    document.getElementById('pp-qty-display').textContent = ppQty;
+    document.getElementById('pp-qty-input').value = ppQty;
+  }
+
+  function ppUpdateVariant() {
+    if (!ppColor || !ppSize) return;
+    const vid = PP_VARIANTS[ppColor + '_' + ppSize];
+    if (vid) document.getElementById('pp-variant-id').value = vid;
+  }
+
+  function ppValidate() {
+    const warn = document.getElementById('pp-warn');
+    if (!ppColor) { warn.textContent = 'Selecione uma cor para continuar.'; return false; }
+    if (!ppSize)  { warn.textContent = 'Selecione um tamanho para continuar.'; return false; }
+    const vid = PP_VARIANTS[ppColor + '_' + ppSize];
+    if (!vid) { warn.textContent = 'Variante não disponível.'; return false; }
+    warn.textContent = '';
+    return true;
+  }
+
+  document.getElementById('pp-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    if (!ppValidate()) return;
+    const btn = document.getElementById('pp-atc');
+    btn.disabled = true;
+    btn.textContent = 'Adicionando...';
+    try {
+      const res = await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: parseInt(document.getElementById('pp-variant-id').value), quantity: ppQty })
+      });
+      if (res.ok) {
+        window.location.href = '/cart';
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Adicionar ao Carrinho';
+        document.getElementById('pp-warn').textContent = 'Erro ao adicionar. Tente novamente.';
+      }
+    } catch(err) {
+      btn.disabled = false;
+      btn.textContent = 'Adicionar ao Carrinho';
+    }
+  });
+
+  async function ppBuyNow() {
+    if (!ppValidate()) return;
+    const btn = document.getElementById('pp-buynow');
+    btn.disabled = true;
+    btn.textContent = 'Aguarde...';
+    try {
+      await fetch('/cart/clear.js', { method: 'POST' });
+      const res = await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: parseInt(document.getElementById('pp-variant-id').value), quantity: ppQty })
+      });
+      if (res.ok) {
+        window.location.href = '/checkout';
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Comprar Agora →';
+      }
+    } catch(err) {
+      btn.disabled = false;
+      btn.textContent = 'Comprar Agora →';
+    }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Página do Produto",
+  "settings": [
+    { "type": "number", "id": "moq", "label": "Pedido mínimo (peças)", "default": 6 },
+    { "type": "number", "id": "wholesale_price", "label": "Preço atacado (R$)", "default": 145 },
+    { "type": "text", "id": "spec_composition", "label": "Composição", "default": "Tecido de alta qualidade" }
+  ],
+  "presets": [{ "name": "Página do Produto" }]
+}
+{% endschema %}

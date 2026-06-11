@@ -1,0 +1,104 @@
+<section class="pc-wrap">
+  <div class="pc-inner">
+
+    {% if cart.item_count > 0 %}
+
+      <div class="pc-header">
+        <span class="p-label">Paneô Atacado</span>
+        <h1 class="pc-title">Seu <em>Pedido</em></h1>
+      </div>
+
+      <div class="pc-layout">
+        <!-- Itens -->
+        <div class="pc-items">
+          {% for item in cart.items %}
+            <div class="pc-item" id="item-{{ item.key | replace: ':', '-' }}">
+              <div class="pc-item-img">
+                {% if item.image %}
+                  <img src="{{ item.image | img_url: '200x' }}" alt="{{ item.title | escape }}">
+                {% else %}
+                  <div class="pc-img-placeholder"><span>PANEÔ</span></div>
+                {% endif %}
+              </div>
+              <div class="pc-item-info">
+                <p class="pc-item-title">{{ item.product.title }}</p>
+                <p class="pc-item-variant">{{ item.variant.title }}</p>
+                <div class="pc-item-bottom">
+                  <div class="p-qty-counter pc-qty">
+                    <button class="p-qty-btn" onclick="pcUpdateQty('{{ item.key }}', {{ item.quantity | minus: 1 }})">−</button>
+                    <span class="p-qty-num">{{ item.quantity }}</span>
+                    <button class="p-qty-btn" onclick="pcUpdateQty('{{ item.key }}', {{ item.quantity | plus: 1 }})">+</button>
+                  </div>
+                  <span class="pc-item-price">R$ {{ item.line_price | money_without_currency }},00</span>
+                  <button class="pc-remove" onclick="pcRemove('{{ item.key }}')" title="Remover">×</button>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <!-- Resumo -->
+        <div class="pc-summary">
+          <p class="p-sum-title">Resumo do Pedido</p>
+          <div class="p-sum-rows">
+            <div class="p-sum-row">
+              <span class="p-sum-key">{{ cart.item_count }} {% if cart.item_count == 1 %}peça{% else %}peças{% endif %}</span>
+              <span class="p-sum-val">R$ {{ cart.total_price | money_without_currency }},00</span>
+            </div>
+            <div class="p-sum-row">
+              <span class="p-sum-key">Frete</span>
+              <span class="p-sum-val">Calculado no checkout</span>
+            </div>
+          </div>
+          <div class="p-sum-divider"></div>
+          <p class="p-sum-total-lbl">Total</p>
+          <p class="p-sum-total">R$ {{ cart.total_price | money_without_currency }},00</p>
+
+          <a href="/checkout" class="p-btn-checkout" style="display:block;text-decoration:none;text-align:center">
+            Finalizar Pedido →
+          </a>
+          <a href="/products/vestido-creta" class="pc-back-link">← Voltar ao produto</a>
+          <p class="p-payment-note">Pagamento via PIX · Cartão de Crédito</p>
+        </div>
+      </div>
+
+    {% else %}
+
+      <div class="pc-empty">
+        <span class="p-label">Paneô Atacado</span>
+        <h1 class="pc-title">Seu pedido<br><em>está vazio.</em></h1>
+        <a href="/products/vestido-creta" class="p-btn-primary" style="margin-top:2.5rem;display:inline-block">Ver Produto →</a>
+      </div>
+
+    {% endif %}
+
+  </div>
+</section>
+
+<script>
+  async function pcUpdateQty(key, qty) {
+    if (qty < 1) { pcRemove(key); return; }
+    const res = await fetch('/cart/change.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: key, quantity: qty })
+    });
+    if (res.ok) location.reload();
+  }
+
+  async function pcRemove(key) {
+    await fetch('/cart/change.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: key, quantity: 0 })
+    });
+    location.reload();
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Carrinho",
+  "presets": [{ "name": "Carrinho" }]
+}
+{% endschema %}

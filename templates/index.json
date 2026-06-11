@@ -58,10 +58,6 @@
         "moq": 6
       }
     },
-    "order": {
-      "type": "paneo-order",
-      "settings": { "product": "vestido-creta", "moq": 6, "wholesale_price": 145 }
-    },
     "faq": {
       "type": "paneo-faq",
       "settings": { "subtitle": "O que mais nos perguntam, respondido direto. Se ficou alguma dúvida, é só chamar no WhatsApp." },
@@ -89,5 +85,5 @@
       "settings": { "logo_text": "PANEÔ", "company_name": "Paneô Brasil", "email": "atacado@paneo.com.br" }
     }
   },
-  "order": ["nav","hero","product","social","video","order","faq","about","footer"]
+  "order": ["nav","hero","product","social","video","faq","about","footer"]
 }

@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "nav": {
+      "type": "paneo-nav",
+      "settings": { "logo_text": "PANEÔ" }
+    },
+    "main-product": {
+      "type": "paneo-product-page",
+      "settings": {
+        "moq": 6,
+        "wholesale_price": 145,
+        "spec_composition": "Tecido de alta qualidade"
+      }
+    },
+    "footer": {
+      "type": "paneo-footer",
+      "settings": {
+        "logo_text": "PANEÔ",
+        "company_name": "Paneô Brasil",
+        "email": "atacado@paneo.com.br"
+      }
+    }
+  },
+  "order": ["nav", "main-product", "footer"]
+}

@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "nav": {
+      "type": "paneo-nav",
+      "settings": { "logo_text": "PANEÔ" }
+    },
+    "main-cart": {
+      "type": "paneo-cart",
+      "settings": {}
+    },
+    "footer": {
+      "type": "paneo-footer",
+      "settings": {
+        "logo_text": "PANEÔ",
+        "company_name": "Paneô Brasil",
+        "email": "atacado@paneo.com.br"
+      }
+    }
+  },
+  "order": ["nav", "main-cart", "footer"]
+}
