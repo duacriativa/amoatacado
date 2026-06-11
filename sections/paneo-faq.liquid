@@ -1,0 +1,50 @@
+<section class="p-faq">
+  <div class="p-faq-inner">
+    <div class="p-faq-left">
+      <span class="p-section-label" style="display:block;margin-bottom:1rem">Dúvidas</span>
+      <h2 class="p-faq-heading">Antes de você<br><em>perguntar.</em></h2>
+      <p class="p-faq-sub">{{ section.settings.subtitle }}</p>
+    </div>
+    <div class="p-faq-right">
+      {% for block in section.blocks %}
+        <div class="p-faq-item" onclick="this.classList.toggle('open')">
+          <div class="p-faq-q">
+            <span>{{ block.settings.question }}</span>
+            <span class="p-faq-icon">+</span>
+          </div>
+          <p class="p-faq-a">{{ block.settings.answer }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    { "type": "textarea", "id": "subtitle", "label": "Subtítulo", "default": "O que mais nos perguntam, respondido direto. Se ficou alguma dúvida, é só chamar no WhatsApp." }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "Pergunta",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Pergunta" },
+        { "type": "textarea", "id": "answer", "label": "Resposta" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "FAQ",
+    "blocks": [
+      { "type": "faq_item", "settings": { "question": "Qual o pedido mínimo?", "answer": "6 peças do Vestido Creta. Você pode distribuir livremente entre as cores Preto, Cappuccino e Bronze e os tamanhos P, M e G." } },
+      { "type": "faq_item", "settings": { "question": "Posso misturar cores e tamanhos?", "answer": "Sim. A grade é totalmente livre — você monta a combinação que fizer mais sentido para a sua loja." } },
+      { "type": "faq_item", "settings": { "question": "Como funciona o pagamento?", "answer": "PIX à vista ou cartão de crédito. O pagamento é feito diretamente pelo checkout seguro do Shopify." } },
+      { "type": "faq_item", "settings": { "question": "Qual o prazo de entrega?", "answer": "Até 21 dias úteis após a confirmação do pedido. Trabalhamos com produção sob demanda para garantir a qualidade." } },
+      { "type": "faq_item", "settings": { "question": "Vocês vendem para consumidor final?", "answer": "Não. Esta página é exclusiva para lojistas. Para compra no varejo, acesse paneobrasil.com.br." } },
+      { "type": "faq_item", "settings": { "question": "E se vier peça com defeito?", "answer": "Troca garantida. Qualquer peça com defeito de fabricação é substituída sem custo adicional. Entre em contato pelo WhatsApp." } }
+    ]
+  }]
+}
+{% endschema %}

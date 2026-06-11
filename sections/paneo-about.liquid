@@ -1,0 +1,18 @@
+<section id="sobre" class="p-about">
+  <span class="p-section-label" style="display:block;margin-bottom:1rem">{{ section.settings.label }}</span>
+  <h2 class="p-about-heading">{{ section.settings.heading_part1 }} <em>{{ section.settings.heading_part2 }}</em></h2>
+  <p class="p-about-text">{{ section.settings.text }}</p>
+</section>
+
+{% schema %}
+{
+  "name": "Sobre",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Legenda", "default": "Paneô Brasil" },
+    { "type": "text", "id": "heading_part1", "label": "Título", "default": "Vestir é um" },
+    { "type": "text", "id": "heading_part2", "label": "Itálico", "default": "ritual." },
+    { "type": "textarea", "id": "text", "label": "Texto", "default": "Nascida no litoral nordestino, a Paneô traduz o calor brasileiro em peças de resort wear desejadas no mundo todo. Cada vestido é uma celebração da pele, da brisa e do sol que insiste em ficar." }
+  ],
+  "presets": [{ "name": "Sobre" }]
+}
+{% endschema %}

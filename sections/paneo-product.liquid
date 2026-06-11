@@ -1,0 +1,57 @@
+{% assign product = all_products[section.settings.product] %}
+<section id="produto" class="p-product">
+  <div class="p-gallery" id="p-gallery">
+    {% if product != blank %}
+      {% assign first_image = product.images[0] %}
+      <img class="p-gallery-main" src="{{ first_image | img_url: '1200x' }}" alt="{{ product.title }}" onclick="openLightbox(this.src)">
+      <div class="p-gallery-row">
+        {% for image in product.images offset: 1 limit: 4 %}
+          <img src="{{ image | img_url: '600x' }}" alt="{{ product.title }} {{ forloop.index }}" onclick="openLightbox('{{ image | img_url: '1200x' }}')">
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="p-gallery-placeholder"><p>Selecione um produto nas configurações da seção.</p></div>
+    {% endif %}
+  </div>
+  <div class="p-product-info">
+    <span class="p-section-label">{{ section.settings.collection_label }}</span>
+    <h2 class="p-product-heading">{{ section.settings.heading_part1 }} <em>{{ section.settings.heading_part2 }}</em></h2>
+    <p class="p-product-desc">{{ section.settings.description }}</p>
+    <div class="p-specs-grid">
+      <div><p class="p-spec-label">Composição</p><p class="p-spec-val">{{ section.settings.spec_composition }}</p></div>
+      <div><p class="p-spec-label">Modelagem</p><p class="p-spec-val">{{ section.settings.spec_model }}</p></div>
+      <div><p class="p-spec-label">Tamanhos</p><p class="p-spec-val">{{ section.settings.spec_sizes }}</p></div>
+      <div><p class="p-spec-label">Cores</p><p class="p-spec-val">{{ section.settings.spec_colors }}</p></div>
+    </div>
+    <span class="p-section-label" style="margin-bottom:0.6rem">Preço unitário no atacado</span>
+    <p class="p-price-tag">R$ {{ section.settings.wholesale_price }},00 <span class="p-price-meta">/ peça · MOQ {{ section.settings.moq }}</span></p>
+    <p class="p-price-note">Varejo R${{ section.settings.retail_price }},00 — margem de 100% para sua loja.</p>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="p-lightbox" class="p-lightbox" onclick="closeLightbox()" style="display:none">
+  <button class="p-lightbox-close" onclick="closeLightbox()">×</button>
+  <img id="p-lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+</div>
+
+{% schema %}
+{
+  "name": "Produto",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Produto" },
+    { "type": "text", "id": "collection_label", "label": "Coleção", "default": "Best Seller · Coleção 2026" },
+    { "type": "text", "id": "heading_part1", "label": "Título (parte 1)", "default": "O vestido que" },
+    { "type": "text", "id": "heading_part2", "label": "Título itálico", "default": "todo closet pede." },
+    { "type": "textarea", "id": "description", "label": "Descrição", "default": "O Vestido Creta é o nosso best seller que une elegância e modernidade com perfeição. Confeccionado em tecido de alta qualidade, destaca-se pela sofisticada fenda lateral e pelo detalhe em nó que valoriza a silhueta feminina." },
+    { "type": "text", "id": "spec_composition", "label": "Composição", "default": "Tecido de alta qualidade" },
+    { "type": "text", "id": "spec_model", "label": "Modelagem", "default": "Vestido com fenda + nó" },
+    { "type": "text", "id": "spec_sizes", "label": "Tamanhos", "default": "P · M · G" },
+    { "type": "text", "id": "spec_colors", "label": "Cores", "default": "Preto · Cappuccino · Bronze" },
+    { "type": "number", "id": "wholesale_price", "label": "Preço atacado", "default": 145 },
+    { "type": "number", "id": "retail_price", "label": "Preço varejo", "default": 290 },
+    { "type": "number", "id": "moq", "label": "Pedido mínimo", "default": 6 }
+  ],
+  "presets": [{ "name": "Produto" }]
+}
+{% endschema %}

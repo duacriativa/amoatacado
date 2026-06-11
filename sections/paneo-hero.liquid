@@ -1,0 +1,39 @@
+<section class="p-hero" id="hero">
+  <div class="p-hero-bg p-hero-bg-mobile" style="background-image: url('{{ section.settings.fallback_image | img_url: '1200x' }}')"></div>
+  {% if section.settings.youtube_video_id != blank %}
+  <div class="p-hero-video-wrap">
+    <iframe
+      src="https://www.youtube.com/embed/{{ section.settings.youtube_video_id }}?autoplay=1&mute=1&loop=1&playlist={{ section.settings.youtube_video_id }}&controls=0&rel=0&playsinline=1&modestbranding=1&showinfo=0"
+      allow="autoplay; encrypted-media"
+      style="position:absolute;top:50%;left:50%;height:max(100vh, calc(100vw * 1.7778));width:calc(max(100vh, calc(100vw * 1.7778)) * 0.5625);transform:translate(-50%,-50%);border:none;pointer-events:none;"
+    ></iframe>
+  </div>
+  {% endif %}
+  <div class="p-hero-overlay"></div>
+  <div class="p-hero-content">
+    <span class="p-label">{{ section.settings.subtitle }}</span>
+    <h1 class="p-hero-title">{{ section.settings.title_part1 }} <em>{{ section.settings.title_part2 }}</em></h1>
+    <p class="p-hero-desc">{{ section.settings.description }}</p>
+    <div class="p-hero-btns">
+      <a href="#pedido" class="p-btn-primary">{{ section.settings.cta_primary }}</a>
+      <a href="#produto" class="p-btn-ghost">{{ section.settings.cta_secondary }} ↓</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "image_picker", "id": "fallback_image", "label": "Imagem (mobile)" },
+    { "type": "text", "id": "youtube_video_id", "label": "YouTube Video ID", "default": "56tyw2g8RKU" },
+    { "type": "text", "id": "subtitle", "label": "Legenda", "default": "Resort 26 · Edição Atacado" },
+    { "type": "text", "id": "title_part1", "label": "Título (parte 1)", "default": "Vestido" },
+    { "type": "text", "id": "title_part2", "label": "Título itálico (parte 2)", "default": "Creta" },
+    { "type": "textarea", "id": "description", "label": "Descrição", "default": "O best seller da Paneô. Fenda lateral, detalhe em nó e tecido de alta qualidade. Atacado a partir de 6 peças, R$145 a unidade." },
+    { "type": "text", "id": "cta_primary", "label": "Botão principal", "default": "Montar Pedido" },
+    { "type": "text", "id": "cta_secondary", "label": "Botão secundário", "default": "Ver Detalhes" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

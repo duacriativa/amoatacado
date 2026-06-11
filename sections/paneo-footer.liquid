@@ -1,0 +1,16 @@
+<footer class="p-footer">
+  <span class="p-footer-logo">{{ section.settings.logo_text }}</span>
+  <span class="p-footer-info">© {{ 'now' | date: '%Y' }} {{ section.settings.company_name }} · {{ section.settings.email }}</span>
+</footer>
+
+{% schema %}
+{
+  "name": "Rodapé",
+  "settings": [
+    { "type": "text", "id": "logo_text", "label": "Logo texto", "default": "PANEÔ" },
+    { "type": "text", "id": "company_name", "label": "Empresa", "default": "Paneô Brasil" },
+    { "type": "text", "id": "email", "label": "E-mail", "default": "atacado@paneo.com.br" }
+  ],
+  "presets": [{ "name": "Rodapé" }]
+}
+{% endschema %}

@@ -1,0 +1,24 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Paneô Atacado",
+    "theme_version": "1.0.0",
+    "theme_author": "Dua Criativa",
+    "theme_documentation_url": "https://duacriativa.com",
+    "theme_support_url": "https://duacriativa.com"
+  },
+  {
+    "name": "Cores",
+    "settings": [
+      { "type": "color", "id": "color_cream", "label": "Cor de fundo", "default": "#F5F0EA" },
+      { "type": "color", "id": "color_dark", "label": "Cor escura", "default": "#1C1410" },
+      { "type": "color", "id": "color_rust", "label": "Cor de destaque", "default": "#7D3018" }
+    ]
+  },
+  {
+    "name": "WhatsApp",
+    "settings": [
+      { "type": "text", "id": "whatsapp_number", "label": "Número WhatsApp (fallback)", "default": "558592189455", "info": "Usado apenas se o checkout Shopify falhar." }
+    ]
+  }
+]

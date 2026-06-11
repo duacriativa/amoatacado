@@ -1,0 +1,93 @@
+{
+  "sections": {
+    "nav": {
+      "type": "paneo-nav",
+      "settings": { "logo_text": "PANEÔ" }
+    },
+    "hero": {
+      "type": "paneo-hero",
+      "settings": {
+        "youtube_video_id": "56tyw2g8RKU",
+        "subtitle": "Resort 26 · Edição Atacado",
+        "title_part1": "Vestido",
+        "title_part2": "Creta",
+        "description": "O best seller da Paneô. Fenda lateral, detalhe em nó e tecido de alta qualidade. Atacado a partir de 6 peças, R$145 a unidade.",
+        "cta_primary": "Montar Pedido",
+        "cta_secondary": "Ver Detalhes"
+      }
+    },
+    "product": {
+      "type": "paneo-product",
+      "settings": {
+        "product": "vestido-creta",
+        "collection_label": "Best Seller · Coleção 2026",
+        "heading_part1": "O vestido que",
+        "heading_part2": "todo closet pede.",
+        "description": "O Vestido Creta é o nosso best seller que une elegância e modernidade com perfeição. Confeccionado em tecido de alta qualidade, destaca-se pela sofisticada fenda lateral e pelo detalhe em nó que valoriza a silhueta feminina.",
+        "spec_composition": "Tecido de alta qualidade",
+        "spec_model": "Vestido com fenda + nó",
+        "spec_sizes": "P · M · G",
+        "spec_colors": "Preto · Cappuccino · Bronze",
+        "wholesale_price": 145,
+        "retail_price": 290,
+        "moq": 6
+      }
+    },
+    "social": {
+      "type": "paneo-social",
+      "settings": {
+        "label": "Feito para lojistas",
+        "heading_part1": "Uma curadoria que vende",
+        "heading_part2": "sozinha.",
+        "stat1_num": "+300", "stat1_label": "Lojistas atendidas",
+        "stat2_num": "94%",  "stat2_label": "Sell-through médio",
+        "stat3_num": "21d",  "stat3_label": "Produção e envio"
+      }
+    },
+    "video": {
+      "type": "paneo-video",
+      "settings": {
+        "video1_id": "56tyw2g8RKU",
+        "video2_id": "sD6dHNCjHmQ",
+        "video3_id": "BAwsWY7F63U",
+        "size_p": "Manequim 36 a 38",
+        "size_m": "Manequim 40 a 42",
+        "size_g": "Manequim 44 a 46",
+        "wholesale_price": 145,
+        "retail_price": 290,
+        "moq": 6
+      }
+    },
+    "order": {
+      "type": "paneo-order",
+      "settings": { "product": "vestido-creta", "moq": 6, "wholesale_price": 145 }
+    },
+    "faq": {
+      "type": "paneo-faq",
+      "settings": { "subtitle": "O que mais nos perguntam, respondido direto. Se ficou alguma dúvida, é só chamar no WhatsApp." },
+      "blocks": {
+        "faq1": { "type": "faq_item", "settings": { "question": "Qual o pedido mínimo?", "answer": "6 peças do Vestido Creta. Você pode distribuir livremente entre as cores Preto, Cappuccino e Bronze e os tamanhos P, M e G." } },
+        "faq2": { "type": "faq_item", "settings": { "question": "Posso misturar cores e tamanhos?", "answer": "Sim. A grade é totalmente livre — você monta a combinação que fizer mais sentido para a sua loja." } },
+        "faq3": { "type": "faq_item", "settings": { "question": "Como funciona o pagamento?", "answer": "PIX à vista ou cartão de crédito via checkout seguro do Shopify." } },
+        "faq4": { "type": "faq_item", "settings": { "question": "Qual o prazo de entrega?", "answer": "Até 21 dias úteis após confirmação do pedido." } },
+        "faq5": { "type": "faq_item", "settings": { "question": "Vocês vendem para consumidor final?", "answer": "Não. Esta página é exclusiva para lojistas. Para varejo, acesse paneobrasil.com.br." } },
+        "faq6": { "type": "faq_item", "settings": { "question": "E se vier peça com defeito?", "answer": "Troca garantida. Qualquer peça com defeito de fabricação é substituída sem custo adicional." } }
+      },
+      "blocks_order": ["faq1","faq2","faq3","faq4","faq5","faq6"]
+    },
+    "about": {
+      "type": "paneo-about",
+      "settings": {
+        "label": "Paneô Brasil",
+        "heading_part1": "Vestir é um",
+        "heading_part2": "ritual.",
+        "text": "Nascida no litoral nordestino, a Paneô traduz o calor brasileiro em peças de resort wear desejadas no mundo todo. Cada vestido é uma celebração da pele, da brisa e do sol que insiste em ficar."
+      }
+    },
+    "footer": {
+      "type": "paneo-footer",
+      "settings": { "logo_text": "PANEÔ", "company_name": "Paneô Brasil", "email": "atacado@paneo.com.br" }
+    }
+  },
+  "order": ["nav","hero","product","social","video","order","faq","about","footer"]
+}

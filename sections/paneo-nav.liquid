@@ -1,0 +1,32 @@
+<nav class="p-nav" id="p-nav">
+  <a href="/" class="p-nav-logo">{{ section.settings.logo_text }}</a>
+  <ul class="p-nav-links">
+    <li><a href="#produto">Produto</a></li>
+    <li><a href="#atacado">Atacado</a></li>
+    <li><a href="#tabela">Tabela</a></li>
+    <li><a href="#pedido">Pedido</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+  </ul>
+  <a href="#pedido" class="p-nav-cta">Comprar</a>
+  <button class="p-nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="p-mobile-menu" id="p-mobile-menu" onclick="toggleMobileMenu()">
+  <a href="#produto">Produto</a>
+  <a href="#atacado">Atacado</a>
+  <a href="#tabela">Tabela</a>
+  <a href="#pedido">Pedido</a>
+  <a href="#sobre">Sobre</a>
+  <a href="#pedido" class="p-nav-cta">Comprar</a>
+</div>
+
+{% schema %}
+{
+  "name": "Navegação",
+  "settings": [
+    { "type": "text", "id": "logo_text", "label": "Logo texto", "default": "PANEÔ" }
+  ],
+  "presets": [{ "name": "Navegação" }]
+}
+{% endschema %}

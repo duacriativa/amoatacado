@@ -1,0 +1,37 @@
+<section id="atacado" class="p-social" style="{% if section.settings.bg_image %}--social-bg: url('{{ section.settings.bg_image | img_url: '1600x' }}'){% endif %}">
+  <div class="p-social-bg"></div>
+  <div class="p-social-overlay"></div>
+  <div class="p-social-content">
+    <span class="p-label" style="color:rgba(255,255,255,0.5);margin-bottom:1.5rem">{{ section.settings.label }}</span>
+    <h2 class="p-social-heading">{{ section.settings.heading_part1 }} <em>{{ section.settings.heading_part2 }}</em></h2>
+    <div class="p-stats-row">
+      {% for i in (1..3) %}
+        {% assign num_key = 'stat' | append: i | append: '_num' %}
+        {% assign lbl_key = 'stat' | append: i | append: '_label' %}
+        <div>
+          <p class="p-stat-num">{{ section.settings[num_key] }}</p>
+          <p class="p-stat-lbl">{{ section.settings[lbl_key] }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Prova Social",
+  "settings": [
+    { "type": "image_picker", "id": "bg_image", "label": "Imagem de fundo" },
+    { "type": "text", "id": "label", "label": "Legenda", "default": "Feito para lojistas" },
+    { "type": "text", "id": "heading_part1", "label": "Título", "default": "Uma curadoria que vende" },
+    { "type": "text", "id": "heading_part2", "label": "Título itálico", "default": "sozinha." },
+    { "type": "text", "id": "stat1_num", "label": "Stat 1 número", "default": "+300" },
+    { "type": "text", "id": "stat1_label", "label": "Stat 1 label", "default": "Lojistas atendidas" },
+    { "type": "text", "id": "stat2_num", "label": "Stat 2 número", "default": "94%" },
+    { "type": "text", "id": "stat2_label", "label": "Stat 2 label", "default": "Sell-through médio" },
+    { "type": "text", "id": "stat3_num", "label": "Stat 3 número", "default": "21d" },
+    { "type": "text", "id": "stat3_label", "label": "Stat 3 label", "default": "Produção e envio" }
+  ],
+  "presets": [{ "name": "Prova Social" }]
+}
+{% endschema %}

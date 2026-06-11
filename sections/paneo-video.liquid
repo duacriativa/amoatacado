@@ -1,0 +1,78 @@
+<section id="tabela" class="p-video-section">
+  <div class="p-video-grid">
+    <div class="p-video-col">
+      <span class="p-section-label" style="margin-bottom:1rem;display:block">Produto em movimento</span>
+      <div class="p-short-player">
+        <div class="p-short-frame" id="p-short-frame">
+          <iframe id="p-short-iframe"
+            src="https://www.youtube.com/embed/{{ section.settings.video1_id }}?rel=0&modestbranding=1&playsinline=1"
+            title="Vestido Creta"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+        <div class="p-short-controls">
+          <button class="p-short-nav" onclick="prevVideo()">←</button>
+          <div class="p-short-dots" id="p-short-dots">
+            {% assign vids = section.settings.video1_id | append: ',' | append: section.settings.video2_id | append: ',' | append: section.settings.video3_id | split: ',' %}
+            {% for v in vids %}
+              {% unless v == blank %}
+                <button class="p-short-dot{% if forloop.first %} active{% endif %}" onclick="goVideo({{ forloop.index0 }})"></button>
+              {% endunless %}
+            {% endfor %}
+          </div>
+          <button class="p-short-nav" onclick="nextVideo()">→</button>
+        </div>
+      </div>
+    </div>
+    <div class="p-sizeguide-col">
+      <span class="p-section-label" style="margin-bottom:1rem;display:block">Guia de tamanhos</span>
+      <h2 class="p-section-heading" style="font-size:clamp(1.8rem,3vw,2.8rem);margin-bottom:2rem">O fit perfeito para <em style="font-style:italic">cada corpo.</em></h2>
+      <table class="p-size-table">
+        <thead><tr><th>Tamanho</th><th>Numeração</th><th>Perfil</th></tr></thead>
+        <tbody>
+          <tr><td>P</td><td>36–38</td><td>{{ section.settings.size_p }}</td></tr>
+          <tr><td>M</td><td>40–42</td><td>{{ section.settings.size_m }}</td></tr>
+          <tr><td>G</td><td>44–46</td><td>{{ section.settings.size_g }}</td></tr>
+        </tbody>
+      </table>
+      <div class="p-price-highlight">
+        <div class="p-price-highlight-row">
+          <span class="p-price-highlight-label">Varejo</span>
+          <span class="p-price-highlight-value p-price-crossed">R$ {{ section.settings.retail_price }},00</span>
+        </div>
+        <div class="p-price-highlight-row">
+          <span class="p-price-highlight-label">Atacado</span>
+          <span class="p-price-highlight-value p-price-main">R$ {{ section.settings.wholesale_price }},00</span>
+          <span class="p-price-highlight-badge">-50%</span>
+        </div>
+        <p class="p-price-highlight-note">Pedido mínimo {{ section.settings.moq }} peças · margem de 100%</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const SECTION_VIDEOS = [
+    {% if section.settings.video1_id != blank %}'{{ section.settings.video1_id }}'{% endif %}
+    {% if section.settings.video2_id != blank %},'{{ section.settings.video2_id }}'{% endif %}
+    {% if section.settings.video3_id != blank %},'{{ section.settings.video3_id }}'{% endif %}
+  ].filter(Boolean);
+</script>
+
+{% schema %}
+{
+  "name": "Vídeos + Guia",
+  "settings": [
+    { "type": "text", "id": "video1_id", "label": "YouTube Shorts ID 1", "default": "56tyw2g8RKU" },
+    { "type": "text", "id": "video2_id", "label": "YouTube Shorts ID 2", "default": "sD6dHNCjHmQ" },
+    { "type": "text", "id": "video3_id", "label": "YouTube Shorts ID 3", "default": "BAwsWY7F63U" },
+    { "type": "text", "id": "size_p", "label": "Tamanho P", "default": "Manequim 36 a 38" },
+    { "type": "text", "id": "size_m", "label": "Tamanho M", "default": "Manequim 40 a 42" },
+    { "type": "text", "id": "size_g", "label": "Tamanho G", "default": "Manequim 44 a 46" },
+    { "type": "number", "id": "wholesale_price", "label": "Preço atacado", "default": 145 },
+    { "type": "number", "id": "retail_price", "label": "Preço varejo", "default": 290 },
+    { "type": "number", "id": "moq", "label": "Pedido mínimo", "default": 6 }
+  ],
+  "presets": [{ "name": "Vídeos + Guia" }]
+}
+{% endschema %}

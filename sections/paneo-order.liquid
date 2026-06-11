@@ -1,0 +1,109 @@
+{% assign product = all_products[section.settings.product] %}
+
+<section id="pedido" class="p-order">
+  <div class="p-order-hdr">
+    <span class="p-section-label" style="display:block;margin-bottom:1rem">Monte seu pedido</span>
+    <h2 class="p-section-heading">Pronto para receber.</h2>
+  </div>
+
+  <!-- Product variant data for JS -->
+  <script>
+    const PRODUCT_HANDLE = '{{ product.handle }}';
+    const MIN_QTY = {{ section.settings.moq | default: 6 }};
+    const WHOLESALE_PRICE = {{ section.settings.wholesale_price | default: 145 }};
+    const COLORS = ['Preto','Cappuccino','Bronze'];
+    const SIZES = ['P','M','G'];
+    const COLOR_DOTS = { 'Preto': '#1A1A1A', 'Cappuccino': '#A87848', 'Bronze': '#7A4A28' };
+
+    // Map variant option1_option2 → variant id
+    const VARIANTS = {};
+    {% for variant in product.variants %}
+      VARIANTS['{{ variant.option1 }}_{{ variant.option2 }}'] = {{ variant.id }};
+    {% endfor %}
+  </script>
+
+  <div class="p-order-card" id="p-order-card">
+    <div class="p-order-form" id="p-order-form">
+
+      <!-- Quantidade -->
+      <div class="p-order-sec">
+        <p class="p-order-lbl">Quantidade total · <span class="p-accent">Mínimo {{ section.settings.moq | default: 6 }}</span></p>
+        <div class="p-qty-row">
+          <div class="p-qty-counter">
+            <button class="p-qty-btn" id="btn-minus" onclick="changeQty(-1)">−</button>
+            <span class="p-qty-num" id="qty-display">{{ section.settings.moq | default: 6 }}</span>
+            <button class="p-qty-btn" onclick="changeQty(1)">+</button>
+          </div>
+          <div class="p-qty-presets">
+            <button class="p-qty-preset active" onclick="setQtyPreset(6)">6</button>
+            <button class="p-qty-preset" onclick="setQtyPreset(12)">12</button>
+            <button class="p-qty-preset" onclick="setQtyPreset(24)">24</button>
+            <button class="p-qty-preset" onclick="setQtyPreset(48)">48</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grade desktop -->
+      <div class="p-order-sec">
+        <p class="p-order-lbl">Grade por cor e tamanho · <span class="p-accent" id="grade-progress">0/{{ section.settings.moq | default: 6 }}</span></p>
+
+        <!-- Desktop table -->
+        <div class="p-grade-wrap" id="p-grade-desktop-wrap">
+          <table class="p-grade-table" id="p-grade-table">
+            <thead>
+              <tr>
+                <th class="size-col"></th>
+                {% for color in 'Preto,Cappuccino,Bronze' | split: ',' %}
+                  <th><div class="th-color"><span class="p-col-dot" style="background:{{ color | downcase | replace: 'preto','#1A1A1A' | replace: 'cappuccino','#A87848' | replace: 'bronze','#7A4A28' }}"></span>{{ color }}</div></th>
+                {% endfor %}
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody id="p-grade-tbody"><!-- filled by JS --></tbody>
+          </table>
+        </div>
+
+        <!-- Mobile tabs -->
+        <div class="p-grade-mobile" id="p-grade-mobile-wrap" style="display:none">
+          <div class="p-color-tabs" id="p-color-tabs"><!-- filled by JS --></div>
+          <div class="p-size-rows" id="p-size-rows"><!-- filled by JS --></div>
+          <div id="p-mobile-totals"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="p-summary">
+      <p class="p-sum-title">Resumo</p>
+      <div class="p-sum-rows">
+        <div class="p-sum-row"><span class="p-sum-key">Produto</span><span class="p-sum-val">{{ product.title | default: 'Vestido Creta' }}</span></div>
+        <div class="p-sum-row"><span class="p-sum-key">Quantidade</span><span class="p-sum-val" id="sum-qty">0 / {{ section.settings.moq | default: 6 }} peças</span></div>
+        <div class="p-sum-row" id="sum-colors-row" style="flex-direction:column;align-items:flex-start;gap:0.5rem">
+          <span class="p-sum-key">Cores</span>
+          <div class="p-sum-colors" id="sum-colors-content"></div>
+        </div>
+        <div class="p-sum-row"><span class="p-sum-key">Preço unitário</span><span class="p-sum-val">R$ {{ section.settings.wholesale_price | default: 145 }},00</span></div>
+      </div>
+      <div class="p-sum-divider"></div>
+      <p class="p-sum-total-lbl">Total</p>
+      <p class="p-sum-total" id="sum-total">R$ 0,00</p>
+      <p class="p-sum-warn error" id="sum-warn">Preencha a grade para continuar.</p>
+      <button class="p-btn-checkout" id="btn-checkout" disabled onclick="addToCartAndCheckout()">
+        Ir para o Checkout →
+      </button>
+      <p class="p-payment-note">Pagamento via PIX · Cartão de Crédito</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pedido Atacado",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Produto" },
+    { "type": "number", "id": "moq", "label": "Pedido mínimo", "default": 6 },
+    { "type": "number", "id": "wholesale_price", "label": "Preço atacado", "default": 145 }
+  ],
+  "presets": [{ "name": "Pedido Atacado" }]
+}
+{% endschema %}
