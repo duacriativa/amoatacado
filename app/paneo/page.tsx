@@ -268,6 +268,55 @@ const CSS = `
     .p-gallery-row img { height: 32vw; min-height: 130px; }
   }
 
+
+  /* COMPACT PICKER + CART */
+  .p-order-compact { display: grid; grid-template-columns: 480px 1fr; gap: 2rem; max-width: 1000px; margin: 0 auto; }
+  .p-picker-card { background: white; border: 1px solid #D4C8BC; display: flex; gap: 0; overflow: hidden; }
+  .p-picker-img-wrap { width: 200px; flex-shrink: 0; }
+  .p-picker-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .p-picker-form { padding: 2rem; flex: 1; display: flex; flex-direction: column; gap: 0; }
+  .p-picker-name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 0.3rem; }
+  .p-picker-price { font-size: 0.9rem; font-weight: 400; margin-bottom: 1.5rem; }
+  .p-picker-price span { font-size: 0.7rem; font-weight: 300; color: #7A6B60; }
+  .p-picker-section { margin-bottom: 1.25rem; }
+  .p-picker-label { font-size: 0.62rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: #7A6B60; margin-bottom: 0.6rem; }
+  .p-picker-label strong { color: #2C2118; font-weight: 500; }
+  .p-swatch-row { display: flex; gap: 0.5rem; }
+  .p-swatch { width: 30px; height: 30px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: all 0.15s; }
+  .p-swatch.selected { border-color: #1C1410; box-shadow: 0 0 0 2px white, 0 0 0 4px #1C1410; }
+  .p-size-btn-row { display: flex; gap: 0.5rem; }
+  .p-size-btn { width: 44px; height: 44px; border: 1px solid #D4C8BC; background: white; font-family: 'Jost', sans-serif; font-size: 0.8rem; font-weight: 400; cursor: pointer; transition: all 0.15s; }
+  .p-size-btn.selected { background: #1C1410; color: white; border-color: #1C1410; }
+  .p-size-btn:hover:not(.selected) { border-color: #2C2118; }
+  .p-picker-qty { display: flex; align-items: center; border: 1px solid #D4C8BC; width: fit-content; }
+  .p-picker-qty-btn { width: 36px; height: 36px; border: none; background: none; cursor: pointer; font-size: 1.1rem; font-family: 'Jost', sans-serif; display: flex; align-items: center; justify-content: center; transition: background 0.15s; color: #2C2118; }
+  .p-picker-qty-btn:hover { background: #F5F0EA; }
+  .p-picker-qty-num { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; width: 48px; text-align: center; line-height: 1; }
+  .p-btn-add { margin-top: 1.5rem; padding: 0.9rem 1.5rem; background: #1C1410; color: white; border: none; font-family: 'Jost', sans-serif; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; width: 100%; }
+  .p-btn-add:hover { background: #7D3018; }
+
+  .p-cart-panel { background: #1C1410; color: white; padding: 2.5rem; display: flex; flex-direction: column; }
+  .p-cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+  .p-cart-count { font-size: 0.8rem; font-weight: 500; }
+  .p-cart-empty { font-size: 0.78rem; font-weight: 300; opacity: 0.45; padding: 1.5rem 0; }
+  .p-cart-items { display: flex; flex-direction: column; gap: 0.75rem; flex: 1; }
+  .p-cart-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .p-cart-item-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .p-cart-item-info { flex: 1; display: flex; flex-direction: column; gap: 0.15rem; }
+  .p-cart-item-name { font-size: 0.8rem; font-weight: 400; }
+  .p-cart-item-qty { font-size: 0.68rem; font-weight: 300; opacity: 0.55; }
+  .p-cart-item-price { font-size: 0.82rem; font-weight: 400; flex-shrink: 0; }
+  .p-cart-item-remove { background: none; border: none; color: rgba(255,255,255,0.4); font-size: 1.1rem; cursor: pointer; padding: 0 0.25rem; line-height: 1; transition: color 0.15s; }
+  .p-cart-item-remove:hover { color: white; }
+  .p-cart-total-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.5rem; font-size: 0.6rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.5; }
+
+  @media (max-width: 768px) {
+    .p-order-compact { grid-template-columns: 1fr; gap: 1.5rem; }
+    .p-picker-img-wrap { width: 140px; }
+    .p-picker-form { padding: 1.5rem; }
+    .p-cart-panel { padding: 2rem 1.5rem; }
+  }
+
   /* MOBILE LAYOUT */
   @media (max-width: 768px) {
     .p-nav { padding: 0 1.25rem; }
@@ -307,7 +356,6 @@ const COLORS = ['Preto', 'Cappuccino', 'Bronze'] as const;
 const SIZES = ['P', 'M', 'G'] as const;
 type ColorKey = typeof COLORS[number];
 type SizeKey = typeof SIZES[number];
-type Grade = Record<SizeKey, Record<ColorKey, number>>;
 
 const COLOR_DOTS: Record<ColorKey, string> = {
   'Preto': '#1A1A1A',
@@ -317,9 +365,14 @@ const COLOR_DOTS: Record<ColorKey, string> = {
 
 const SHORTS = ['56tyw2g8RKU', 'sD6dHNCjHmQ', 'BAwsWY7F63U'];
 
-const tiers = [
-  { min: 6, max: 9999, price: 145.00 },
-];
+const PRICE = 145;
+const MIN_ORDER = 6;
+
+interface CartItem { color: ColorKey; size: SizeKey; qty: number; }
+
+function fmt(n: number) { return n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); }
+
+
 
 const GALLERY_IMGS = [
   'https://dcdn-us.mitiendanube.com/stores/006/453/112/products/foto-05-06-2026-09-52-55-2-8664be9e91868c459a17810177776839-1024-1024.webp',
@@ -329,15 +382,6 @@ const GALLERY_IMGS = [
   'https://dcdn-us.mitiendanube.com/stores/006/453/112/products/foto-05-06-2026-09-52-55-1-9601c83a44656eb54117810177783115-1024-1024.webp',
 ];
 
-const initGrade = (): Grade => ({
-  P: { Preto: 0, Cappuccino: 0, Bronze: 0 },
-  M: { Preto: 0, Cappuccino: 0, Bronze: 0 },
-  G: { Preto: 0, Cappuccino: 0, Bronze: 0 },
-});
-
-function getTier(q: number) { return tiers.find(t => q >= t.min && q <= t.max) || tiers[0]; }
-function fmt(n: number) { return 'R$ ' + n.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
-function gradeTotal(g: Grade) { return SIZES.reduce((s, sz) => s + COLORS.reduce((s2, c) => s2 + g[sz][c], 0), 0); }
 
 function FaqItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false);
@@ -353,13 +397,13 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
 }
 
 export default function PaneoBrasilPage() {
-  const [qty, setQtyState] = useState(6);
-  const [grade, setGrade] = useState<Grade>(initGrade());
+  const [selColor, setSelColor] = useState<ColorKey>('Preto');
+  const [selSize, setSelSize] = useState<SizeKey>('M');
+  const [selQty, setSelQty] = useState(1);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [lightbox, setLightbox] = useState<string | null>(null);
-  const [mobileColor, setMobileColor] = useState<ColorKey>('Preto');
-  const [isMobile, setIsMobile] = useState(false);
   const [activeVideo, setActiveVideo] = useState(0);
 
   useEffect(() => {
@@ -368,12 +412,6 @@ export default function PaneoBrasilPage() {
     return () => window.removeEventListener('scroll', fn);
   }, []);
 
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth <= 768);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
 
   const closeLightbox = useCallback(() => setLightbox(null), []);
   useEffect(() => {
@@ -388,37 +426,34 @@ export default function PaneoBrasilPage() {
     return () => { document.body.style.overflow = ''; };
   }, [lightbox]);
 
-  const tier = getTier(qty);
-  const totalSelected = gradeTotal(grade);
-  const ready = totalSelected === qty && qty >= 6;
-  const remaining = qty - totalSelected;
+  const cartTotal = cartItems.reduce((s, i) => s + i.qty, 0);
+  const cartValue = cartTotal * PRICE;
+  const ready = cartTotal >= MIN_ORDER;
+  const remaining = Math.max(0, MIN_ORDER - cartTotal);
 
-  function changeQty(delta: number) {
-    const next = qty + delta;
-    if (next < 6) return;
-    setQtyState(next);
-    if (gradeTotal(grade) > next) setGrade(initGrade());
+  function addToCart() {
+    if (selQty < 1) return;
+    setCartItems(prev => {
+      const existing = prev.findIndex(i => i.color === selColor && i.size === selSize);
+      if (existing >= 0) {
+        const next = [...prev];
+        next[existing] = { ...next[existing], qty: next[existing].qty + selQty };
+        return next;
+      }
+      return [...prev, { color: selColor, size: selSize, qty: selQty }];
+    });
+    setSelQty(1);
   }
 
-  function setQtyPreset(val: number) { setQtyState(val); setGrade(initGrade()); }
-
-  function changeCell(size: SizeKey, color: ColorKey, delta: number) {
-    const total = gradeTotal(grade);
-    if (delta > 0 && total >= qty) return;
-    if (delta < 0 && grade[size][color] <= 0) return;
-    setGrade(prev => ({ ...prev, [size]: { ...prev[size], [color]: prev[size][color] + delta } }));
+  function removeFromCart(idx: number) {
+    setCartItems(prev => prev.filter((_, i) => i !== idx));
   }
-
-  function colTotal(color: ColorKey) { return SIZES.reduce((s, sz) => s + grade[sz][color], 0); }
-  function rowTotal(size: SizeKey) { return COLORS.reduce((s, c) => s + grade[size][c], 0); }
 
   function goCheckout() {
-    const totalStr = (totalSelected * tier.price).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-    const lines = COLORS
-      .filter(c => colTotal(c) > 0)
-      .map(c => `${c}: ${colTotal(c)}pç (${SIZES.filter(s => grade[s][c] > 0).map(s => `${s}:${grade[s][c]}`).join(' ')})`);
+    const totalStr = cartValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+    const lines = cartItems.map(i => `${i.color} · ${i.size} · ${i.qty} peça${i.qty !== 1 ? 's' : ''}`);
     const msg = encodeURIComponent(
-      `Olá! Pedido atacado Vestido Creta 🛍️\n\n${lines.join('\n')}\n\n*Total:* ${totalSelected} peças · R$${totalStr}\n\nComo finalizo o pagamento?`
+      `Olá! Pedido atacado Vestido Creta 🛍️\n\n${lines.join('\n')}\n\n*Total:* ${cartTotal} peças · R$${totalStr}\n\nComo finalizo o pagamento?`
     );
     window.open(`https://wa.me/558592189455?text=${msg}`, '_blank');
   }
@@ -618,168 +653,102 @@ export default function PaneoBrasilPage() {
           <span className="p-section-label" style={{ display: 'block', marginBottom: '1rem' }}>Monte seu pedido</span>
           <h2 className="p-section-heading">Pronto para receber.</h2>
         </div>
-        <div className="p-order-card">
-          <div className="p-order-form">
 
-            {/* Quantidade */}
-            <div className="p-order-sec">
-              <p className="p-order-lbl">Quantidade total · <span className="p-accent">Mínimo 6</span></p>
-              <div className="p-qty-row">
-                <div className="p-qty-counter">
-                  <button className="p-qty-btn" onClick={() => changeQty(-1)} disabled={qty <= 6}>−</button>
-                  <span className="p-qty-num">{qty}</span>
-                  <button className="p-qty-btn" onClick={() => changeQty(1)}>+</button>
-                </div>
-                <div className="p-qty-presets">
-                  {[6, 12, 24, 48].map(v => (
-                    <button key={v} className={`p-qty-preset${qty === v ? ' active' : ''}`} onClick={() => setQtyPreset(v)}>{v}</button>
+        <div className="p-order-compact">
+          {/* LEFT: product picker */}
+          <div className="p-picker-card">
+            <div className="p-picker-img-wrap">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={GALLERY_IMGS[0]} alt="Vestido Creta" />
+            </div>
+            <div className="p-picker-form">
+              <h3 className="p-picker-name">Vestido Creta</h3>
+              <p className="p-picker-price">R$ 145,00 <span>/ peça atacado</span></p>
+
+              {/* Cor */}
+              <div className="p-picker-section">
+                <p className="p-picker-label">Cor: <strong>{selColor}</strong></p>
+                <div className="p-swatch-row">
+                  {COLORS.map(c => (
+                    <button
+                      key={c}
+                      className={`p-swatch${selColor === c ? ' selected' : ''}`}
+                      style={{ background: COLOR_DOTS[c] }}
+                      onClick={() => setSelColor(c)}
+                      title={c}
+                    />
                   ))}
                 </div>
               </div>
-            </div>
 
-            {/* Grade cor × tamanho */}
-            <div className="p-order-sec">
-              <p className="p-order-lbl">
-                Grade por cor e tamanho ·{' '}
-                <span className={`p-accent`} style={{ color: totalSelected === qty ? '#2C7A3A' : '#7D3018' }}>
-                  {totalSelected}/{qty}
-                </span>
-              </p>
-              {!isMobile && <div className="p-grade-wrap">
-                <table className="p-grade-table">
-                  <thead>
-                    <tr>
-                      <th className="size-col"></th>
-                      {COLORS.map(c => (
-                        <th key={c}>
-                          <div className="th-color">
-                            <span className="p-col-dot" style={{ background: COLOR_DOTS[c], }} />
-                            {c}
-                          </div>
-                        </th>
-                      ))}
-                      <th>Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {SIZES.map(sz => (
-                      <tr key={sz}>
-                        <td className="size-lbl">{sz}</td>
-                        {COLORS.map(c => (
-                          <td key={c}>
-                            <div className="p-cell-ctr">
-                              <button className="p-cell-btn" onClick={() => changeCell(sz, c, -1)} disabled={grade[sz][c] <= 0}>−</button>
-                              <span className="p-cell-num">{grade[sz][c]}</span>
-                              <button className="p-cell-btn" onClick={() => changeCell(sz, c, 1)} disabled={totalSelected >= qty}>+</button>
-                            </div>
-                          </td>
-                        ))}
-                        <td>
-                          <span className={`p-total-badge${rowTotal(sz) > 0 && rowTotal(sz) < qty ? ' partial' : ''}`}>
-                            {rowTotal(sz)}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                    <tr className="total-row">
-                      <td className="size-lbl">Total</td>
-                      {COLORS.map(c => (
-                        <td key={c}>
-                          <span className={`p-total-badge${colTotal(c) > 0 && totalSelected < qty ? ' partial' : ''}`}>
-                            {colTotal(c)}
-                          </span>
-                        </td>
-                      ))}
-                      <td>
-                        <span className={`p-total-badge${totalSelected === qty ? '' : ' partial'}`} style={totalSelected === qty ? { background: '#2C7A3A' } : {}}>
-                          {totalSelected}
-                        </span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>}
-            </div>
-
-            {/* Grade mobile: abas por cor */}
-            {isMobile && <div className="p-grade-mobile">
-              <div className="p-color-tabs">
-                {COLORS.map(c => (
-                  <button key={c} className={`p-color-tab${mobileColor === c ? ' active' : ''}`} onClick={() => setMobileColor(c)}>
-                    <span className="p-col-dot" style={{ background: COLOR_DOTS[c] }} />
-                    <span style={{fontSize:'0.6rem',letterSpacing:'0.1em'}}>{c === 'Cappuccino' ? 'Capp.' : c}</span>
-                    {colTotal(c) > 0 && <span className="p-tab-badge">{colTotal(c)}</span>}
-                  </button>
-                ))}
-              </div>
-              <div className="p-size-rows">
-                {SIZES.map(sz => (
-                  <div key={sz} className="p-size-row">
-                    <span className="p-size-row-lbl">{sz}</span>
-                    <div className="p-size-row-ctr">
-                      <button className="p-cell-btn" style={{width:32,height:32}} onClick={() => changeCell(sz, mobileColor, -1)} disabled={grade[sz][mobileColor] <= 0}>−</button>
-                      <span className="p-cell-num" style={{fontSize:'1.8rem',width:36}}>{grade[sz][mobileColor]}</span>
-                      <button className="p-cell-btn" style={{width:32,height:32}} onClick={() => changeCell(sz, mobileColor, 1)} disabled={totalSelected >= qty}>+</button>
-                    </div>
-                  </div>
-                ))}
-                <div className="p-size-row" style={{background:'#F9F7F4'}}>
-                  <span className="p-size-row-lbl" style={{fontSize:'0.6rem',letterSpacing:'0.15em',textTransform:'uppercase',color:'#7A6B60'}}>Total {mobileColor}</span>
-                  <span className="p-total-badge" style={colTotal(mobileColor) > 0 ? {background:'#7D3018'} : {}}>{colTotal(mobileColor)}</span>
+              {/* Tamanho */}
+              <div className="p-picker-section">
+                <p className="p-picker-label">Tamanho: <strong>{selSize}</strong></p>
+                <div className="p-size-btn-row">
+                  {SIZES.map(s => (
+                    <button key={s} className={`p-size-btn${selSize === s ? ' selected' : ''}`} onClick={() => setSelSize(s)}>{s}</button>
+                  ))}
                 </div>
               </div>
-              <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginTop:'0.75rem',padding:'0.5rem 0',borderTop:'2px solid #D4C8BC'}}>
-                <span style={{fontSize:'0.6rem',fontWeight:500,letterSpacing:'0.15em',textTransform:'uppercase',color:'#7A6B60'}}>Total geral</span>
-                <span className={`p-total-badge${totalSelected === qty ? '' : ' partial'}`} style={totalSelected === qty ? {background:'#2C7A3A'} : {}}>{totalSelected}/{qty}</span>
+
+              {/* Quantidade */}
+              <div className="p-picker-section">
+                <p className="p-picker-label">Quantidade</p>
+                <div className="p-picker-qty">
+                  <button className="p-picker-qty-btn" onClick={() => setSelQty(q => Math.max(1, q - 1))}>−</button>
+                  <span className="p-picker-qty-num">{selQty}</span>
+                  <button className="p-picker-qty-btn" onClick={() => setSelQty(q => q + 1)}>+</button>
+                </div>
               </div>
-            </div>}
+
+              <button className="p-btn-add" onClick={addToCart}>
+                + Adicionar ao Pedido
+              </button>
+            </div>
           </div>
 
-          {/* RESUMO */}
-          <div className="p-summary">
-            <p className="p-sum-title">Resumo</p>
-            <div className="p-sum-rows">
-              <div className="p-sum-row">
-                <span className="p-sum-key">Produto</span>
-                <span className="p-sum-val">Vestido Creta</span>
-              </div>
-              <div className="p-sum-row">
-                <span className="p-sum-key">Quantidade</span>
-                <span className="p-sum-val">{totalSelected} / {qty} peças</span>
-              </div>
-              {/* Color breakdown */}
-              {COLORS.filter(c => colTotal(c) > 0).length > 0 && (
-                <div className="p-sum-row" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.5rem' }}>
-                  <span className="p-sum-key">Cores</span>
-                  <div className="p-sum-colors">
-                    {COLORS.filter(c => colTotal(c) > 0).map(c => (
-                      <div key={c} className="p-sum-color-row">
-                        <span className="p-sum-color-dot" style={{ background: COLOR_DOTS[c] }} />
-                        <span>{c}: {colTotal(c)} pç</span>
-                        <span style={{ opacity: 0.5, fontSize: '0.65rem' }}>
-                          ({SIZES.filter(s => grade[s][c] > 0).map(s => `${s}:${grade[s][c]}`).join(' ')})
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-              <div className="p-sum-row">
-                <span className="p-sum-key">Preço unitário</span>
-                <span className="p-sum-val">{fmt(tier.price)}</span>
-              </div>
+          {/* RIGHT: cart summary */}
+          <div className="p-cart-panel">
+            <div className="p-cart-header">
+              <span className="p-sum-title">Pedido atual</span>
+              <span className="p-cart-count" style={{ color: ready ? '#2C7A3A' : '#7D3018' }}>
+                {cartTotal} peça{cartTotal !== 1 ? 's' : ''}
+              </span>
             </div>
+
+            {cartItems.length === 0 ? (
+              <p className="p-cart-empty">Nenhuma peça adicionada ainda.</p>
+            ) : (
+              <div className="p-cart-items">
+                {cartItems.map((item, i) => (
+                  <div key={i} className="p-cart-item">
+                    <span className="p-cart-item-dot" style={{ background: COLOR_DOTS[item.color] }} />
+                    <div className="p-cart-item-info">
+                      <span className="p-cart-item-name">{item.color} · {item.size}</span>
+                      <span className="p-cart-item-qty">{item.qty} peça{item.qty !== 1 ? 's' : ''}</span>
+                    </div>
+                    <span className="p-cart-item-price">{(item.qty * PRICE).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                    <button className="p-cart-item-remove" onClick={() => removeFromCart(i)}>×</button>
+                  </div>
+                ))}
+              </div>
+            )}
+
             <div className="p-sum-divider" />
-            <p className="p-sum-total-lbl">Total</p>
-            <p className="p-sum-total">{fmt(totalSelected * tier.price)}</p>
+
+            <div className="p-cart-total-row">
+              <span>Total</span>
+              <span className="p-sum-total" style={{ fontSize: '2rem', marginBottom: 0 }}>
+                {cartValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+              </span>
+            </div>
+
             <p className={`p-sum-warn${!ready ? ' error' : ''}`}>
               {ready
                 ? 'Frete calculado no checkout.'
-                : totalSelected === 0
-                  ? 'Preencha a grade para continuar.'
-                  : `Faltam ${remaining} peça${remaining !== 1 ? 's' : ''} para completar a grade.`}
+                : `Adicione mais ${remaining} peça${remaining !== 1 ? 's' : ''} para atingir o mínimo de ${MIN_ORDER}.`}
             </p>
+
             <button className="p-btn-checkout" onClick={goCheckout} disabled={!ready}>
               Ir para o Checkout →
             </button>
