@@ -42,11 +42,20 @@
       <div class="pp-opt">
         <label class="pp-opt-lbl">Cor &middot; <span id="sel-color" class="p-accent">Selecione</span></label>
         <div class="pp-color-btns">
-          {% assign colors = 'Preto,Cappuccino,Bronze' | split: ',' %}
-          {% assign color_hex = '#1A1A1A,#A87848,#7A4A28' | split: ',' %}
-          {% for color in colors %}
+          {% assign color_option = current_product.options_by_name['Cor'] %}
+          {% for color in color_option.values %}
+            {% assign color_lower = color | downcase %}
+            {% if color_lower == 'preto' %}{% assign hex = '#1A1A1A' %}
+            {% elsif color_lower == 'bronze' %}{% assign hex = '#7A4A28' %}
+            {% elsif color_lower == 'capuccino' or color_lower == 'cappuccino' %}{% assign hex = '#A87848' %}
+            {% elsif color_lower == 'azul-marinho' or color_lower == 'azul marinho' %}{% assign hex = '#1B2A4A' %}
+            {% elsif color_lower == 'café' or color_lower == 'cafe' %}{% assign hex = '#5C3D2E' %}
+            {% elsif color_lower == 'pink' %}{% assign hex = '#E8A0A0' %}
+            {% elsif color_lower == 'pérola' or color_lower == 'perola' %}{% assign hex = '#F0EAD6' %}
+            {% else %}{% assign hex = '#888' %}
+            {% endif %}
             <button type="button" class="pp-color-btn" data-color="{{ color }}" onclick="ppSelectColor('{{ color }}')">
-              <span class="pp-color-dot" style="background:{{ color_hex[forloop.index0] }}"></span>
+              <span class="pp-color-dot" style="background:{{ hex }}"></span>
               {{ color }}
             </button>
           {% endfor %}
@@ -57,8 +66,8 @@
       <div class="pp-opt">
         <label class="pp-opt-lbl">Tamanho &middot; <span id="sel-size" class="p-accent">Selecione</span></label>
         <div class="pp-size-btns">
-          {% assign sizes = 'P,M,G' | split: ',' %}
-          {% for size in sizes %}
+          {% assign size_option = current_product.options_by_name['Tamanho'] %}
+          {% for size in size_option.values %}
             <button type="button" class="pp-size-btn" data-size="{{ size }}" onclick="ppSelectSize('{{ size }}')">{{ size }}</button>
           {% endfor %}
         </div>
