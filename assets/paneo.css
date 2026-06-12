@@ -326,3 +326,11 @@ body { font-family: 'Jost', sans-serif; background: #F5F0EA; color: #2C2118; fon
 .pp-grand-total { font-weight: 600; }
 .pp-progress-bar { height: 3px; background: #D4C8BC; margin-top: 1rem; border-radius: 2px; overflow: hidden; }
 .pp-progress-fill { height: 100%; background: #7D3018; transition: width 0.3s; }
+
+/* ========== SOCIAL PROOF BADGE ========== */
+.p-sp-badge { display: inline-flex; align-items: center; gap: 0.65rem; background: rgba(255,255,255,0.12); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.22); border-radius: 100px; padding: 0.35rem 1rem 0.35rem 0.35rem; margin-bottom: 1.5rem; }
+.p-sp-avatars { display: flex; align-items: center; }
+.p-sp-avatar { width: 30px; height: 30px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.7); object-fit: cover; margin-left: -8px; flex-shrink: 0; }
+.p-sp-avatars .p-sp-avatar:first-child { margin-left: 0; }
+.p-sp-avatar-init { display: flex; align-items: center; justify-content: center; font-family: 'Jost',sans-serif; font-size: 0.6rem; font-weight: 600; color: white; }
+.p-sp-text { font-family: 'Jost',sans-serif; font-size: 0.72rem; font-weight: 400; color: rgba(255,255,255,0.92); white-space: nowrap; letter-spacing: 0.02em; }

@@ -13,6 +13,25 @@
   <div class="p-hero-content">
     <span class="p-label">{{ section.settings.subtitle }}</span>
     <h1 class="p-hero-title">{{ section.settings.title_part1 }} <em>{{ section.settings.title_part2 }}</em></h1>
+
+    {% if section.settings.social_proof_text != blank %}
+    <div class="p-sp-badge">
+      <div class="p-sp-avatars">
+        {% for i in (1..4) %}
+          {% assign avatar_img = 'avatar_' | append: i %}
+          {% assign avatar_color = 'avatar_color_' | append: i %}
+          {% assign avatar_initial = 'avatar_initial_' | append: i %}
+          {% if section.settings[avatar_img] != blank %}
+            <img class="p-sp-avatar" src="{{ section.settings[avatar_img] | img_url: '60x60', crop: 'center' }}" alt="">
+          {% else %}
+            <div class="p-sp-avatar p-sp-avatar-init" style="background:{{ section.settings[avatar_color] | default: '#A87848' }}">{{ section.settings[avatar_initial] | default: 'L' }}</div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <span class="p-sp-text">{{ section.settings.social_proof_text }}</span>
+    </div>
+    {% endif %}
+
     <p class="p-hero-desc">{{ section.settings.description }}</p>
     <div class="p-hero-btns">
       <a href="{{ section.settings.cta_url | default: '/products/vestido-creta' }}" class="p-btn-primary">{{ section.settings.cta_primary }}</a>
@@ -33,7 +52,21 @@
     { "type": "textarea", "id": "description", "label": "Descrição", "default": "O best seller da Paneô. Fenda lateral, detalhe em nó e tecido de alta qualidade. Atacado a partir de 6 peças, R$145 a unidade." },
     { "type": "text", "id": "cta_primary", "label": "Botão principal", "default": "Montar Pedido" },
     { "type": "text", "id": "cta_secondary", "label": "Botão secundário", "default": "Ver Detalhes" },
-    { "type": "url", "id": "cta_url", "label": "Link botão principal" }
+    { "type": "url", "id": "cta_url", "label": "Link botão principal" },
+    { "type": "header", "content": "Prova social (badge)" },
+    { "type": "text", "id": "social_proof_text", "label": "Texto do badge", "default": "+ de 200 lojistas compraram" },
+    { "type": "image_picker", "id": "avatar_1", "label": "Foto lojista 1" },
+    { "type": "color", "id": "avatar_color_1", "label": "Cor fallback 1", "default": "#A87848" },
+    { "type": "text", "id": "avatar_initial_1", "label": "Inicial fallback 1", "default": "M" },
+    { "type": "image_picker", "id": "avatar_2", "label": "Foto lojista 2" },
+    { "type": "color", "id": "avatar_color_2", "label": "Cor fallback 2", "default": "#7D3018" },
+    { "type": "text", "id": "avatar_initial_2", "label": "Inicial fallback 2", "default": "L" },
+    { "type": "image_picker", "id": "avatar_3", "label": "Foto lojista 3" },
+    { "type": "color", "id": "avatar_color_3", "label": "Cor fallback 3", "default": "#1B2A4A" },
+    { "type": "text", "id": "avatar_initial_3", "label": "Inicial fallback 3", "default": "C" },
+    { "type": "image_picker", "id": "avatar_4", "label": "Foto lojista 4" },
+    { "type": "color", "id": "avatar_color_4", "label": "Cor fallback 4", "default": "#5C3D2E" },
+    { "type": "text", "id": "avatar_initial_4", "label": "Inicial fallback 4", "default": "A" }
   ],
   "presets": [{ "name": "Hero" }]
 }
