@@ -1,8 +1,19 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "nav": {
       "type": "paneo-nav",
-      "settings": { "logo_text": "PANEÔ" }
+      "settings": {
+        "logo_text": "PANEÔ"
+      }
     },
     "hero": {
       "type": "paneo-hero",
@@ -39,9 +50,21 @@
         "label": "Feito para lojistas",
         "heading_part1": "Uma curadoria que vende",
         "heading_part2": "sozinha.",
-        "stat1_num": "+300", "stat1_label": "Lojistas atendidas",
-        "stat2_num": "94%",  "stat2_label": "Sell-through médio",
-        "stat3_num": "21d",  "stat3_label": "Produção e envio"
+        "stat1_num": "+300",
+        "stat1_label": "Lojistas atendidas",
+        "stat2_num": "94%",
+        "stat2_label": "Sell-through médio",
+        "stat3_num": "21d",
+        "stat3_label": "Produção e envio"
+      }
+    },
+    "paneo_product_page_dXk9X6": {
+      "type": "paneo-product-page",
+      "name": "Página do Produto",
+      "settings": {
+        "moq": 6,
+        "wholesale_price": 145,
+        "spec_composition": "Tecido de alta qualidade"
       }
     },
     "video": {
@@ -58,18 +81,64 @@
         "moq": 6
       }
     },
-    "faq": {
+    "paneo_faq_yyDr36": {
       "type": "paneo-faq",
-      "settings": { "subtitle": "O que mais nos perguntam, respondido direto. Se ficou alguma dúvida, é só chamar no WhatsApp." },
       "blocks": {
-        "faq1": { "type": "faq_item", "settings": { "question": "Qual o pedido mínimo?", "answer": "6 peças do Vestido Creta. Você pode distribuir livremente entre as cores Preto, Cappuccino e Bronze e os tamanhos P, M e G." } },
-        "faq2": { "type": "faq_item", "settings": { "question": "Posso misturar cores e tamanhos?", "answer": "Sim. A grade é totalmente livre — você monta a combinação que fizer mais sentido para a sua loja." } },
-        "faq3": { "type": "faq_item", "settings": { "question": "Como funciona o pagamento?", "answer": "PIX à vista ou cartão de crédito via checkout seguro do Shopify." } },
-        "faq4": { "type": "faq_item", "settings": { "question": "Qual o prazo de entrega?", "answer": "Até 21 dias úteis após confirmação do pedido." } },
-        "faq5": { "type": "faq_item", "settings": { "question": "Vocês vendem para consumidor final?", "answer": "Não. Esta página é exclusiva para lojistas. Para varejo, acesse paneobrasil.com.br." } },
-        "faq6": { "type": "faq_item", "settings": { "question": "E se vier peça com defeito?", "answer": "Troca garantida. Qualquer peça com defeito de fabricação é substituída sem custo adicional." } }
+        "faq_item_fWTKMR": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Qual o pedido mínimo?",
+            "answer": "6 peças do Vestido Creta. Você pode distribuir livremente entre as cores Preto, Cappuccino e Bronze e os tamanhos P, M e G."
+          }
+        },
+        "faq_item_HjNrk7": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Posso misturar cores e tamanhos?",
+            "answer": "Sim. A grade é totalmente livre — você monta a combinação que fizer mais sentido para a sua loja."
+          }
+        },
+        "faq_item_TnP9XG": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Como funciona o pagamento?",
+            "answer": "PIX à vista ou cartão de crédito. O pagamento é feito diretamente pelo checkout seguro do Shopify."
+          }
+        },
+        "faq_item_8Qgqa4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Qual o prazo de entrega?",
+            "answer": "Até 21 dias úteis após a confirmação do pedido. Trabalhamos com produção sob demanda para garantir a qualidade."
+          }
+        },
+        "faq_item_LJeVT6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Vocês vendem para consumidor final?",
+            "answer": "Não. Esta página é exclusiva para lojistas. Para compra no varejo, acesse paneobrasil.com.br."
+          }
+        },
+        "faq_item_briRX8": {
+          "type": "faq_item",
+          "settings": {
+            "question": "E se vier peça com defeito?",
+            "answer": "Troca garantida. Qualquer peça com defeito de fabricação é substituída sem custo adicional. Entre em contato pelo WhatsApp."
+          }
+        }
       },
-      "blocks_order": ["faq1","faq2","faq3","faq4","faq5","faq6"]
+      "block_order": [
+        "faq_item_fWTKMR",
+        "faq_item_HjNrk7",
+        "faq_item_TnP9XG",
+        "faq_item_8Qgqa4",
+        "faq_item_LJeVT6",
+        "faq_item_briRX8"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "subtitle": "O que mais nos perguntam, respondido direto. Se ficou alguma dúvida, é só chamar no WhatsApp."
+      }
     },
     "about": {
       "type": "paneo-about",
@@ -82,8 +151,22 @@
     },
     "footer": {
       "type": "paneo-footer",
-      "settings": { "logo_text": "PANEÔ", "company_name": "Paneô Brasil", "email": "atacado@paneo.com.br" }
+      "settings": {
+        "logo_text": "PANEÔ",
+        "company_name": "Paneô Brasil",
+        "email": "atacado@paneo.com.br"
+      }
     }
   },
-  "order": ["nav","hero","product","social","video","faq","about","footer"]
+  "order": [
+    "nav",
+    "hero",
+    "product",
+    "social",
+    "paneo_product_page_dXk9X6",
+    "video",
+    "paneo_faq_yyDr36",
+    "about",
+    "footer"
+  ]
 }
