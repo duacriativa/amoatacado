@@ -19,12 +19,13 @@
       "type": "paneo-hero",
       "settings": {
         "youtube_video_id": "56tyw2g8RKU",
-        "subtitle": "Resort 26 · Edição Atacado",
+        "subtitle": "PANEÔ BRASIL - ATACADO",
         "title_part1": "Vestido",
         "title_part2": "Creta",
         "description": "O best seller da Paneô. Fenda lateral, detalhe em nó e tecido de alta qualidade. Atacado a partir de 6 peças, R$145 a unidade.",
         "cta_primary": "Montar Pedido",
-        "cta_secondary": "Ver Detalhes"
+        "cta_secondary": "Ver Detalhes",
+        "cta_url": ""
       }
     },
     "product": {
