@@ -196,8 +196,8 @@ body { font-family: 'Jost', sans-serif; background: #F5F0EA; color: #2C2118; fon
   .p-nav-hamburger { display: flex; }
   .p-hero { padding: 3rem 1.5rem 4rem; }
   .p-hero-title { font-size: clamp(3.5rem,14vw,5rem); }
-  .p-hero-bg-mobile { display: block; }
-  .p-hero-video-wrap { display: none; }
+  .p-hero-bg-mobile { display: none; }
+  .p-hero-video-wrap { display: block; }
   .p-product { grid-template-columns: 1fr; }
   .p-gallery-main { height: 60vw; min-height: 260px; }
   .p-gallery-row img { height: 32vw; min-height: 130px; }

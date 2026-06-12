@@ -38,7 +38,7 @@
         "spec_composition": "Tecido de alta qualidade",
         "spec_model": "Vestido com fenda + nó",
         "spec_sizes": "P · M · G",
-        "spec_colors": "Preto · Cappuccino · Bronze",
+        "spec_colors": "Preto · Bronze · Azul-marinho · Capuccino · Café · Pink · Pérola",
         "wholesale_price": 145,
         "retail_price": 290,
         "moq": 6
@@ -54,8 +54,8 @@
         "stat1_label": "Lojistas atendidas",
         "stat2_num": "94%",
         "stat2_label": "Sell-through médio",
-        "stat3_num": "21d",
-        "stat3_label": "Produção e envio"
+        "stat3_num": "✓",
+        "stat3_label": "Pronta entrega"
       }
     },
     "video": {
