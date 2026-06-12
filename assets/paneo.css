@@ -306,3 +306,23 @@ body { font-family: 'Jost', sans-serif; background: #F5F0EA; color: #2C2118; fon
   .pc-layout { grid-template-columns: 1fr; gap: 2.5rem; }
   .pc-summary { position: static; }
 }
+
+/* ========== GRADE TABLE (product page) ========== */
+.pp-grade-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+.pp-grade-counter { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: #7D3018; font-weight: 500; }
+.pp-grade-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.pp-grade-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+.pp-grade-table th, .pp-grade-table td { padding: 0.5rem 0.4rem; text-align: center; border-bottom: 1px solid #D4C8BC; }
+.pp-grade-table thead th { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 400; color: #7A6B60; border-bottom: 2px solid #D4C8BC; }
+.pp-th-color { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+.pp-th-total { font-weight: 500; color: #1C1410; }
+.pp-size-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-align: left; color: #1C1410; min-width: 32px; }
+.pp-cell { padding: 0.35rem 0.2rem; }
+.pp-cell-inner { display: flex; align-items: center; gap: 0.15rem; justify-content: center; }
+.pp-cell-btn { width: 22px; height: 22px; border: 1px solid #D4C8BC; background: transparent; font-size: 0.85rem; line-height: 1; cursor: pointer; color: #1C1410; display: flex; align-items: center; justify-content: center; transition: all 0.15s; flex-shrink: 0; }
+.pp-cell-btn:hover { background: #1C1410; color: #F5F0EA; border-color: #1C1410; }
+.pp-cell-qty { min-width: 20px; font-size: 0.82rem; font-weight: 400; text-align: center; }
+.pp-row-total, .pp-col-total, .pp-grand-total { font-size: 0.78rem; font-weight: 500; color: #1C1410; }
+.pp-grand-total { font-weight: 600; }
+.pp-progress-bar { height: 3px; background: #D4C8BC; margin-top: 1rem; border-radius: 2px; overflow: hidden; }
+.pp-progress-fill { height: 100%; background: #7D3018; transition: width 0.3s; }

@@ -18,9 +18,7 @@
         </div>
       {% endif %}
     {% else %}
-      <div class="pp-img-placeholder">
-        <span>PANEÔ</span>
-      </div>
+      <div class="pp-img-placeholder"><span>PANEÔ</span></div>
     {% endif %}
   </div>
 
@@ -34,69 +32,97 @@
       <span class="pp-price-note">por peça · mínimo {{ section.settings.moq | default: 6 }} peças</span>
     </div>
 
-    <form id="pp-form">
-      <input type="hidden" name="id" id="pp-variant-id" value="">
-      <input type="hidden" name="quantity" id="pp-qty-input" value="{{ section.settings.moq | default: 6 }}">
-
-      <!-- Cor -->
-      <div class="pp-opt">
-        <label class="pp-opt-lbl">Cor &middot; <span id="sel-color" class="p-accent">Selecione</span></label>
-        <div class="pp-color-btns">
-          {% assign color_option = current_product.options_by_name['Cor'] %}
-          {% for color in color_option.values %}
-            {% assign color_lower = color | downcase %}
-            {% if color_lower == 'preto' %}{% assign hex = '#1A1A1A' %}
-            {% elsif color_lower == 'bronze' %}{% assign hex = '#7A4A28' %}
-            {% elsif color_lower == 'capuccino' or color_lower == 'cappuccino' %}{% assign hex = '#A87848' %}
-            {% elsif color_lower == 'azul-marinho' or color_lower == 'azul marinho' %}{% assign hex = '#1B2A4A' %}
-            {% elsif color_lower == 'café' or color_lower == 'cafe' %}{% assign hex = '#5C3D2E' %}
-            {% elsif color_lower == 'pink' %}{% assign hex = '#E8A0A0' %}
-            {% elsif color_lower == 'pérola' or color_lower == 'perola' %}{% assign hex = '#F0EAD6' %}
-            {% else %}{% assign hex = '#888' %}
-            {% endif %}
-            <button type="button" class="pp-color-btn" data-color="{{ color }}" onclick="ppSelectColor('{{ color }}')">
-              <span class="pp-color-dot" style="background:{{ hex }}"></span>
-              {{ color }}
-            </button>
-          {% endfor %}
-        </div>
+    <!-- Grade de Quantidade -->
+    <div class="pp-opt">
+      <div class="pp-grade-header">
+        <label class="pp-opt-lbl">Monte sua grade</label>
+        <span class="pp-grade-counter">
+          <span id="pp-total">0</span> / {{ section.settings.moq | default: 6 }} peças
+        </span>
       </div>
 
-      <!-- Tamanho -->
-      <div class="pp-opt">
-        <label class="pp-opt-lbl">Tamanho &middot; <span id="sel-size" class="p-accent">Selecione</span></label>
-        <div class="pp-size-btns">
-          {% assign size_option = current_product.options_by_name['Tamanho'] %}
-          {% for size in size_option.values %}
-            <button type="button" class="pp-size-btn" data-size="{{ size }}" onclick="ppSelectSize('{{ size }}')">{{ size }}</button>
-          {% endfor %}
-        </div>
+      <!-- Tabela Desktop -->
+      <div class="pp-grade-table-wrap" id="pp-grade-desktop">
+        <table class="pp-grade-table">
+          <thead>
+            <tr>
+              <th></th>
+              {% assign color_option = current_product.options_by_name['Cor'] %}
+              {% for color in color_option.values %}
+                {% assign color_lower = color | downcase %}
+                {% if color_lower == 'preto' %}{% assign hex = '#1A1A1A' %}
+                {% elsif color_lower == 'bronze' %}{% assign hex = '#7A4A28' %}
+                {% elsif color_lower == 'capuccino' or color_lower == 'cappuccino' %}{% assign hex = '#A87848' %}
+                {% elsif color_lower == 'azul-marinho' or color_lower == 'azul marinho' %}{% assign hex = '#1B2A4A' %}
+                {% elsif color_lower == 'café' or color_lower == 'cafe' %}{% assign hex = '#5C3D2E' %}
+                {% elsif color_lower == 'pink' %}{% assign hex = '#E8A0A0' %}
+                {% elsif color_lower == 'pérola' or color_lower == 'perola' %}{% assign hex = '#F0EAD6; border: 1px solid #D4C8BC' %}
+                {% else %}{% assign hex = '#888' %}
+                {% endif %}
+                <th>
+                  <div class="pp-th-color">
+                    <span class="pp-color-dot" style="background:{{ hex }}"></span>
+                    {{ color }}
+                  </div>
+                </th>
+              {% endfor %}
+              <th class="pp-th-total">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% assign size_option = current_product.options_by_name['Tamanho'] %}
+            {% for size in size_option.values %}
+              <tr>
+                <td class="pp-size-label">{{ size }}</td>
+                {% for color in color_option.values %}
+                  <td class="pp-cell">
+                    <div class="pp-cell-inner">
+                      <button type="button" class="pp-cell-btn" onclick="ppGradeChange('{{ size }}','{{ color }}',-1)">−</button>
+                      <span class="pp-cell-qty" id="qty-{{ size }}-{{ color | replace: ' ', '-' }}">0</span>
+                      <button type="button" class="pp-cell-btn" onclick="ppGradeChange('{{ size }}','{{ color }}',1)">+</button>
+                    </div>
+                  </td>
+                {% endfor %}
+                <td class="pp-row-total" id="row-{{ size }}">0</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td class="pp-size-label" style="font-weight:500">Total</td>
+              {% for color in color_option.values %}
+                <td class="pp-col-total" id="col-{{ color | replace: ' ', '-' }}">0</td>
+              {% endfor %}
+              <td class="pp-grand-total" id="pp-grand-total">0</td>
+            </tr>
+          </tfoot>
+        </table>
       </div>
 
-      <!-- Quantidade -->
-      <div class="pp-opt">
-        <label class="pp-opt-lbl">Quantidade &middot; <span class="p-accent">Mín. {{ section.settings.moq | default: 6 }} peças</span></label>
-        <div class="p-qty-counter pp-qty-row">
-          <button type="button" class="p-qty-btn" onclick="ppChangeQty(-1)">−</button>
-          <span class="p-qty-num" id="pp-qty-display">{{ section.settings.moq | default: 6 }}</span>
-          <button type="button" class="p-qty-btn" onclick="ppChangeQty(1)">+</button>
-        </div>
+      <!-- Progresso -->
+      <div class="pp-progress-bar">
+        <div class="pp-progress-fill" id="pp-progress-fill" style="width:0%"></div>
       </div>
+    </div>
 
-      <p class="pp-warn" id="pp-warn"></p>
+    <p class="pp-warn" id="pp-warn"></p>
 
-      <div class="pp-btns">
-        <button type="submit" class="p-btn-primary pp-atc-btn" id="pp-atc">Adicionar ao Carrinho</button>
-        <button type="button" class="pp-buynow-btn" id="pp-buynow" onclick="ppBuyNow()">Comprar Agora →</button>
-      </div>
-    </form>
+    <div class="pp-btns">
+      <button type="button" class="pp-atc-btn" id="pp-atc" onclick="ppAddToCart(false)">Adicionar ao Carrinho</button>
+      <button type="button" class="pp-buynow-btn" id="pp-buynow" onclick="ppAddToCart(true)">Comprar Agora →</button>
+    </div>
 
     <!-- Especificações -->
     <div class="pp-specs">
       <div class="pp-spec-row"><span>Composição</span><span>{{ section.settings.spec_composition | default: 'Tecido de alta qualidade' }}</span></div>
       <div class="pp-spec-row"><span>Tamanhos</span><span>P · M · G</span></div>
-      <div class="pp-spec-row"><span>Cores</span><span>Preto · Cappuccino · Bronze</span></div>
-      <div class="pp-spec-row"><span>Produção</span><span>Até 21 dias úteis</span></div>
+      <div class="pp-spec-row">
+        <span>Cores</span>
+        <span>
+          {% for color in color_option.values %}{{ color }}{% unless forloop.last %} · {% endunless %}{% endfor %}
+        </span>
+      </div>
+      <div class="pp-spec-row"><span>Disponibilidade</span><span>{{ section.settings.availability | default: 'Pronta entrega' }}</span></div>
       <div class="pp-spec-row"><span>Pagamento</span><span>PIX · Cartão de Crédito</span></div>
     </div>
 
@@ -106,15 +132,14 @@
   </div>
 </section>
 
+<!-- Variant map -->
 <script>
   const PP_MOQ = {{ section.settings.moq | default: 6 }};
-  let ppQty = PP_MOQ;
-  let ppColor = null;
-  let ppSize = null;
-
+  const PP_GRADE = {};
   const PP_VARIANTS = {};
+
   {% for variant in current_product.variants %}
-    PP_VARIANTS['{{ variant.option1 }}_{{ variant.option2 }}'] = {{ variant.id }};
+    PP_VARIANTS['{{ variant.option2 }}_{{ variant.option1 }}'] = {{ variant.id }};
   {% endfor %}
 
   function ppSetImage(src, thumb) {
@@ -123,90 +148,112 @@
     thumb.classList.add('active');
   }
 
-  function ppSelectColor(val) {
-    ppColor = val;
-    document.getElementById('sel-color').textContent = val;
-    document.querySelectorAll('.pp-color-btn').forEach(b => b.classList.toggle('active', b.dataset.color === val));
-    ppUpdateVariant();
+  function ppGradeChange(size, color, delta) {
+    const key = size + '_' + color;
+    PP_GRADE[key] = Math.max(0, (PP_GRADE[key] || 0) + delta);
+    ppUpdateTotals();
   }
 
-  function ppSelectSize(val) {
-    ppSize = val;
-    document.getElementById('sel-size').textContent = val;
-    document.querySelectorAll('.pp-size-btn').forEach(b => b.classList.toggle('active', b.dataset.size === val));
-    ppUpdateVariant();
-  }
+  function ppUpdateTotals() {
+    let grand = 0;
+    const rowTotals = {};
+    const colTotals = {};
 
-  function ppChangeQty(delta) {
-    ppQty = Math.max(PP_MOQ, ppQty + delta);
-    document.getElementById('pp-qty-display').textContent = ppQty;
-    document.getElementById('pp-qty-input').value = ppQty;
-  }
+    Object.entries(PP_GRADE).forEach(([key, qty]) => {
+      if (qty <= 0) return;
+      const [size, ...colorParts] = key.split('_');
+      const color = colorParts.join('_');
+      grand += qty;
+      rowTotals[size] = (rowTotals[size] || 0) + qty;
+      colTotals[color] = (colTotals[color] || 0) + qty;
 
-  function ppUpdateVariant() {
-    if (!ppColor || !ppSize) return;
-    const vid = PP_VARIANTS[ppColor + '_' + ppSize];
-    if (vid) document.getElementById('pp-variant-id').value = vid;
-  }
+      const el = document.getElementById('qty-' + size + '-' + color.replace(/ /g, '-'));
+      if (el) el.textContent = qty;
+    });
 
-  function ppValidate() {
-    const warn = document.getElementById('pp-warn');
-    if (!ppColor) { warn.textContent = 'Selecione uma cor para continuar.'; return false; }
-    if (!ppSize)  { warn.textContent = 'Selecione um tamanho para continuar.'; return false; }
-    const vid = PP_VARIANTS[ppColor + '_' + ppSize];
-    if (!vid) { warn.textContent = 'Variante não disponível.'; return false; }
-    warn.textContent = '';
-    return true;
-  }
+    // Reset all displayed quantities then update
+    document.querySelectorAll('.pp-cell-qty').forEach(el => {
+      const [,size, ...colorParts] = el.id.split('-');
+      // id format: qty-SIZE-COLOR
+    });
 
-  document.getElementById('pp-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    if (!ppValidate()) return;
-    const btn = document.getElementById('pp-atc');
-    btn.disabled = true;
-    btn.textContent = 'Adicionando...';
-    try {
-      const res = await fetch('/cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: parseInt(document.getElementById('pp-variant-id').value), quantity: ppQty })
-      });
-      if (res.ok) {
-        window.location.href = '/cart';
-      } else {
-        btn.disabled = false;
-        btn.textContent = 'Adicionar ao Carrinho';
-        document.getElementById('pp-warn').textContent = 'Erro ao adicionar. Tente novamente.';
-      }
-    } catch(err) {
-      btn.disabled = false;
-      btn.textContent = 'Adicionar ao Carrinho';
+    // Update all cell displays
+    document.querySelectorAll('.pp-cell-qty').forEach(el => {
+      const id = el.id; // qty-SIZE-COLOR
+      const parts = id.replace('qty-','').split('-');
+      const size = parts[0];
+      const color = parts.slice(1).join('-');
+      const key = size + '_' + color.replace(/-/g, ' ');
+      el.textContent = PP_GRADE[key] || 0;
+    });
+
+    // Row totals
+    document.querySelectorAll('[id^="row-"]').forEach(el => {
+      const size = el.id.replace('row-','');
+      el.textContent = rowTotals[size] || 0;
+    });
+
+    // Col totals
+    document.querySelectorAll('[id^="col-"]').forEach(el => {
+      const color = el.id.replace('col-','').replace(/-/g, ' ');
+      el.textContent = colTotals[color] || 0;
+    });
+
+    document.getElementById('pp-total').textContent = grand;
+    document.getElementById('pp-grand-total').textContent = grand;
+
+    const pct = Math.min(100, (grand / PP_MOQ) * 100);
+    document.getElementById('pp-progress-fill').style.width = pct + '%';
+
+    const atc = document.getElementById('pp-atc');
+    const buynow = document.getElementById('pp-buynow');
+    const ready = grand >= PP_MOQ;
+    atc.disabled = !ready;
+    buynow.disabled = !ready;
+
+    if (grand > 0 && !ready) {
+      document.getElementById('pp-warn').textContent = 'Adicione mais ' + (PP_MOQ - grand) + ' peça(s) para continuar.';
+    } else {
+      document.getElementById('pp-warn').textContent = '';
     }
-  });
+  }
 
-  async function ppBuyNow() {
-    if (!ppValidate()) return;
-    const btn = document.getElementById('pp-buynow');
+  async function ppAddToCart(buyNow) {
+    const items = [];
+    Object.entries(PP_GRADE).forEach(([key, qty]) => {
+      if (qty <= 0) return;
+      const vid = PP_VARIANTS[key];
+      if (vid) items.push({ id: vid, quantity: qty });
+    });
+
+    if (items.length === 0) return;
+
+    const btn = buyNow ? document.getElementById('pp-buynow') : document.getElementById('pp-atc');
     btn.disabled = true;
     btn.textContent = 'Aguarde...';
+
     try {
-      await fetch('/cart/clear.js', { method: 'POST' });
+      if (buyNow) await fetch('/cart/clear.js', { method: 'POST' });
       const res = await fetch('/cart/add.js', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: parseInt(document.getElementById('pp-variant-id').value), quantity: ppQty })
+        body: JSON.stringify({ items })
       });
       if (res.ok) {
-        window.location.href = '/checkout';
+        window.location.href = buyNow ? '/checkout' : '/cart';
       } else {
         btn.disabled = false;
-        btn.textContent = 'Comprar Agora →';
+        btn.textContent = buyNow ? 'Comprar Agora →' : 'Adicionar ao Carrinho';
+        document.getElementById('pp-warn').textContent = 'Erro ao adicionar. Tente novamente.';
       }
-    } catch(err) {
+    } catch {
       btn.disabled = false;
-      btn.textContent = 'Comprar Agora →';
+      btn.textContent = buyNow ? 'Comprar Agora →' : 'Adicionar ao Carrinho';
     }
   }
+
+  // Init
+  ppUpdateTotals();
 </script>
 
 {% schema %}
@@ -215,7 +262,8 @@
   "settings": [
     { "type": "number", "id": "moq", "label": "Pedido mínimo (peças)", "default": 6 },
     { "type": "number", "id": "wholesale_price", "label": "Preço atacado (R$)", "default": 145 },
-    { "type": "text", "id": "spec_composition", "label": "Composição", "default": "Tecido de alta qualidade" }
+    { "type": "text", "id": "spec_composition", "label": "Composição", "default": "Tecido de alta qualidade" },
+    { "type": "text", "id": "availability", "label": "Disponibilidade", "default": "Pronta entrega" }
   ],
   "presets": [{ "name": "Página do Produto" }]
 }
