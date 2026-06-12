@@ -19,14 +19,14 @@
       "type": "paneo-hero",
       "settings": {
         "youtube_video_id": "56tyw2g8RKU",
-        "subtitle": "PANEÔ BRASIL - ATACADO",
+        "subtitle": "ATACADO · PRONTA ENTREGA",
         "title_part1": "Vestido",
         "title_part2": "Creta",
-        "description": "O best seller da Paneô. Fenda lateral, detalhe em nó e tecido de alta qualidade. Atacado a partir de 6 peças, R$145 a unidade.",
+        "description": "O best seller que sai do estoque antes do fim da semana. Compre a R$145 e venda a R$290 — margem de 100% garantida. Pronta entrega, nota fiscal inclusa, mínimo de 6 peças.",
         "cta_primary": "Montar Pedido",
         "cta_secondary": "Ver Detalhes",
-        "cta_url": "",
-        "social_proof_text": "+ de 200 lojistas compraram",
+        "cta_url": "/products/vestido-creta",
+        "social_proof_text": "+ de 200 lojistas revendem",
         "avatar_1": "shopify://shop_images/Captura_de_tela_2026-06-12_141120.png",
         "avatar_color_1": "#a87848",
         "avatar_initial_1": "M",
@@ -46,9 +46,9 @@
       "settings": {
         "product": "vestido-creta",
         "collection_label": "Best Seller · Coleção 2026",
-        "heading_part1": "O vestido que",
-        "heading_part2": "todo closet pede.",
-        "description": "O Vestido Creta é o nosso best seller que une elegância e modernidade com perfeição. Confeccionado em tecido de alta qualidade, destaca-se pela sofisticada fenda lateral e pelo detalhe em nó que valoriza a silhueta feminina.",
+        "heading_part1": "O vestido que sua cliente",
+        "heading_part2": "volta pra buscar.",
+        "description": "94% de sell-through médio entre as lojistas Paneô. Alta rotatividade, sem encalhe. Fenda lateral, detalhe em nó e caimento impecável — a peça que vende sozinha e fideliza a cliente da sua loja.",
         "spec_composition": "Tecido de alta qualidade",
         "spec_model": "Vestido com fenda + nó",
         "spec_sizes": "P · M · G",
@@ -62,14 +62,14 @@
       "type": "paneo-social",
       "settings": {
         "label": "Feito para lojistas",
-        "heading_part1": "Uma curadoria que vende",
-        "heading_part2": "sozinha.",
-        "stat1_num": "+300",
-        "stat1_label": "Lojistas atendidas",
-        "stat2_num": "94%",
-        "stat2_label": "Sell-through médio",
-        "stat3_num": "✓",
-        "stat3_label": "Pronta entrega"
+        "heading_part1": "Uma peça que entra hoje",
+        "heading_part2": "e sai amanhã.",
+        "stat1_num": "94%",
+        "stat1_label": "Sell-through médio",
+        "stat2_num": "+300",
+        "stat2_label": "Lojistas parceiras",
+        "stat3_num": "0d",
+        "stat3_label": "Espera — pronta entrega"
       }
     },
     "video": {
@@ -93,7 +93,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Qual o pedido mínimo?",
-            "answer": "6 peças do Vestido Creta. Você pode distribuir livremente entre as cores Preto, Cappuccino e Bronze e os tamanhos P, M e G."
+            "answer": "6 peças do Vestido Creta. A grade é totalmente livre — você distribui entre as 7 cores disponíveis e os tamanhos P, M e G como quiser."
           }
         },
         "faq_item_HjNrk7": {
@@ -107,21 +107,21 @@
           "type": "faq_item",
           "settings": {
             "question": "Como funciona o pagamento?",
-            "answer": "PIX à vista ou cartão de crédito. O pagamento é feito diretamente pelo checkout seguro do Shopify."
+            "answer": "PIX à vista, sem acréscimo — essa é a forma que recomendamos. Também aceitamos cartão de crédito, com acréscimo de juros conforme a operadora. O pagamento é feito pelo checkout seguro do Shopify. Emitimos nota fiscal para CNPJ e CPF."
           }
         },
         "faq_item_8Qgqa4": {
           "type": "faq_item",
           "settings": {
-            "question": "Qual o prazo de entrega?",
-            "answer": "Pronta entrega, ao finalizar a sua compra suas peças já serão separadas e enviadas."
+            "question": "Como funciona o frete e a entrega?",
+            "answer": "Estoque pronto — assim que o pagamento é confirmado, seu pedido é separado e enviado. O frete é calculado no checkout com base no seu CEP. Trabalhamos com transportadoras parceiras para garantir rastreio e segurança na entrega."
           }
         },
         "faq_item_LJeVT6": {
           "type": "faq_item",
           "settings": {
             "question": "Vocês vendem para consumidor final?",
-            "answer": "Não. Esta página é exclusiva para lojistas. Para compra no varejo, acesse paneobrasil.com.br."
+            "answer": "Não. Esta página é exclusiva para lojistas e revendedoras. Para compra no varejo, acesse paneobrasil.com.br. Não trabalhamos com exclusividade por região — qualquer lojista do Brasil pode comprar."
           }
         },
         "faq_item_briRX8": {
@@ -148,10 +148,10 @@
     "about": {
       "type": "paneo-about",
       "settings": {
-        "label": "Paneô Brasil",
-        "heading_part1": "Vestir é um",
-        "heading_part2": "ritual.",
-        "text": "Nascida no litoral nordestino, a Paneô traduz o calor brasileiro em peças de resort wear desejadas no mundo todo. Cada vestido é uma celebração da pele, da brisa e do sol que insiste em ficar."
+        "label": "Por que revender Paneô",
+        "heading_part1": "Uma parceira que",
+        "heading_part2": "cresce com você.",
+        "text": "Mais de 300 lojistas em todo o Brasil já revendem a Paneô. Peças com identidade forte, alta rotatividade e suporte direto pelo WhatsApp. Nota fiscal em todos os pedidos, frete rastreado e estoque pronto para envio imediato. Quando sua loja cresce, nós crescemos juntas."
       }
     },
     "footer": {
