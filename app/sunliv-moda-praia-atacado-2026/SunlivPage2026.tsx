@@ -3,16 +3,27 @@
 import { useState } from 'react';
 
 const PHOTOS = [
-    '/images/sunliv/catalog-1.jpg',
-    '/images/sunliv/catalog-2.jpg',
-    '/images/sunliv/catalog-3.jpg',
-    '/images/sunliv/catalog-4.jpg',
-    '/images/sunliv/catalog-5.jpg',
-    '/images/sunliv/catalog-6.jpg',
-    '/images/sunliv/catalog-7.jpg',
-    '/images/sunliv/catalog-8.jpg',
+    '/images/sunliv/IMG_1409.JPG.jpeg',
+    '/images/sunliv/IMG_1402.JPG.jpeg',
+    '/images/sunliv/IMG_1396.JPG.jpeg',
+    '/images/sunliv/IMG_1400.JPG.jpeg',
+    '/images/sunliv/IMG_1390.JPG.jpeg',
+    '/images/sunliv/IMG_1384.JPG.jpeg',
+    '/images/sunliv/IMG_1381.JPG.jpeg',
+    '/images/sunliv/IMG_1388.JPG.jpeg',
+    '/images/sunliv/IMG_1414.JPG.jpeg',
+    '/images/sunliv/IMG_1420.JPG.jpeg',
+    '/images/sunliv/IMG_1385.JPG.jpeg',
+    '/images/sunliv/IMG_1393.JPG.jpeg',
+    '/images/sunliv/IMG_1401.JPG.jpeg',
+    '/images/sunliv/IMG_1404.JPG.jpeg',
+    '/images/sunliv/IMG_1405.JPG.jpeg',
+    '/images/sunliv/IMG_1415.JPG.jpeg',
+    '/images/sunliv/IMG_1380.JPG.jpeg',
 ];
 const IMG = (n: number) => PHOTOS[(n - 1) % PHOTOS.length];
+
+const VIDEO = '/images/sunliv/SaveClip.App_AQPMM3IM3aqR7PjQsPOpCG4UCMZuq0QhPUf-1hT4U6l8Bu0DGtsEFXIA0w23t3K9ujF7hjnmKrq2Zg5KIxG53RTmhXGjep47dLr-DqE.mp4';
 
 const WA = "https://wa.me/5585991613500?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20da%20Amo%20Atacado%20e%20gostaria%20de%20revender%20a%20Sunliv.";
 
@@ -166,7 +177,9 @@ function Hero() {
 
                 <div className="relative md:col-span-6">
                     <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] sl-sw">
-                        <img src={IMG(2)} alt="Modelo usando biquíni Sunliv na praia" className="h-full w-full object-cover object-top" />
+                        <video autoPlay muted loop playsInline className="h-full w-full object-cover object-top">
+                        <source src={VIDEO} type="video/mp4" />
+                    </video>
                         <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent" />
                         <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between">
                             <div className="rounded-2xl px-4 py-3 sl-ss" style={{ background: 'rgba(255,255,255,0.95)' }}>
