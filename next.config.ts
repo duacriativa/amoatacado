@@ -50,6 +50,20 @@ const nextConfig: NextConfig = {
     ];
   },
 
+  // Proxy sunliv conversion flow landing page
+  async rewrites() {
+    return [
+      {
+        source: '/sunliv-moda-praia-atacado-2026',
+        destination: 'https://sunliv-conversion-flow.vercel.app/',
+      },
+      {
+        source: '/sunliv-moda-praia-atacado-2026/:path*',
+        destination: 'https://sunliv-conversion-flow.vercel.app/:path*',
+      },
+    ];
+  },
+
   // Optimize images
   images: {
     formats: ['image/avif', 'image/webp'],
