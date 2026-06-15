@@ -27,6 +27,13 @@ export default function Page() {
                 fbq('init','1342296943580479');fbq('track','PageView');
             `}</Script>
             <noscript><img height="1" width="1" style={{display:'none'}} src="https://www.facebook.com/tr?id=1342296943580479&ev=PageView&noscript=1" alt="" /></noscript>
+            <Script id="microsoft-clarity-sl26" strategy="lazyOnload">{`
+                (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","vj3eb84q9y");
+            `}</Script>
+            <Script src="https://www.googletagmanager.com/gtag/js?id=AW-401775500" strategy="afterInteractive" />
+            <Script id="google-ads-gtag-sl26" strategy="afterInteractive">{`
+                window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-401775500');
+            `}</Script>
             <SunlivPage2026 />
         </div>
     );

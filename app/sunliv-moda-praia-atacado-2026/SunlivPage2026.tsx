@@ -27,6 +27,14 @@ const VIDEO = '/images/sunliv/SaveClip.App_AQPMM3IM3aqR7PjQsPOpCG4UCMZuq0QhPUf-1
 
 const WA = "https://wa.me/5585991613500?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20da%20Amo%20Atacado%20e%20gostaria%20de%20revender%20a%20Sunliv.";
 
+const trackWA = () => {
+    if (typeof window !== 'undefined' && (window as { gtag?: (...args: unknown[]) => void }).gtag) {
+        (window as { gtag?: (...args: unknown[]) => void }).gtag?.('event', 'conversion', {
+            send_to: 'AW-401775500/FHUdCLqlloAcEIy3yr8B',
+        });
+    }
+};
+
 const STYLES = `
 .sl-page {
   --sl-p: oklch(0.68 0.19 38);
@@ -94,7 +102,7 @@ function CTAWa({ children, variant = "wa", className = "" }: {
         ghost: { border: '1px solid var(--sl-border)', background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(8px)' },
     };
     return (
-        <a href={WA} target="_blank" rel="noopener" className={`${base} ${className}`} style={varStyles[variant]}>
+        <a href={WA} target="_blank" rel="noopener" onClick={trackWA} className={`${base} ${className}`} style={varStyles[variant]}>
             {children}
         </a>
     );
@@ -435,7 +443,7 @@ function FAQ() {
                 </div>
                 <p className="mt-8 text-center text-sm" style={{ color: 'var(--sl-muted)' }}>
                     Ainda com dúvida?{' '}
-                    <a href={WA} target="_blank" rel="noopener" className="font-semibold underline-offset-4 hover:underline" style={{ color: 'var(--sl-p)' }}>
+                    <a href={WA} target="_blank" rel="noopener" onClick={trackWA} className="font-semibold underline-offset-4 hover:underline" style={{ color: 'var(--sl-p)' }}>
                         Chama no WhatsApp
                     </a>, te respondemos em minutos.
                 </p>
@@ -501,7 +509,7 @@ function Footer() {
                 </div>
                 <div className="text-sm">
                     <div className="text-xs uppercase tracking-widest" style={{ color: 'rgba(245,240,230,0.5)' }}>Atendimento</div>
-                    <p className="mt-3">WhatsApp: <a href={WA} className="hover:underline" style={{ color: 'var(--sl-pg)' }}>(85) 99161-3500</a></p>
+                    <p className="mt-3">WhatsApp: <a href={WA} onClick={trackWA} className="hover:underline" style={{ color: 'var(--sl-pg)' }}>(85) 99161-3500</a></p>
                     <p>Segunda a Sábado · 8h às 20h</p>
                 </div>
                 <div className="text-sm">
