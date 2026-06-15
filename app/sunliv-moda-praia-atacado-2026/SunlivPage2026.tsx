@@ -45,9 +45,9 @@ const STYLES = `
   -webkit-font-smoothing: antialiased;
 }
 .sl-page h1, .sl-page h2, .sl-page h3, .sl-display {
-  font-family: var(--font-display-sl, 'Cormorant Garamond', ui-serif, Georgia, serif);
+  font-family: var(--font-display-sl, 'Poppins', ui-sans-serif, system-ui, sans-serif);
   font-weight: 300;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
 }
 .sl-c-gradient {
   background: var(--sl-gs);
@@ -194,14 +194,14 @@ function Hero() {
 
                     <div className="absolute -left-6 -top-6 hidden w-48 rounded-2xl p-3 sl-sw sl-float md:block" style={{ background: 'white' }}>
                         <img src={IMG(5)} alt="" className="aspect-[3/4] w-full rounded-xl object-cover object-top" />
-                        <p className="px-1 pt-2 text-xs font-medium">Top cortininha</p>
-                        <p className="px-1 text-xs" style={{ color: 'var(--sl-p)' }}>Coleção verão</p>
+                        <p className="px-1 pt-2 text-xs font-medium">Pronta-Entrega</p>
+                        <p className="px-1 text-xs" style={{ color: 'var(--sl-p)' }}>Direto da fábrica</p>
                     </div>
 
                     <div className="absolute -right-4 bottom-10 hidden w-44 rounded-2xl p-3 sl-sw sl-float-d md:block" style={{ background: 'white' }}>
                         <img src={IMG(7)} alt="" className="aspect-[3/4] w-full rounded-xl object-cover object-top" />
-                        <p className="px-1 pt-2 text-xs font-medium">Maiô hot pant</p>
-                        <p className="px-1 text-xs" style={{ color: 'var(--sl-p)' }}>Best-seller</p>
+                        <p className="px-1 pt-2 text-xs font-medium">O Mais vendido</p>
+                        <p className="px-1 text-xs" style={{ color: 'var(--sl-p)' }}>Coleção 26&rsquo;</p>
                     </div>
                 </div>
             </div>

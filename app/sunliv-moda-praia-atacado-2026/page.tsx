@@ -1,11 +1,10 @@
 import type { Metadata } from 'next';
-import { Cormorant_Garamond } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import SunlivPage2026 from './SunlivPage2026';
 
-const cormorant = Cormorant_Garamond({
+const poppins = Poppins({
     subsets: ['latin'],
     weight: ['300', '400', '500', '600', '700'],
-    style: ['normal', 'italic'],
     variable: '--font-display-sl',
     display: 'swap',
 });
@@ -21,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
     return (
-        <div className={cormorant.variable}>
+        <div className={poppins.variable}>
             <SunlivPage2026 />
         </div>
     );
