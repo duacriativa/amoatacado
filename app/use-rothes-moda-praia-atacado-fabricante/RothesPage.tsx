@@ -126,57 +126,89 @@ function Nav() {
 
 function Hero() {
     return (
-        <section id="top" className="relative min-h-screen overflow-hidden" style={{ background: 'var(--rt-sand)' }}>
-            <div className="mx-auto grid max-w-7xl grid-cols-1 gap-0 lg:grid-cols-2 min-h-screen">
-                {/* Left: copy */}
-                <div className="flex flex-col justify-center px-6 py-20 lg:px-14 lg:py-0 order-2 lg:order-1">
-                    <div className="mb-5 inline-flex items-center gap-2 self-start rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest" style={{ background: 'oklch(0.62 0.14 32 / 0.10)', color: 'var(--rt-p)' }}>
+        <section id="top" className="relative overflow-hidden" style={{ background: 'var(--rt-sand)' }}>
+            {/* Mobile: vídeo full-width em cima, copy embaixo */}
+            <div className="lg:hidden">
+                <div className="relative w-full" style={{ height: '70vw', maxHeight: 420 }}>
+                    <video autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover object-top">
+                        <source src={VIDEO} type="video/mp4" />
+                    </video>
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, transparent 60%, var(--rt-sand))' }} />
+                    {/* Só uma card no mobile */}
+                    <div className="rt-float-d rt-ss absolute bottom-4 right-4 w-32 overflow-hidden rounded-2xl bg-white/90 pb-2 backdrop-blur-sm">
+                        <div className="h-24 overflow-hidden rounded-xl">
+                            <img src={IMG(7)} alt="" className="h-full w-full object-cover" />
+                        </div>
+                        <p className="px-1 pt-1.5 text-[11px] font-medium">O Mais vendido</p>
+                        <p className="px-1 text-[11px]" style={{ color: 'var(--rt-p)' }}>Coleção 2026</p>
+                    </div>
+                </div>
+                <div className="px-6 pb-24 pt-6">
+                    <div className="mb-4 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest" style={{ background: 'oklch(0.62 0.14 32 / 0.10)', color: 'var(--rt-p)' }}>
                         <span className="h-1.5 w-1.5 rounded-full" style={{ background: 'var(--rt-p)' }} />
                         Fábrica · Fortaleza · CE
                     </div>
-                    <h1 className="text-5xl font-light leading-[1.08] tracking-tight lg:text-6xl xl:text-7xl" style={{ color: 'var(--rt-ink)' }}>
+                    <h1 className="text-4xl font-light leading-[1.1] tracking-tight" style={{ color: 'var(--rt-ink)' }}>
                         Moda praia<br />
                         <span className="rt-c-gradient font-semibold">artesanal</span><br />
                         que vende<br />
                         sozinha.
                     </h1>
-                    <p className="mt-6 max-w-md text-base leading-relaxed lg:text-lg" style={{ color: 'var(--rt-muted)' }}>
-                        Biquínis de macramê e crochê que nenhuma loja tem. Peças únicas direto da fábrica em Fortaleza com <strong style={{ color: 'var(--rt-fg)' }}>margem acima de 100%</strong> e envio em até 48h.
+                    <p className="mt-4 text-sm leading-relaxed" style={{ color: 'var(--rt-muted)' }}>
+                        Biquínis de macramê e crochê únicos. Direto da fábrica em Fortaleza com <strong style={{ color: 'var(--rt-fg)' }}>margem acima de 100%</strong>.
                     </p>
-                    <div className="mt-8 flex flex-wrap items-center gap-4">
-                        <CTAWa variant="wa">
-                            <WhatsIcon /> Receber catálogo
-                        </CTAWa>
-                        <a href="#colecao" className="text-sm font-semibold underline-offset-4 hover:underline" style={{ color: 'var(--rt-muted)' }}>
-                            Ver coleção ↓
-                        </a>
-                    </div>
-                    <div className="mt-10 flex flex-wrap gap-6 text-sm" style={{ color: 'var(--rt-muted)' }}>
-                        {['Pedido mín. 10 peças', 'Envio em 48h', 'Fabricação própria'].map(t => (
-                            <span key={t} className="flex items-center gap-1.5">
-                                <CheckIcon /> {t}
-                            </span>
+                    <CTAWa variant="wa" className="mt-6 w-full justify-center">
+                        <WhatsIcon /> Receber catálogo
+                    </CTAWa>
+                    <div className="mt-6 flex flex-wrap gap-4 text-xs" style={{ color: 'var(--rt-muted)' }}>
+                        {['Mín. 10 peças', 'Envio 48h', 'Fábrica própria'].map(t => (
+                            <span key={t} className="flex items-center gap-1"><CheckIcon /> {t}</span>
                         ))}
                     </div>
                 </div>
-                {/* Right: video + floating cards */}
-                <div className="relative order-1 lg:order-2 min-h-[60vw] lg:min-h-screen">
+            </div>
+
+            {/* Desktop: grid lado a lado */}
+            <div className="hidden lg:grid mx-auto max-w-7xl grid-cols-2 min-h-screen">
+                <div className="flex flex-col justify-center px-14">
+                    <div className="mb-5 inline-flex items-center gap-2 self-start rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest" style={{ background: 'oklch(0.62 0.14 32 / 0.10)', color: 'var(--rt-p)' }}>
+                        <span className="h-1.5 w-1.5 rounded-full" style={{ background: 'var(--rt-p)' }} />
+                        Fábrica · Fortaleza · CE
+                    </div>
+                    <h1 className="text-6xl font-light leading-[1.08] tracking-tight xl:text-7xl" style={{ color: 'var(--rt-ink)' }}>
+                        Moda praia<br />
+                        <span className="rt-c-gradient font-semibold">artesanal</span><br />
+                        que vende<br />
+                        sozinha.
+                    </h1>
+                    <p className="mt-6 max-w-md text-lg leading-relaxed" style={{ color: 'var(--rt-muted)' }}>
+                        Biquínis de macramê e crochê que nenhuma loja tem. Direto da fábrica em Fortaleza com <strong style={{ color: 'var(--rt-fg)' }}>margem acima de 100%</strong> e envio em até 48h.
+                    </p>
+                    <div className="mt-8 flex items-center gap-4">
+                        <CTAWa variant="wa"><WhatsIcon /> Receber catálogo</CTAWa>
+                        <a href="#colecao" className="text-sm font-semibold underline-offset-4 hover:underline" style={{ color: 'var(--rt-muted)' }}>Ver coleção ↓</a>
+                    </div>
+                    <div className="mt-10 flex gap-6 text-sm" style={{ color: 'var(--rt-muted)' }}>
+                        {['Pedido mín. 10 peças', 'Envio em 48h', 'Fabricação própria'].map(t => (
+                            <span key={t} className="flex items-center gap-1.5"><CheckIcon /> {t}</span>
+                        ))}
+                    </div>
+                </div>
+                <div className="relative min-h-screen">
                     <div className="absolute inset-0 overflow-hidden">
                         <video autoPlay muted loop playsInline className="h-full w-full object-cover object-top">
                             <source src={VIDEO} type="video/mp4" />
                         </video>
-                        <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, var(--rt-sand) 0%, transparent 20%)' }} />
+                        <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, var(--rt-sand) 0%, transparent 25%)' }} />
                     </div>
-                    {/* Floating card left */}
-                    <div className="rt-float rt-ss absolute left-4 top-[18%] w-36 overflow-hidden rounded-2xl bg-white/90 pb-3 backdrop-blur-sm lg:left-[-48px] lg:top-[22%]">
+                    <div className="rt-float rt-ss absolute left-[-48px] top-[22%] w-36 overflow-hidden rounded-2xl bg-white/90 pb-3 backdrop-blur-sm">
                         <div className="h-28 overflow-hidden rounded-xl">
                             <img src={IMG(3)} alt="" className="h-full w-full object-cover" />
                         </div>
                         <p className="px-1 pt-2 text-xs font-medium">Pronta-Entrega</p>
                         <p className="px-1 text-xs" style={{ color: 'var(--rt-p)' }}>Direto da fábrica</p>
                     </div>
-                    {/* Floating card right */}
-                    <div className="rt-float-d rt-ss absolute bottom-[14%] right-4 w-36 overflow-hidden rounded-2xl bg-white/90 pb-3 backdrop-blur-sm lg:bottom-[18%] lg:right-8">
+                    <div className="rt-float-d rt-ss absolute bottom-[18%] right-8 w-36 overflow-hidden rounded-2xl bg-white/90 pb-3 backdrop-blur-sm">
                         <div className="h-28 overflow-hidden rounded-xl">
                             <img src={IMG(7)} alt="" className="h-full w-full object-cover" />
                         </div>
