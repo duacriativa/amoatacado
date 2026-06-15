@@ -171,7 +171,7 @@ function Hero() {
                         <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between">
                             <div className="rounded-2xl px-4 py-3 sl-ss" style={{ background: 'rgba(255,255,255,0.95)' }}>
                                 <p className="text-[11px] uppercase tracking-widest" style={{ color: 'var(--sl-muted)' }}>Coleção verão</p>
-                                <p className="sl-display text-lg font-semibold">Sunliv 26'</p>
+                                <p className="sl-display text-lg font-semibold">Sunliv 26&rsquo;</p>
                             </div>
                             <CTAWa variant="wa" className="px-5 py-3 text-sm">
                                 <WhatsIcon className="h-4 w-4" /> Falar no WhatsApp
@@ -262,7 +262,7 @@ function Collection() {
             <div className="mx-auto max-w-7xl px-5">
                 <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
                     <div>
-                        <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: 'var(--sl-p)' }}>Coleção verão 26'</span>
+                        <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: 'var(--sl-p)' }}>Coleção verão 26&rsquo;</span>
                         <h2 className="mt-3 text-4xl leading-tight tracking-[0.02em] md:text-6xl">
                             As peças que estão <br className="hidden md:inline" />
                             <em className="not-italic sl-c-gradient">esgotando</em> nas revendedoras.
