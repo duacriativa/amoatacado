@@ -49,12 +49,12 @@
         "heading_part1": "O vestido que sua cliente",
         "heading_part2": "volta pra buscar.",
         "description": "94% de giro de estoque entre as lojistas Paneô. Alta rotatividade, sem encalhe. Fenda lateral, detalhe em nó e caimento impecável — a peça que vende sozinha e fideliza a cliente da sua loja.",
-        "spec_composition": "Tecido de alta qualidade",
+        "spec_composition": "90% poliamida, 10% elastano",
         "spec_model": "Vestido com fenda + nó",
         "spec_sizes": "P · M · G",
-        "spec_colors": "Preto · Bronze · Azul-marinho · Capuccino · Café · Pink · Pérola",
-        "wholesale_price": 145,
-        "retail_price": 290,
+        "spec_colors": "Preto · Verde Militar · Azul-marinho · Capuccino · Coffee · Pink · Pérola",
+        "wholesale_price": 135,
+        "retail_price": 270,
         "moq": 6
       }
     },
