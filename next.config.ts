@@ -50,32 +50,6 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  // Sunliv saiu da carteira de clientes: redireciona as landing pages para a home
-  async redirects() {
-    return [
-      {
-        source: '/sunliv-moda-praia-atacado',
-        destination: '/',
-        permanent: false,
-      },
-      {
-        source: '/sunliv-moda-praia-atacado/:path*',
-        destination: '/',
-        permanent: false,
-      },
-      {
-        source: '/sunliv-moda-praia-atacado-2026',
-        destination: '/',
-        permanent: false,
-      },
-      {
-        source: '/sunliv-moda-praia-atacado-2026/:path*',
-        destination: '/',
-        permanent: false,
-      },
-    ];
-  },
-
   // Optimize images
   images: {
     formats: ['image/avif', 'image/webp'],
