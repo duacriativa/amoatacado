@@ -130,7 +130,7 @@ function Hero() {
             {/* Mobile: vídeo full-width em cima, copy embaixo */}
             <div className="lg:hidden">
                 <div className="relative w-full" style={{ height: '70vw', maxHeight: 420 }}>
-                    <video autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover object-top">
+                    <video autoPlay muted loop playsInline poster={IMG(1)} className="absolute inset-0 h-full w-full object-cover object-top">
                         <source src={VIDEO} type="video/mp4" />
                     </video>
                     <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, transparent 60%, var(--rt-sand))' }} />
@@ -149,13 +149,12 @@ function Hero() {
                         Fábrica · Fortaleza · CE
                     </div>
                     <h1 className="text-4xl font-light leading-[1.1] tracking-tight" style={{ color: 'var(--rt-ink)' }}>
-                        Moda praia<br />
-                        <span className="rt-c-gradient font-semibold">artesanal</span><br />
-                        que vende<br />
-                        sozinha.
+                        Compre moda<br />
+                        praia no<br />
+                        <span className="rt-c-gradient font-semibold">atacado</span>.
                     </h1>
                     <p className="mt-4 text-sm leading-relaxed" style={{ color: 'var(--rt-muted)' }}>
-                        Biquínis de macramê e crochê únicos. Direto da fábrica em Fortaleza com <strong style={{ color: 'var(--rt-fg)' }}>margem acima de 100%</strong>.
+                        Seja revendedora Rothes: biquínis de macramê e crochê únicos, direto da fábrica em Fortaleza, com <strong style={{ color: 'var(--rt-fg)' }}>margem acima de 100%</strong>.
                     </p>
                     <CTAWa variant="wa" className="mt-6 w-full justify-center">
                         <WhatsIcon /> Receber catálogo
@@ -176,13 +175,12 @@ function Hero() {
                         Fábrica · Fortaleza · CE
                     </div>
                     <h1 className="text-6xl font-light leading-[1.08] tracking-tight xl:text-7xl" style={{ color: 'var(--rt-ink)' }}>
-                        Moda praia<br />
-                        <span className="rt-c-gradient font-semibold">artesanal</span><br />
-                        que vende<br />
-                        sozinha.
+                        Compre moda<br />
+                        praia no<br />
+                        <span className="rt-c-gradient font-semibold">atacado</span>.
                     </h1>
                     <p className="mt-6 max-w-md text-lg leading-relaxed" style={{ color: 'var(--rt-muted)' }}>
-                        Biquínis de macramê e crochê que nenhuma loja tem. Direto da fábrica em Fortaleza com <strong style={{ color: 'var(--rt-fg)' }}>margem acima de 100%</strong> e envio em até 48h.
+                        Seja revendedora Rothes: biquínis de macramê e crochê que nenhuma loja tem, direto da fábrica em Fortaleza, com <strong style={{ color: 'var(--rt-fg)' }}>margem acima de 100%</strong> e envio em até 48h.
                     </p>
                     <div className="mt-8 flex items-center gap-4">
                         <CTAWa variant="wa"><WhatsIcon /> Receber catálogo</CTAWa>
@@ -196,7 +194,7 @@ function Hero() {
                 </div>
                 <div className="relative min-h-screen">
                     <div className="absolute inset-0 overflow-hidden">
-                        <video autoPlay muted loop playsInline className="h-full w-full object-cover object-top">
+                        <video autoPlay muted loop playsInline poster={IMG(1)} className="h-full w-full object-cover object-top">
                             <source src={VIDEO} type="video/mp4" />
                         </video>
                         <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, var(--rt-sand) 0%, transparent 25%)' }} />
