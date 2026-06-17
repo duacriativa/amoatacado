@@ -130,9 +130,7 @@ function Hero() {
             {/* Mobile: vídeo full-width em cima, copy embaixo */}
             <div className="lg:hidden">
                 <div className="relative w-full" style={{ height: '70vw', maxHeight: 420 }}>
-                    <video autoPlay muted loop playsInline poster={IMG(1)} className="absolute inset-0 h-full w-full object-cover object-top">
-                        <source src={VIDEO} type="video/mp4" />
-                    </video>
+                    <img src="/images/rothes/IMG_8987.JPG" alt="Rothes moda praia" className="absolute inset-0 h-full w-full object-cover object-top" />
                     <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, transparent 60%, var(--rt-sand))' }} />
                     {/* Só uma card no mobile */}
                     <div className="rt-float-d rt-ss absolute bottom-4 right-4 w-32 overflow-hidden rounded-2xl bg-white/90 pb-2 backdrop-blur-sm">
