@@ -50,16 +50,28 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  // Proxy sunliv conversion flow landing page
-  async rewrites() {
+  // Sunliv saiu da carteira de clientes: redireciona as landing pages para a home
+  async redirects() {
     return [
       {
+        source: '/sunliv-moda-praia-atacado',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/sunliv-moda-praia-atacado/:path*',
+        destination: '/',
+        permanent: false,
+      },
+      {
         source: '/sunliv-moda-praia-atacado-2026',
-        destination: 'https://sunliv-conversion-flow.vercel.app/',
+        destination: '/',
+        permanent: false,
       },
       {
         source: '/sunliv-moda-praia-atacado-2026/:path*',
-        destination: 'https://sunliv-conversion-flow.vercel.app/:path*',
+        destination: '/',
+        permanent: false,
       },
     ];
   },
