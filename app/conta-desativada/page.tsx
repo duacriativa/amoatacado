@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 export default function ContaDesativadaPage() {
   const [segundos, setSegundos] = useState(10);
@@ -27,12 +28,12 @@ export default function ContaDesativadaPage() {
         <p className="text-gray-600 mb-6">
           Esta página não está mais disponível. Você será redirecionado para a Amo Atacado em {segundos}s.
         </p>
-        <a
+        <Link
           href="/"
           className="inline-block bg-orange-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-orange-600 transition"
         >
           Ir para a home agora
-        </a>
+        </Link>
       </div>
     </main>
   );
