@@ -22,7 +22,7 @@ const PHOTOS = [
 const IMG = (n: number) => PHOTOS[(n - 1) % PHOTOS.length];
 const VIDEO = '/images/rothes/01%20-%20ROTHES.mp4';
 
-const WA = 'https://wa.me/5585986172515?text=Ol%C3%A1%20vim%20da%20amoatacado%20e%20gostaria%20de%20revender%20Rothes';
+const WA = 'https://wa.me/558586172514?text=Ol%C3%A1%20vim%20da%20amoatacado%20e%20gostaria%20de%20revender%20Rothes';
 
 const trackWA = () => {
     if (typeof window !== 'undefined' && (window as { fbq?: (...args: unknown[]) => void }).fbq) {
@@ -474,7 +474,7 @@ function Footer() {
             <p className="rt-display mb-3 text-xl font-bold tracking-[0.14em] text-white">ROTHES</p>
             <p>Fábrica em Fortaleza · CE · Brasil</p>
             <p className="mt-2">
-                WhatsApp: <a href={WA} onClick={trackWA} className="hover:underline" style={{ color: 'var(--rt-pg)' }}>(85) 98617-2515</a>
+                WhatsApp: <a href={WA} onClick={trackWA} className="hover:underline" style={{ color: 'var(--rt-pg)' }}>(85) 8617-2514</a>
             </p>
             <p className="mt-6 text-xs opacity-50">© 2026 Rothes Moda Praia · Todos os direitos reservados</p>
         </footer>
