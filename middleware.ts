@@ -30,6 +30,13 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const ua = request.headers.get('user-agent') || '';
 
+  // Sunliv saiu da carteira de clientes — qualquer URL dela mostra a página de desativação
+  if (pathname === '/sunliv-moda-praia-atacado' || pathname.startsWith('/sunliv-moda-praia-atacado/') || pathname === '/sunliv-moda-praia-atacado-2026' || pathname.startsWith('/sunliv-moda-praia-atacado-2026/')) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/conta-desativada';
+    return NextResponse.rewrite(url);
+  }
+
   // Bloqueia paths suspeitos
   for (const pattern of BLOCKED_PATHS) {
     if (pattern.test(pathname)) {
