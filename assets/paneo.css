@@ -114,7 +114,7 @@ body { font-family: 'Jost', sans-serif; background: #F5F0EA; color: #2C2118; fon
 .p-qty-btn { width: 42px; height: 42px; border: none; background: none; cursor: pointer; font-size: 1.1rem; font-family: 'Jost',sans-serif; color: #2C2118; display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
 .p-qty-btn:hover:not(:disabled) { background: #F5F0EA; }
 .p-qty-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-.p-qty-num { font-family: 'Cormorant Garamond',serif; font-size: 2.2rem; font-weight: 400; width: 64px; text-align: center; line-height: 1; padding: 0 0.25rem; }
+.p-qty-num { font-family: 'Jost',sans-serif; font-size: 1.6rem; font-weight: 500; width: 64px; text-align: center; line-height: 1; padding: 0 0.25rem; }
 .p-qty-presets { display: flex; gap: 0.4rem; }
 .p-qty-preset { width: 40px; height: 40px; border: 1px solid #D4C8BC; background: white; font-family: 'Jost',sans-serif; font-size: 0.75rem; font-weight: 400; cursor: pointer; transition: all 0.15s; }
 .p-qty-preset.active { background: #1C1410; color: white; border-color: #1C1410; }
@@ -131,7 +131,7 @@ body { font-family: 'Jost', sans-serif; background: #F5F0EA; color: #2C2118; fon
 .p-cell-btn { width: 22px; height: 22px; border: 1px solid #D4C8BC; background: white; cursor: pointer; font-size: 0.9rem; font-family: 'Jost',sans-serif; display: flex; align-items: center; justify-content: center; transition: background 0.12s; flex-shrink: 0; }
 .p-cell-btn:hover:not(:disabled) { background: #F5F0EA; }
 .p-cell-btn:disabled { opacity: 0.25; cursor: not-allowed; }
-.p-cell-num { font-family: 'Cormorant Garamond',serif; font-size: 1.35rem; font-weight: 400; width: 28px; text-align: center; line-height: 1; }
+.p-cell-num { font-family: 'Jost',sans-serif; font-size: 1.05rem; font-weight: 500; width: 28px; text-align: center; line-height: 1; }
 .p-col-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; display: inline-block; }
 .p-total-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 28px; height: 22px; background: #1C1410; color: white; font-size: 0.65rem; font-weight: 400; padding: 0 0.4rem; }
 .p-total-badge.partial { background: #7D3018; }
