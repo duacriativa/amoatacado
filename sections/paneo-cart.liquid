@@ -29,7 +29,7 @@
                     <span class="p-qty-num">{{ item.quantity }}</span>
                     <button class="p-qty-btn" onclick="pcUpdateQty('{{ item.key }}', {{ item.quantity | plus: 1 }})">+</button>
                   </div>
-                  <span class="pc-item-price">R$ {{ item.line_price | money_without_currency }},00</span>
+                  <span class="pc-item-price">R$ {{ item.line_price | money_without_currency }}</span>
                   <button class="pc-remove" onclick="pcRemove('{{ item.key }}')" title="Remover">×</button>
                 </div>
               </div>
@@ -43,7 +43,7 @@
           <div class="p-sum-rows">
             <div class="p-sum-row">
               <span class="p-sum-key">{{ cart.item_count }} {% if cart.item_count == 1 %}peça{% else %}peças{% endif %}</span>
-              <span class="p-sum-val">R$ {{ cart.total_price | money_without_currency }},00</span>
+              <span class="p-sum-val">R$ {{ cart.total_price | money_without_currency }}</span>
             </div>
             <div class="p-sum-row">
               <span class="p-sum-key">Frete</span>
@@ -52,7 +52,7 @@
           </div>
           <div class="p-sum-divider"></div>
           <p class="p-sum-total-lbl">Total</p>
-          <p class="p-sum-total">R$ {{ cart.total_price | money_without_currency }},00</p>
+          <p class="p-sum-total">R$ {{ cart.total_price | money_without_currency }}</p>
 
           <a href="/checkout" class="p-btn-checkout" style="display:block;text-decoration:none;text-align:center">
             Finalizar Pedido →
