@@ -26,7 +26,9 @@
                 <div class="pc-item-bottom">
                   <div class="p-qty-counter pc-qty">
                     <button class="p-qty-btn" onclick="pcUpdateQty('{{ item.key }}', {{ item.quantity | minus: 1 }})">−</button>
-                    <span class="p-qty-num">{{ item.quantity }}</span>
+                    <input type="number" class="p-qty-num p-qty-input" min="1" value="{{ item.quantity }}"
+                      onkeydown="if(event.key==='Enter'){this.blur();}"
+                      onchange="pcUpdateQty('{{ item.key }}', this.value)">
                     <button class="p-qty-btn" onclick="pcUpdateQty('{{ item.key }}', {{ item.quantity | plus: 1 }})">+</button>
                   </div>
                   <span class="pc-item-price">R$ {{ item.line_price | money_without_currency }}</span>
@@ -77,7 +79,8 @@
 
 <script>
   async function pcUpdateQty(key, qty) {
-    if (qty < 1) { pcRemove(key); return; }
+    qty = parseInt(qty, 10);
+    if (!qty || qty < 1) { pcRemove(key); return; }
     const res = await fetch('/cart/change.js', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
