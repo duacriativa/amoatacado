@@ -672,8 +672,8 @@ export default function JardimRosaPage() {
             <section className="hero">
                 <div className="container hero-container">
                     <div className="hero-content">
-                        <span className="badge">Venda Atacado • Fabricação Própria</span>
-                        <h1>Estampas exclusivas e <span className="text-highlight">100% Algodão</span>.</h1>
+                        <span className="badge">Fabricante de Moda Infantil no Atacado</span>
+                        <h1>Seu fornecedor de Moda Infantil <span className="text-highlight">100% Algodão</span>.</h1>
                         <p>Lucre muito mais revendendo roupas infantis premium. Peças seguras, confortáveis e com estampas que encantam mães e crianças.</p>
                         
                         <div className="hero-cta-group">
