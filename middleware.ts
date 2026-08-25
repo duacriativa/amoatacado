@@ -30,8 +30,8 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const ua = request.headers.get('user-agent') || '';
 
-  // Sunliv saiu da carteira de clientes — qualquer URL dela mostra a página de desativação
-  if (pathname === '/sunliv-moda-praia-atacado' || pathname.startsWith('/sunliv-moda-praia-atacado/') || pathname === '/sunliv-moda-praia-atacado-2026' || pathname.startsWith('/sunliv-moda-praia-atacado-2026/')) {
+  // Sunliv e Rothes saíram da carteira de clientes — qualquer URL delas mostra a página de desativação
+  if (pathname === '/sunliv-moda-praia-atacado' || pathname.startsWith('/sunliv-moda-praia-atacado/') || pathname === '/sunliv-moda-praia-atacado-2026' || pathname.startsWith('/sunliv-moda-praia-atacado-2026/') || pathname === '/use-rothes-moda-praia-atacado-fabricante' || pathname.startsWith('/use-rothes-moda-praia-atacado-fabricante/')) {
     const url = request.nextUrl.clone();
     url.pathname = '/conta-desativada';
     return NextResponse.rewrite(url);
