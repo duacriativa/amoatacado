@@ -9,10 +9,10 @@ import Script from 'next/script';
 const ACCENT = '#1a2747';
 
 const WHATSAPP_NUMBER = '5585988839020';
-const WHATSAPP_MESSAGE = 'Olá! Vi o site da Kyrefh e quero receber o catálogo com os preços de atacado.';
+const WHATSAPP_MESSAGE = 'Oi, vim pela amoatacado e gostaria de revender kyrefh.';
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
-const CHAT_WIDGET_MESSAGE = 'Oi gostaria de revender Kyrefh, pode me ajudar?';
+const CHAT_WIDGET_MESSAGE = 'Oi, vim pela amoatacado e gostaria de revender kyrefh.';
 const CHAT_WIDGET_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(CHAT_WIDGET_MESSAGE)}`;
 
 function trackWhatsAppClick() {
