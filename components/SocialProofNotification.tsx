@@ -4,32 +4,50 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, CheckCircle2 } from 'lucide-react';
 
-const leads = [
-    { name: 'Ana Silva', city: 'São Paulo', action: 'solicitou um catálogo' },
-    { name: 'Ricardo Santos', city: 'Goiânia', action: 'solicitou análise de projeto' },
-    { name: 'Juliana Ferreira', city: 'Belo Horizonte', action: 'solicitou orçamento atacado' },
-    { name: 'Marcos Oliveira', city: 'Curitiba', action: 'acabou de se cadastrar' },
-    { name: 'Carla Souza', city: 'Rio de Janeiro', action: 'solicitou contato comercial' },
-    { name: 'Felipe Costa', city: 'Fortaleza', action: 'solicitou catálogo Private Label' },
-    { name: 'Beatriz Lima', city: 'Salvador', action: 'solicitou análise de marca' },
-    { name: 'Lucas Rocha', city: 'Porto Alegre', action: 'solicitou orçamento' },
-    { name: 'Fernanda Alves', city: 'Recife', action: 'acabou de se cadastrar' },
-    { name: 'Gabriel Mendes', city: 'Brasília', action: 'solicitou análise gratuita' },
+const NAMES_CITIES = [
+    { name: 'Ana Silva', city: 'São Paulo' },
+    { name: 'Ricardo Santos', city: 'Goiânia' },
+    { name: 'Juliana Ferreira', city: 'Belo Horizonte' },
+    { name: 'Marcos Oliveira', city: 'Curitiba' },
+    { name: 'Carla Souza', city: 'Rio de Janeiro' },
+    { name: 'Felipe Costa', city: 'Fortaleza' },
+    { name: 'Beatriz Lima', city: 'Salvador' },
+    { name: 'Lucas Rocha', city: 'Porto Alegre' },
+    { name: 'Fernanda Alves', city: 'Recife' },
+    { name: 'Gabriel Mendes', city: 'Brasília' },
+];
+
+const DEFAULT_ACTIONS = [
+    'solicitou um catálogo',
+    'solicitou análise de projeto',
+    'solicitou orçamento atacado',
+    'acabou de se cadastrar',
+    'solicitou contato comercial',
+    'solicitou catálogo Private Label',
+    'solicitou análise de marca',
+    'solicitou orçamento',
+    'acabou de se cadastrar',
+    'solicitou análise gratuita',
 ];
 
 const times = ['agora mesmo', 'há 2 min', 'há 5 min', 'há 10 min', 'há 15 min', 'há 30 min'];
 
-export default function SocialProofNotification() {
-    const [currentLead, setCurrentLead] = useState<typeof leads[0] | null>(null);
+type SocialProofNotificationProps = {
+    actions?: string[];
+};
+
+export default function SocialProofNotification({ actions = DEFAULT_ACTIONS }: SocialProofNotificationProps) {
+    const [currentLead, setCurrentLead] = useState<{ name: string; city: string; action: string } | null>(null);
     const [currentTime, setCurrentTime] = useState('');
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
         const showNotification = () => {
-            const randomLead = leads[Math.floor(Math.random() * leads.length)];
+            const randomNameCity = NAMES_CITIES[Math.floor(Math.random() * NAMES_CITIES.length)];
+            const randomAction = actions[Math.floor(Math.random() * actions.length)];
             const randomTime = times[Math.floor(Math.random() * times.length)];
 
-            setCurrentLead(randomLead);
+            setCurrentLead({ ...randomNameCity, action: randomAction });
             setCurrentTime(randomTime);
             setIsVisible(true);
 
@@ -49,7 +67,7 @@ export default function SocialProofNotification() {
             clearTimeout(initialTimeout);
             clearInterval(interval);
         };
-    }, []);
+    }, [actions]);
 
     return (
         <AnimatePresence>
