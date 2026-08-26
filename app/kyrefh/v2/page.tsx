@@ -1,16 +1,22 @@
 'use client';
 
 import { useState, Suspense } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Instagram, MapPin, Truck, CheckCircle2 } from 'lucide-react';
+import { Instagram, MapPin, Truck, CheckCircle2, MessageCircle } from 'lucide-react';
 import SocialProofNotification from '@/components/SocialProofNotification';
 import Script from 'next/script';
 
 const ACCENT = '#1a2747';
+
+const WHATSAPP_NUMBER = '5585988839020';
+const WHATSAPP_MESSAGE = 'Olá! Vi o site da Kyrefh e quero receber o catálogo com os preços de atacado.';
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+
+function trackWhatsAppClick() {
+  if (typeof window !== 'undefined' && (window as { fbq?: (...args: unknown[]) => void }).fbq) {
+    (window as { fbq?: (...args: unknown[]) => void }).fbq?.('track', 'Contact');
+  }
+}
 
 /* ─── Lookbook images from kyrefhjeans.com.br ────────────────────────────── */
 const LOOKBOOK_IMAGES = [
@@ -47,13 +53,13 @@ const NUMBERS = [
 const STEPS = [
   {
     num: '01',
-    title: 'Você preenche',
-    desc: 'Formulário rápido. 60 segundos pra contar quem você é, onde fica e o seu volume.',
+    title: 'Você chama no WhatsApp',
+    desc: 'Clique no botão e fale direto com a nossa consultora. Sem formulário, sem espera.',
   },
   {
     num: '02',
-    title: 'A gente entra em contato',
-    desc: 'Em até 30 min, um consultor chama no WhatsApp com a tabela completa e o catálogo da semana.',
+    title: 'A gente manda o catálogo',
+    desc: 'Você recebe na hora a tabela completa e as fotos da coleção da semana.',
   },
   {
     num: '03',
@@ -103,258 +109,6 @@ const FAQS = [
   ['Quais formas de pagamento?', 'Trabalhamos somente com Pix. Pagou, confirmou — e a gente despacha no próximo dia útil.'],
   ['E se vier peça com defeito?', 'Garantia total. Defeito de fabricação a gente troca ou estorna, sem questionamento.'],
 ];
-
-/* ─── Form ────────────────────────────────────────────────────────────────── */
-const formSchema = z.object({
-  name: z.string().min(2, 'Nome é obrigatório'),
-  phone: z.string().min(10, 'WhatsApp inválido'),
-  cidade: z.string().min(2, 'Cidade é obrigatória'),
-  uf: z.string().min(2, 'UF é obrigatória'),
-  businessType: z.string().min(1, 'Selecione o tipo de negócio'),
-  volume: z.string().min(1, 'Selecione o volume'),
-  source: z.string().optional(),
-});
-type FormData = z.infer<typeof formSchema>;
-
-const BUSINESS_TYPES = ['Loja física', 'Loja online', 'Sacoleira / revendedor', 'Em planejamento'];
-const VOLUMES = ['Até 30 peças', '30 a 100 peças', '100 a 300 peças', 'Mais de 300 peças'];
-
-function KyrefhV2Form() {
-  const searchParams = useSearchParams();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-    formState: { errors },
-  } = useForm<FormData>({ resolver: zodResolver(formSchema) });
-
-  const selectedBusiness = watch('businessType');
-  const selectedVolume = watch('volume');
-
-  const onSubmit = async (data: FormData) => {
-    setIsSubmitting(true);
-    setSubmitError(null);
-    const utms: Record<string, string> = {};
-    searchParams.forEach((value, key) => {
-      if (key.startsWith('utm_')) utms[key] = value;
-    });
-    try {
-      const res = await fetch('/api/lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, ...utms, clientSlug: 'kyrefh-v2' }),
-      });
-      if (!res.ok) throw new Error();
-      if (typeof window !== 'undefined' && (window as { fbq?: (...args: unknown[]) => void }).fbq) {
-        (window as { fbq?: (...args: unknown[]) => void }).fbq?.('track', 'Lead');
-      }
-      window.location.href = '/kyrefh/v2/obrigado';
-    } catch {
-      setSubmitError('Ocorreu um erro. Tente novamente.');
-      setIsSubmitting(false);
-    }
-  };
-
-  const inputStyle: React.CSSProperties = {
-    width: '100%',
-    border: '1px solid rgba(10,10,10,0.15)',
-    borderRadius: 4,
-    padding: '12px 14px',
-    fontFamily: 'var(--font-manrope), sans-serif',
-    fontSize: 15,
-    color: '#0a0a0a',
-    background: '#fff',
-    outline: 'none',
-    boxSizing: 'border-box',
-  };
-
-  const labelStyle: React.CSSProperties = {
-    display: 'block',
-    fontFamily: 'var(--font-manrope), sans-serif',
-    fontSize: 11,
-    fontWeight: 700,
-    letterSpacing: '0.12em',
-    textTransform: 'uppercase',
-    color: 'rgba(10,10,10,0.5)',
-    marginBottom: 8,
-  };
-
-  const toggleBtnStyle = (active: boolean): React.CSSProperties => ({
-    padding: '10px 14px',
-    border: `1px solid ${active ? ACCENT : 'rgba(10,10,10,0.15)'}`,
-    borderRadius: 4,
-    background: active ? ACCENT : '#fff',
-    color: active ? '#fff' : '#0a0a0a',
-    fontFamily: 'var(--font-manrope), sans-serif',
-    fontSize: 13,
-    fontWeight: active ? 700 : 400,
-    cursor: 'pointer',
-    transition: 'all .15s',
-    textAlign: 'left' as const,
-  });
-
-  return (
-    <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-      {/* Nome */}
-      <div>
-        <label style={labelStyle}>Seu Nome</label>
-        <input
-          {...register('name')}
-          type="text"
-          placeholder="Como te chamam?"
-          style={inputStyle}
-        />
-        {errors.name && <p style={{ fontSize: 12, color: '#e00', marginTop: 4 }}>{errors.name.message}</p>}
-      </div>
-
-      {/* WhatsApp */}
-      <div>
-        <label style={labelStyle}>WhatsApp</label>
-        <input
-          {...register('phone')}
-          type="tel"
-          placeholder="(85) 9 9999-9999"
-          style={inputStyle}
-        />
-        {errors.phone && <p style={{ fontSize: 12, color: '#e00', marginTop: 4 }}>{errors.phone.message}</p>}
-      </div>
-
-      {/* Cidade + UF */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 80px', gap: 10 }}>
-        <div>
-          <label style={labelStyle}>Cidade</label>
-          <input {...register('cidade')} type="text" placeholder="Fortaleza" style={inputStyle} />
-          {errors.cidade && <p style={{ fontSize: 12, color: '#e00', marginTop: 4 }}>{errors.cidade.message}</p>}
-        </div>
-        <div>
-          <label style={labelStyle}>UF</label>
-          <input {...register('uf')} type="text" placeholder="CE" maxLength={2} style={inputStyle} />
-          {errors.uf && <p style={{ fontSize: 12, color: '#e00', marginTop: 4 }}>{errors.uf.message}</p>}
-        </div>
-      </div>
-
-      {/* Tipo de Negócio */}
-      <div>
-        <label style={labelStyle}>Tipo de Negócio</label>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-          {BUSINESS_TYPES.map((t) => (
-            <button
-              key={t}
-              type="button"
-              onClick={() => setValue('businessType', t, { shouldValidate: true })}
-              style={toggleBtnStyle(selectedBusiness === t)}
-            >
-              {t}
-            </button>
-          ))}
-        </div>
-        {errors.businessType && <p style={{ fontSize: 12, color: '#e00', marginTop: 4 }}>{errors.businessType.message}</p>}
-        <input type="hidden" {...register('businessType')} />
-      </div>
-
-      {/* Volume */}
-      <div>
-        <label style={labelStyle}>Volume Mensal Estimado</label>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-          {VOLUMES.map((v) => (
-            <button
-              key={v}
-              type="button"
-              onClick={() => setValue('volume', v, { shouldValidate: true })}
-              style={toggleBtnStyle(selectedVolume === v)}
-            >
-              {v}
-            </button>
-          ))}
-        </div>
-        {errors.volume && <p style={{ fontSize: 12, color: '#e00', marginTop: 4 }}>{errors.volume.message}</p>}
-        <input type="hidden" {...register('volume')} />
-      </div>
-
-      {/* Como Conheceu — dropdown */}
-      <div>
-        <label style={labelStyle}>Como Conheceu a Kyrefh?</label>
-        <div style={{ position: 'relative' }}>
-          <select
-            {...register('source')}
-            style={{
-              ...inputStyle,
-              appearance: 'none',
-              paddingRight: 40,
-              cursor: 'pointer',
-              color: 'rgba(10,10,10,0.6)',
-            }}
-            defaultValue=""
-          >
-            <option value="" disabled>Selecione...</option>
-            <option value="Instagram">Instagram</option>
-            <option value="Google">Google</option>
-            <option value="Indicação">Indicação</option>
-            <option value="Anúncios">Anúncios</option>
-            <option value="Outro">Outro</option>
-          </select>
-          <span
-            style={{
-              position: 'absolute',
-              right: 14,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              pointerEvents: 'none',
-              fontFamily: 'var(--font-manrope), sans-serif',
-              fontSize: 10,
-              color: 'rgba(10,10,10,0.4)',
-            }}
-          >
-            ▼
-          </span>
-        </div>
-      </div>
-
-      {submitError && <p style={{ fontSize: 13, color: '#e00' }}>{submitError}</p>}
-
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        style={{
-          width: '100%',
-          padding: '16px',
-          background: '#25D366',
-          color: '#fff',
-          border: 'none',
-          borderRadius: 4,
-          fontFamily: 'var(--font-manrope), sans-serif',
-          fontSize: 13,
-          fontWeight: 700,
-          letterSpacing: '0.1em',
-          textTransform: 'uppercase',
-          cursor: isSubmitting ? 'not-allowed' : 'pointer',
-          opacity: isSubmitting ? 0.7 : 1,
-          transition: 'opacity .15s',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 8,
-        }}
-      >
-        {isSubmitting ? 'Enviando...' : 'Solicitar Catálogo →'}
-      </button>
-
-      <p style={{
-        fontFamily: 'var(--font-manrope), sans-serif',
-        fontSize: 11,
-        color: 'rgba(10,10,10,0.4)',
-        textAlign: 'center',
-        margin: 0,
-      }}>
-        Resposta em até 30 min em horário comercial. Seus dados ficam só com a Kyrefh.
-      </p>
-    </form>
-  );
-}
 
 /* ─── Marquee ─────────────────────────────────────────────────────────────── */
 function Marquee() {
@@ -485,7 +239,7 @@ export default function KyrefhV2Page() {
                 Jeans, sarja e blusas masculinas a partir de R$ 50, com novidade toda semana.
               </p>
               <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-                <a href="#capturar" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', background: '#f5efe6', color: '#0a0a0a', fontFamily: 'var(--font-manrope), sans-serif', fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none', borderRadius: 4 }}>
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={trackWhatsAppClick} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', background: '#f5efe6', color: '#0a0a0a', fontFamily: 'var(--font-manrope), sans-serif', fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none', borderRadius: 4 }}>
                   Seja revendedor(a)
                 </a>
               </div>
@@ -668,7 +422,7 @@ export default function KyrefhV2Page() {
             ))}
           </div>
           <div className="mt-14 text-center">
-            <a href="#capturar"
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={trackWhatsAppClick}
               style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 40px', background: '#f5efe6', color: '#0a0a0a', fontFamily: 'var(--font-manrope), sans-serif', fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none', borderRadius: 4 }}>
               Solicitar catálogo
             </a>
@@ -791,7 +545,7 @@ export default function KyrefhV2Page() {
                 Receba o catálogo.
               </h2>
               <p style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: 17, lineHeight: 1.6, color: 'rgba(245,239,230,0.6)', margin: '0 0 36px', maxWidth: 440 }}>
-                Em até 3 minutos, um consultor te chama no WhatsApp com o catálogo completo e as fotos da coleção semanal.
+                Clique no botão e fale agora com a nossa consultora no WhatsApp. Você recebe na hora o catálogo completo e as fotos da coleção semanal.
               </p>
               <div className="flex flex-col gap-4 mb-8">
                 {[{ Icon: MapPin, text: 'Rua José Avelino, 256 · Centro · Fortaleza/CE' }, { Icon: Truck, text: 'Envios diários para todo o Brasil' }].map(({ Icon, text }, i) => (
@@ -809,13 +563,48 @@ export default function KyrefhV2Page() {
               </div>
             </div>
 
-            {/* Right: form */}
+            {/* Right: WhatsApp CTA */}
             <div style={{ background: '#f5efe6', borderRadius: 6, padding: '40px', boxShadow: '0 24px 80px rgba(0,0,0,0.3)' }}>
-              <p style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: ACCENT, marginBottom: 4 }}>Formulário de atacado</p>
-              <h3 style={{ fontFamily: 'var(--font-bebas), sans-serif', fontSize: 36, fontWeight: 400, letterSpacing: '0.01em', color: '#0a0a0a', margin: '8px 0 24px' }}>Receba o catálogo em 60 segundos.</h3>
-              <Suspense fallback={<div style={{ padding: 40, textAlign: 'center', color: 'rgba(10,10,10,0.4)' }}>Carregando...</div>}>
-                <KyrefhV2Form />
-              </Suspense>
+              <p style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: ACCENT, marginBottom: 4 }}>Fale com a gente</p>
+              <h3 style={{ fontFamily: 'var(--font-bebas), sans-serif', fontSize: 36, fontWeight: 400, letterSpacing: '0.01em', color: '#0a0a0a', margin: '8px 0 24px' }}>Receba o catálogo agora, direto no WhatsApp.</h3>
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={trackWhatsAppClick}
+                style={{
+                  width: '100%',
+                  padding: '18px',
+                  background: '#25D366',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: 4,
+                  fontFamily: 'var(--font-manrope), sans-serif',
+                  fontSize: 14,
+                  fontWeight: 700,
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  textDecoration: 'none',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 10,
+                  boxSizing: 'border-box',
+                }}
+              >
+                <MessageCircle size={18} />
+                Falar no WhatsApp agora
+              </a>
+              <p style={{
+                fontFamily: 'var(--font-manrope), sans-serif',
+                fontSize: 11,
+                color: 'rgba(10,10,10,0.4)',
+                textAlign: 'center',
+                margin: '16px 0 0',
+              }}>
+                Sem formulário, sem espera. É só clicar e mandar a mensagem.
+              </p>
             </div>
           </div>
         </div>
