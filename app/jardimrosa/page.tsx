@@ -19,6 +19,33 @@ const SOCIAL_PROOF_ACTIONS = [
     'entrou em contato pelo WhatsApp',
 ];
 
+function getCookie(name: string): string | undefined {
+    if (typeof document === 'undefined') return undefined;
+    const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return match ? decodeURIComponent(match[1]) : undefined;
+}
+
+function trackWhatsAppClick() {
+    if (typeof window === 'undefined') return;
+
+    const eventId = crypto.randomUUID();
+    const w = window as unknown as { fbq?: (...args: unknown[]) => void };
+    w.fbq?.('track', 'Contact', {}, { eventID: eventId });
+
+    fetch('/api/jardimrosa/capi', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            eventName: 'Contact',
+            eventId,
+            eventSourceUrl: window.location.href,
+            fbp: getCookie('_fbp'),
+            fbc: getCookie('_fbc'),
+        }),
+        keepalive: true,
+    }).catch(() => {});
+}
+
 function WhatsAppIcon({ size = 26 }: { size?: number }) {
     return (
         <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -79,6 +106,7 @@ function WhatsAppChatWidget() {
                             href={CHAT_WIDGET_URL}
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={trackWhatsAppClick}
                             style={{
                                 display: 'flex',
                                 alignItems: 'center',
@@ -103,6 +131,7 @@ function WhatsAppChatWidget() {
                 href={CHAT_WIDGET_URL}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={trackWhatsAppClick}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ type: 'spring', stiffness: 260, damping: 20 }}
@@ -800,7 +829,7 @@ export default function JardimRosaPage() {
                     <div className="logo">
                         <span className="logo-text">Jardim Rosa</span>
                     </div>
-                    <a href="https://wa.me/557194003232?text=Ol%C3%A1%2C%20quero%20revender%20Jardim%20Rosa%21" target="_blank" rel="noreferrer" className="btn btn-outline">
+                    <a href="https://wa.me/557194003232?text=Ol%C3%A1%2C%20quero%20revender%20Jardim%20Rosa%21" target="_blank" rel="noreferrer" onClick={trackWhatsAppClick} className="btn btn-outline">
                         <i className="ph ph-whatsapp-logo"></i> Atendimento
                     </a>
                 </div>
@@ -814,7 +843,7 @@ export default function JardimRosaPage() {
                         <p>Lucre muito mais revendendo roupas infantis premium. Peças seguras, confortáveis e com estampas que encantam mães e crianças.</p>
                         
                         <div className="hero-cta-group">
-                            <a href="https://wa.me/557194003232?text=Ol%C3%A1%2C%20quero%20revender%20Jardim%20Rosa%21" target="_blank" rel="noreferrer" className="btn btn-primary btn-large">
+                            <a href="https://wa.me/557194003232?text=Ol%C3%A1%2C%20quero%20revender%20Jardim%20Rosa%21" target="_blank" rel="noreferrer" onClick={trackWhatsAppClick} className="btn btn-primary btn-large">
                                 Quero Revender Agora
                                 <i className="ph ph-arrow-right"></i>
                             </a>
@@ -929,7 +958,7 @@ export default function JardimRosaPage() {
                                 <li><i className="ph-fill ph-check-circle"></i> Acabamento impecável</li>
                                 <li><i className="ph-fill ph-check-circle"></i> Rápido giro de estoque</li>
                             </ul>
-                            <a href="https://wa.me/557194003232?text=Ol%C3%A1%2C%20quero%20revender%20os%20conjuntos%20Jardim%20Rosa%21" target="_blank" rel="noreferrer" className="btn btn-primary w-100">
+                            <a href="https://wa.me/557194003232?text=Ol%C3%A1%2C%20quero%20revender%20os%20conjuntos%20Jardim%20Rosa%21" target="_blank" rel="noreferrer" onClick={trackWhatsAppClick} className="btn btn-primary w-100">
                                 Ver Catálogo Completo
                             </a>
                         </div>
@@ -968,7 +997,7 @@ export default function JardimRosaPage() {
                         </div>
                         
                         <div className="cta-center">
-                            <a href="https://wa.me/557194003232?text=Ol%C3%A1%2C%20quero%20fazer%20meu%20pedido%20no%20atacado%21" target="_blank" rel="noreferrer" className="btn btn-primary btn-large glow">
+                            <a href="https://wa.me/557194003232?text=Ol%C3%A1%2C%20quero%20fazer%20meu%20pedido%20no%20atacado%21" target="_blank" rel="noreferrer" onClick={trackWhatsAppClick} className="btn btn-primary btn-large glow">
                                 Falar com Consultor Agora
                             </a>
                         </div>
